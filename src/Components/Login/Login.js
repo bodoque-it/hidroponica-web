@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import AppBar from '@material-ui/core/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Box from '@material-ui/core/Box';
@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from 'material-ui/GridList';
 import Container from '@material-ui/core/Container';
 import { palette } from '@material-ui/system';
-import { Toolbar, Typography } from '@material-ui/core';
+import { Toolbar, Typography, IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles({
     avatar: {
@@ -46,15 +46,20 @@ class Login extends Component {
     render () {
 
         const { values, handleChange } = this.props;
-        
+
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <center>
-                        <AppBar title="Hidropónica">by Gaia Software</AppBar>
+                        <AppBar style={{background: '#43a047'}}>
+                            <Toolbar>
+                                <Typography variant="h3">Hidropónica</Typography>
+                                <Typography variant="h8" align="justify">By Gaia Software</Typography>
+                            </Toolbar>
+                        </AppBar>
                         <br/>
                         <Box
-                            bgcolor="lightblue"
+                            bgcolor="#8bc34a"
                             marginTop={20}
                             marginLeft={0}
                             height={300}
