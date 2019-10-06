@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
+import Page from './page';
 
 class Graphics extends Component {
     render() {
         return(
-            <div>
-                
-            </div>
+            <Page/>
         )
     }
 }
