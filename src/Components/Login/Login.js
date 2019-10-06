@@ -90,6 +90,7 @@ class Login extends Component {
                             </Box>
                             <br/>
                             <RaisedButton
+                            onClick=""
                                 primary={true}
                                 label="Adelante"
                                 disabled={!this.validateForm()}
