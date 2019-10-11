@@ -21,13 +21,6 @@ function Page(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <NavDropdown  title="Site" id="nav-dropdown" backgroundColor="red">
-                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                        <NavDropdown.Item href="/container">Contenedores</NavDropdown.Item>
-                        <NavDropdown.Item href="/cycle">Ciclos</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="">Log out</NavDropdown.Item>
-                    </NavDropdown>
                 </Nav>
                 <Form inline className="mr-auto" >
                     <FormControl type="text" placeholder="Escribe Aquí "  />

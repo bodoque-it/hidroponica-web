@@ -1,14 +1,18 @@
 import React from 'react';
 import './styles.css';
 import './sb-admin-2.css';
-
+import Rails from '../Rails';
 
 function Page(props) {
 
     return (
         <div id="wrapper">
             {renderSidebar()}
+            <div id="content">
+				<Rails/>
+			</div>
         </div>
+        
     );
 }
 function renderSidebar(){
@@ -23,7 +27,6 @@ function renderSidebar(){
 		    <hr class="sidebar-divider my-0"/>
 		    <li class="nav-item active">
 		    	<a class="nav-link" href="/">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span>
 		    	</a>
 		    </li>
@@ -33,6 +36,11 @@ function renderSidebar(){
 			<div class="sidebar-heading">
 				Infraestructura
 			</div>
+			<li class="nav-item active">
+		    	<a class="nav-link" href="/">
+					<span>Rieles</span>
+		    	</a>
+		    </li>
 		</ul>
 	);
 }

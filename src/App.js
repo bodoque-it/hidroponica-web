@@ -7,6 +7,7 @@ import Microclime from './Components/Microclime';
 import Dashboard from './Components/Dashboard';
 import Cycle from './Components/Cycle';
 import Rails from './Components/Rails';
+import Plantilla from './Components/Plantilla';
 import Container from './Components/Container';
 
 class App extends Component {
@@ -44,11 +45,11 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/login" component={Login} />
-                    <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/microclime" component={Microclime} />
-                    <Route path="/cycle" component={Cycle} />
-                    <Route path="/rails" component={Rails} />
-                    <Route path="/container" component={Container} />
+                    <Route path="/dashboard" component={Plantilla} />
+                    <Route path="/microclimes" component={Plantilla} />
+                    <Route path="/cycles" component={Plantilla} />
+                    <Route path="/rails" component={Plantilla} />
+                    <Route path="/containers" component={Plantilla} />
                     <Redirect from="/" to="/login" />
                 </Switch>
             </BrowserRouter>
