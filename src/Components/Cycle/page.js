@@ -7,9 +7,6 @@ function Page(props) {
 
     return (
         <div>
-            <AppBar
-                title="Ciclos"
-            />
             Hello from Cycles
         </div>
     );

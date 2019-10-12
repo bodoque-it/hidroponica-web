@@ -16,7 +16,7 @@ function Page(props) {
     } = props;
     
     return(
-        <Navbar expand="lg" bg="success" >
+        <Navbar expand="lg" bg="success" id="AppBar-general">
             <Navbar.Brand  >{title}</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

@@ -13,7 +13,7 @@ class Plantilla extends Component {
         return(
 		    <div>
 		    	<AppBar
-		    		title = "TITULO"
+		    		title = {this.state.title}
 		    	/>
 		        <Page/>
             </div>

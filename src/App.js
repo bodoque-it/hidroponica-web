@@ -45,11 +45,11 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/login" component={Login} />
-                    <Route path="/dashboard" component={Plantilla} />
-                    <Route path="/microclimes" component={Plantilla} />
-                    <Route path="/cycles" component={Plantilla} />
-                    <Route path="/rails" component={Plantilla} />
-                    <Route path="/containers" component={Plantilla} />
+                    <Route path="/dashboard" render={() => (<Plantilla title="Dashboard" />) } />
+                    <Route path="/microclimes" render={() => (<Plantilla title="Microclimas" />) } />
+                    <Route path="/cycles" render={() => (<Plantilla title="Ciclos" />) } />
+                    <Route path="/rails" render={() => (<Plantilla title="Rieles" />) } />
+                    <Route path="/containers" render={() => (<Plantilla title="Contenedores" />) } />
                     <Redirect from="/" to="/login" />
                 </Switch>
             </BrowserRouter>
