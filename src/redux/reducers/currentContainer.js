@@ -1,5 +1,6 @@
 import { type as findCurrentContainerType } from '../actions/findCurrentContainer';
 
+
 const defaultState = {};
 
 function reducer(state = defaultState, {type,payload}) {

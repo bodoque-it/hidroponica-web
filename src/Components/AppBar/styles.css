@@ -1,3 +1,6 @@
 #AppBar-general{
     border: ridge 0.35em rgb(200, 255, 0);
+    display: flex;
+    justify-content: space-between;
+    background-color: #5cb85c;
 }
