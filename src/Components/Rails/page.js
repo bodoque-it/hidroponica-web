@@ -1,20 +1,19 @@
 import React from 'react';
 import './styles.css';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ImageGradient } from 'material-ui/svg-icons';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      width: '100%',
-      padding: '50px'
+        height:'100%',
+        width:'100%',
+        padding:'170px',
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -32,12 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
   
 function Page(props) {
     return (
-        <div>
+        <div >
         	{Rieles()}
         </div>
     );
 }
 export default Page;
+
 function SimpleExpansionPanel(name, location, content) {
   const classes = useStyles();
 	return(
@@ -78,7 +78,7 @@ function SimpleExpansionPanelDisabled(name, location) {
 function Rieles(){
 	const classes = useStyles();
 	return(
-		<div className={classes.root}>
+		<div className={classes.root} >
 			{SimpleExpansionPanel("Cultivo - Tomate Cherry",
 									"Campus Miraflores Edificio 10.000",
 									"A este muchacho le pondría unos cuantos rieles")}

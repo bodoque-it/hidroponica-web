@@ -16,7 +16,7 @@ function Page(props) {
     return (
         <div id="wrapper">
             {renderSidebar()}
-            <div id="content-wrapper" class="d-flex flex-column">
+            <div id="color-gradient" class="d-flex flex-column" width='100%' height='100%'>
 		        <div id="content">
 					<Provider store={store}>
 						<BrowserRouter>
