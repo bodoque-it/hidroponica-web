@@ -1,4 +1,4 @@
-import { type as findResults } from '../actions/findResults';
+import { type as findContainersResultsType } from '../actions/findContainersResults';
 
 const defaultState = [];
 

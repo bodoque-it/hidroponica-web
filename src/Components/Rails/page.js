@@ -53,7 +53,7 @@ function SimpleExpansionPanel(name, location, content) {
 		    </ExpansionPanelSummary>
 		    <ExpansionPanelDetails>
 		      <Typography>
-		        {content}
+		        {content} // Agregar Cards en donde para cada Riel se mostraran sus contenedores en cada Card
 		      </Typography>
 		    </ExpansionPanelDetails>
 		  </ExpansionPanel>
