@@ -16,20 +16,22 @@ function Page(props) {
     return (
         <div id="wrapper">
             {renderSidebar()}
-            <div id="content">
-				<Provider store={store}>
-					<BrowserRouter>
-						<Switch>
-							
-							<Route path="/dashboard" component={Dashboard} />
-							<Route path="/microclimes" component={Microclime} />
-							<Route path="/cycles" component={Cycle} />
-							<Route path="/rails" component={Rails} />
-							<Route path="/containers" component={Container} />
-							
-						</Switch>
-					</BrowserRouter>
-				</Provider>
+            <div id="content-wrapper" class="d-flex flex-column">
+		        <div id="content">
+					<Provider store={store}>
+						<BrowserRouter>
+							<Switch>
+								
+								<Route path="/dashboard" component={Dashboard} />
+								<Route path="/microclimes" component={Microclime} />
+								<Route path="/cycles" component={Cycle} />
+								<Route path="/rails" component={Rails} />
+								<Route path="/containers" component={Container} />
+								
+							</Switch>
+						</BrowserRouter>
+					</Provider>
+				</div>
 			</div>
         </div>
         
