@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from './page';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props) {
@@ -15,7 +16,9 @@ class Login extends Component {
     }
 
     validateForm() {
-        return this.state.username==="Admin" && this.state.password==="Admin";
+        if(this.state.username==="Admin" && this.state.password==="Admin"){
+        	this.props.history.push("/dashboard");
+        }
     }
 
     handleChange = input => e => {
