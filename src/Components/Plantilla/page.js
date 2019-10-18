@@ -16,12 +16,11 @@ function Page(props) {
     return (
         <div id="wrapper">
             {renderSidebar()}
-            <div id="color-gradient" class="d-flex flex-column" width='100%' height='100%'>
-		        <div id="content">
+            <div id="content-wrapper" class="d-flex flex-column color-gradient" height='100%'>
+			    <div id="content">
 					<Provider store={store}>
 						<BrowserRouter>
-							<Switch>
-								
+							<Switch>		
 								<Route path="/dashboard" component={Dashboard} />
 								<Route path="/microclimes" component={Microclime} />
 								<Route path="/cycles" component={Cycle} />
