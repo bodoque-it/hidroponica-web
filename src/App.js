@@ -3,12 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import store from './redux/store';
 import Login from './Components/Login';
-import Microclime from './Components/Microclime';
-import Dashboard from './Components/Dashboard';
-import Cycle from './Components/Cycle';
-import Rails from './Components/Rails';
 import Plantilla from './Components/Plantilla';
-import Container from './Components/Container';
+
 
 class App extends Component {
 
@@ -20,16 +16,6 @@ class App extends Component {
     }
   }
 
-  componenDidMount() {
-    fetch('https://localhost:8080/users/')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoaded:true,
-          items: json,
-        })
-      });
-  }
 
   render() {
     

@@ -1,18 +1,10 @@
-import { createStore, combineReducers } from 'redux';
-import currentContainer from './reducers/currentContainer';
-import suggestions from './reducers/suggestions';
-import railsResults from './reducers/railsResults';
-import containersResults from './reducers/containersResults';
+import { applyMiddleware , createStore } from 'redux';
+import {rootReducer} from './rootReducer/rootReducer';
+import thunk from 'redux-thunk';
 
-const reducer = combineReducers({
-    // reducers
-    railsResults,
-    containersResults,
-    suggestions,
-    currentContainer,
 
-});
+const middlewares = [thunk];
 
-const store = createStore(reducer);
+const store = createStore(rootReducer,applyMiddleware(...middlewares) );
 
 export default store;
