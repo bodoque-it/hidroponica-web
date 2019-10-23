@@ -24,7 +24,7 @@ class AppBarAutocomplete extends Component{
         const {
             isOpen,
         } = this.state;
-
+        
         return (
             <div className="main-container" style={{
                 position: 'absolute', 
@@ -68,14 +68,14 @@ class AppBarAutocomplete extends Component{
                 <Paper className="container-results" square>
                     {suggestions.map(suggestion =>
                     <MenuItem
-                        key={suggestion.id}
+                        key={suggestion.locate}
                         component="div"
                         onClick={() => {
-                            onChangeSelection(suggestion.title);
+                            onChangeSelection(suggestion.name);
                             this.setState({ isOpen: false });
                         }}
                     >
-                        {suggestion.title}
+                        {suggestion.name}
                     </MenuItem>)}
                 </Paper>}
             </div>
