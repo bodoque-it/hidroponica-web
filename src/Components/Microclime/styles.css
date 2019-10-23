@@ -1,0 +1,8 @@
+.other-card-color-gradient{
+    background:linear-gradient(-30deg,rgba(240, 209, 143, 0.979),transparent);
+}
+
+.button-specs{
+    float: right;
+    background:#ff5722;
+}

@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => {
     createStyles({
         card: {
             width: 340,
+            float: 'right',
         },
         media: {
             height: 145,
@@ -50,14 +51,14 @@ function RailCard(Name,TypeOfLight,IntesityOfLight,TypeOfPlant,Temperature,Humid
 
     return(
         <Card className={classes.card}>
-            <CardMedia className={classes.media}>
+            <CardMedia className={"other-card-color-gradient"}>
             <CardContent>
                 <Grid container spacing={6}>
                     <Grid item xs={6}>
-                        <Typography variant="h5">Nombre: {Name}</Typography>
+                        <Typography variant="h4">Nombre: {Name}</Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button variant="contained" style={{float:"right",background:'#e53935',color:'#fff'}}>
                             DELETE THIS
                         </Button>
                     </Grid>
