@@ -64,15 +64,26 @@ const useStyles = makeStyles((theme) =>
 
   
 function Page(props) {
+	const {
+		suggestions,
+	} = props;
     return (
         <div >
-        	{Rieles()}
+        	<Rieles
+				suggestions={suggestions}
+			/>
         </div>
     );
 }
 export default Page;
 
-function Riel(name, location, content) {
+export function Riel(props) {
+	const {
+		containers,
+		atr_1,
+		atr_2,
+	} = props;
+
 	const classes = useStyles();
 	return(
 		<div>
@@ -82,97 +93,124 @@ function Riel(name, location, content) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  <Typography className={classes.heading}>{name}</Typography>
-			  <Typography className={classes.secondaryHeading}>{location}</Typography>
+			  <Typography className={classes.heading}>{atr_1}</Typography>
+			  <Typography className={classes.secondaryHeading}> Ubicación: {atr_2} </Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				{Contenedores()}
+				{ <Contenedores
+					containers={containers}
+				/> 
+				}
 			</ExpansionPanelDetails>
 		  </ExpansionPanel>
 		 </div>
 	)
 }
-function RielDesactivado(name, location) {
-  const classes = useStyles();
-  return(
-  	<ExpansionPanel disabled>
-		<ExpansionPanelSummary
-		  expandIcon={<ExpandMoreIcon />}
-		  aria-controls="panel3a-content"
-		  id="panel3a-header"
-		>
-		  <Typography className={classes.heading}>{name}</Typography>
-		  <Typography className={classes.secondaryHeading}>{location}</Typography>
-		</ExpansionPanelSummary>
-	</ExpansionPanel>
-  )
-}
-function Rieles(){
+export function RielDesactivado(props) {
+	const {
+		atr_1,
+		atr_2,
+	} = props;
+		
 	const classes = useStyles();
 	return(
+		<ExpansionPanel disabled>
+			<ExpansionPanelSummary
+			expandIcon={<ExpandMoreIcon />}
+			aria-controls="panel3a-content"
+			id="panel3a-header"
+			>
+			<Typography className={classes.heading}> {atr_1} </Typography>
+			<Typography className={classes.secondaryHeading}> {atr_2} </Typography>
+			</ExpansionPanelSummary>
+		</ExpansionPanel>
+  	)
+}
+export function Rieles(props){
+	const {
+		suggestions,
+	} = props;
+	
+	const isEmpty = suggestions.length === 0;
+	const classes = useStyles();
+	
+	return(
 		<div className={classes.root} >
-			{Riel("Cultivo - Tomate Cherry",
-									"Campus Miraflores Edificio 10.000",
-									"A este muchacho le pondría unos cuantos rieles")}
-			{Riel("Cultivo de Lechugas",
-									"Camino a Guacamayo 910, Valdivia",
-									"A este otro muchacho le pondría un botón ''AGREGAR NUEVO CONTENEDOR''")}
-			{Riel("Buenas frutillitas",
-									"Donde tu mami",
-									"yo le pondría más color si, no sabría que color ponerle a esto, pero creo que si debe ser un color neutral, el padding se le vé bastante bien eeeh?, modifícalo a tu anotojo")}
-			{RielDesactivado("El abrazo M-O-R-T-A-L",
-											"Casa de la O-Vega")}
+			{ isEmpty?
+				<Typography variant="h5" component="h3" className="page-message">
+					No se encontraron Rieles
+				</Typography>
+				:
+				suggestions.map( suggestion =>
+					<Riel
+						containers={suggestion.containers}
+						atr_1={suggestion.name}
+						atr_2={suggestion.location}
+					/>
+				)}
 		</div>	
 	)
 }
-function Contenedores(){
+export function Contenedores(props){
+	const {
+		containers
+	} = props;
+
 	const classes = useStyles();
 	return(
 		<Table className="table-borderless" aria-label="spanning table">
 			<TableRow>
-				<TableCell align="center">{Contenedor()}</TableCell>
-				<TableCell align="center">{Contenedor()}</TableCell>
+				{ containers.map( container =>
+					<TableCell align="center">
+						{ <Contenedor
+							id={container.id_container}
+							name={container.name}
+							active={container.active}
+							volume={container.volume}
+						/> }
+					</TableCell>
+				)}
 			</TableRow>
 		</Table>
 	)
 }
-function Contenedor() {
-  const classes = useStyles();
-  return (
-    <Card className="card">
-      <CardContent>
-      	  <div className="row">
-      	  	<div className="col">
-		  	  <Typography className={classes.cardHeader} color="textSecondary">
-		  	  	Contenedor-01: Frutilla y mermeladits
-		  	  </Typography>
+export function Contenedor(props) {
+	const {
+		id,
+		name,
+		active,
+		volume
+	} = props;
+
+  	const classes = useStyles();
+  	return (
+		<Card className="card">
+		<CardContent>
+			<div className="row">
+				<div className="col">
+				<Typography className={classes.cardHeader} float="center" color="textSecondary">
+					Nombre Contenedor: { name }
+				</Typography>
+				</div>
+				<div className="col-2">
+					<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
+						<DeleteIcon />
+					</Fab>
+				</div>
 			</div>
-			<div className="col-2">
-				<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
-					<DeleteIcon />
-				</Fab>
+			<div>
+				<Table className={classes.table} aria-label="spanning table">
+					<TableRow>
+						<TableCell rowSpan={2} align="center" width="33%"> id: { id } </TableCell>
+						<TableCell align="center" width="33%"> Esta activado?: { active } </TableCell>
+						<TableCell align="center" width="33%"> Volumen: { volume } </TableCell>
+					</TableRow>
+					
+				</Table>
 			</div>
-		  </div>
-		  <div>
-			<Table className={classes.table} aria-label="spanning table">
-				<TableRow>
-					<TableCell rowSpan={2} align="center" width="33%">Tipo de luz</TableCell>
-					<TableCell align="center" width="33%">Frutilla</TableCell>
-					<TableCell align="center" width="33%"> 20 [°C]</TableCell>
-		  		</TableRow>
-		  		<TableRow>
-		      		<TableCell rowSpan={2} align="center"> </TableCell>
-		  			<TableCell align="center"> 20 [H%]</TableCell>
-		  		</TableRow>
-		  		<TableRow>
-		  			<TableCell align="center"> 200 </TableCell>     		
-		  			<TableCell align="center"> restante: 30 días</TableCell>
-		  		</TableRow>
-			</Table>
-		  </div>
-      </CardContent>
-    </Card>
-  );
+		</CardContent>
+		</Card>
+  	);
 }
 
 
