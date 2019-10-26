@@ -6,6 +6,13 @@
   margin-right: -15px;
   margin-left: -15px;
 }
+.col {
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
 .col-2 {
   -ms-flex: 0 0 16.666667%;
   flex: 0 0 16.666667%;
@@ -18,7 +25,13 @@
   border: 0;
 }
 .card{
-	minWidth: 300,
+	minWidth: 300;
+	maxWidth: 50%;
+	transition:0.5s;
+}
+.card:hover{
+	transition:0.5s;
+	background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
 }
 .card-color-gradient{
     background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
