@@ -3892,6 +3892,11 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
+  transition: 0.5s;
+}
+.nav-item:hover{
+	background-color: #28B745;
+	transition: 0.5s;
 }
 
 .nav-tabs .nav-link {
