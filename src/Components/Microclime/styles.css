@@ -6,3 +6,30 @@
     float: right;
     background:#ff5722;
 }
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.col {
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
+.root {
+    flex-grow: 1;
+	width: 100%;
+	padding: 50px;
+}
+.add{
+	color: #28a745;
+	float: right;
+}
+.add:hover{
+   background-color: #28C745;
+}
