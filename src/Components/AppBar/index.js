@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import fetchSuggestions from '../../redux/rootReducer/fetchSuggestions';
 
 class AppBar extends Component{
+	componentWillMount(){
+		this.props.fetchSuggestions("");
+	}
     constructor(props){
         super(props);
         this.state={

@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) =>
       margin: theme.spacing(1),
       float:'right',
     },
+    //Para los botones agregar
     add:{
     	backgroundColor: '#28a745',
     	float:'right',
@@ -106,19 +107,21 @@ export function Riel(props) {
 			  <Typography className={classes.heading}>{atr_1}</Typography>
 			  <Typography className={classes.secondaryHeading}> Ubicación: {atr_2} </Typography>
 			</ExpansionPanelSummary>
-			<ExpansionPanelDetails>
-				<div className="row">
-					<div className="col">
-						<Fab aria-label="add" className={classes.fab, classes.add}>
-							<AddIcon />
-						</Fab>
+			<ExpansionPanelDetails style={{display:'block'}}>
+				<div>
+					<div className="row">
+						<div className="col">
+							<Fab aria-label="add" className={classes.fab, classes.add}>
+								<AddIcon />
+							</Fab>
+						</div>
 					</div>
-				</div>
-				<div className="row">
-					<div className="col">
-						{ <Contenedores
-							containers={containers}
-						/> }
+					<div className="row">
+						<div className="col">
+							{ <Contenedores
+								containers={containers}
+							/> }
+						</div>
 					</div>
 				</div>
 			</ExpansionPanelDetails>
@@ -292,7 +295,7 @@ export function ContenedorActivo(props) {
 					<TableRow>
 						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID</h6> { id } </TableCell>
 						<TableCell align="center" width="33%"><h6>ESTADO</h6> ACTIVO </TableCell>
-						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume }[m3] </TableCell>
+						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
 					</TableRow>
 				</Table>
 			</div>
@@ -328,7 +331,7 @@ export function ContenedorInactivo(props) {
 					<TableRow>
 						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID</h6> { id } </TableCell>
 						<TableCell align="center" width="33%"><h6>ESTADO</h6> zZzZ </TableCell>
-						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume }[m3] </TableCell>
+						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
 					</TableRow>
 					
 				</Table>

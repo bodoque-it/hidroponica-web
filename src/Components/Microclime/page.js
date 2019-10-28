@@ -70,13 +70,13 @@ function RailCard(Name,TypeOfLight,IntesityOfLight,TypeOfPlant,Temperature,Humid
                         <Paper>Tipo de luz: {TypeOfLight}</Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Intensidad de la luz: {IntesityOfLight}</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
                         <Paper>Plantación: {TypeOfPlant}</Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper>Temperatura: {Temperature}°C</Paper>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Paper>Intensidad de la luz: {IntesityOfLight}</Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper>Humedad: {Humidity}%</Paper>
