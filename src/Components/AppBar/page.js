@@ -26,6 +26,7 @@ function Page(props) {
                 </Typography>
 
                 <AppBarAutocomplete 
+	                title={title}
                     text={text}
                     suggestions={suggestions}
                     onChangeText={onChangeText}
