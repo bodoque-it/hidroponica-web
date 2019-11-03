@@ -1,11 +1,27 @@
-export const FIND_SUGGESTIONS = 'FIND_SUGGESTIONS';
+export const FIND_RAILS_SUGGESTIONS = 'FIND_RAILS_SUGGESTIONS';
+export const FIND_CYCLES_SUGGESTIONS = 'FIND_CYCLES_SUGGESTIONS';
+export const FIND_MICROCLIMATES_SUGGESTIONS = 'FIND_MICROCLIMATES_SUGGESTIONS';
 export const FIND_CONTAINERS_RESULTS = 'FIND_CONTAINERS_RESULTS';
 export const FIND_CURRENT_CONTAINER = 'FIND_CURRENT_CONTAINER';
 export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
 
-export function findSuggestions(text) {
+export function findRailsSuggestions(text) {
     return {
-        type: FIND_SUGGESTIONS,
+        type: FIND_RAILS_SUGGESTIONS,
+        payload: text,
+    }
+}
+
+export function findCyclesSuggestions(text) {
+    return {
+        type: FIND_CYCLES_SUGGESTIONS,
+        payload: text,
+    }
+}
+
+export function findMicroclimatesSuggestions(text) {
+    return {
+        type: FIND_MICROCLIMATES_SUGGESTIONS,
         payload: text,
     }
 }

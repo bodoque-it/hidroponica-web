@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import Page from './page';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import fetchSuggestions from '../../redux/rootReducer/fetchSuggestions';
+import fetchRailsSuggestions from '../../redux/rootReducer/fetchRailsSuggestions';
+import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestions';
+import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
 
 class AppBar extends Component{
 	componentWillMount(){
-		this.props.fetchSuggestions("");
+        if ( this.state.title === "Rieles" ) {
+            this.props.fetchRailsSuggestions("");  
+        }
+        else if( this.state.title === "Ciclos"  ){
+            this.props.fetchCyclesSuggestions("");
+        }
+        else if( this.state.title === "Microclimas"  ){
+            this.props.fetchMicroclimatesSuggestions("");
+        }
 	}
     constructor(props){
         super(props);
@@ -22,13 +32,29 @@ class AppBar extends Component{
     onChangeText(text){
         this.setState({ text });
 
-        this.props.fetchSuggestions(text);
+        if (this.state.title === "Rieles" ) {
+            this.props.fetchRailsSuggestions(text);    
+        }
+        else if( this.state.title === "Ciclos"  ){
+            this.props.fetchCyclesSuggestions(text);
+        }
+        else if( this.state.title === "Microclimas"  ){
+            this.props.fetchMicroclimatesSuggestions(text);
+        }
     }
 
     onChangeSelection(text){
         this.setState({ text });
-        this.props.fetchSuggestions(text)
-
+        
+        if (this.state.title === "Rieles" ) {
+            this.props.fetchRailsSuggestions(text);    
+        }
+        else if( this.state.title === "Ciclos"  ){
+            this.props.fetchCyclesSuggestions(text);
+        }
+        else if( this.state.title === "Microclimas"  ){
+            this.props.fetchMicroclimatesSuggestions(text);
+        }
     }
 
     render(){
@@ -52,7 +78,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    fetchSuggestions,
+    fetchRailsSuggestions,
+    fetchCyclesSuggestions,
+    fetchMicroclimatesSuggestions,
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(AppBar));

@@ -1,7 +1,6 @@
-import { findSuggestions } from '../actions/actions';
-import items from '../../data/items';
+import { findRailsSuggestions } from '../actions/actions';
 
-function fetchSuggestions(text) {
+function fetchRailsSuggestions(text) {
     return dispatch => {
         const regex = new RegExp(`^${text}`,'i');
 
@@ -12,7 +11,7 @@ function fetchSuggestions(text) {
                 throw(res.error);
             }
             const results = res.data.filter( n => regex.test(n.name) )
-            dispatch(findSuggestions(results))
+            dispatch(findRailsSuggestions(results))
             return results;
         })
         .catch(error => {
@@ -21,4 +20,4 @@ function fetchSuggestions(text) {
     }
 }
 
-export default fetchSuggestions;
+export default fetchRailsSuggestions;

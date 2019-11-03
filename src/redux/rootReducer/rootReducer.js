@@ -1,4 +1,4 @@
-import { FIND_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER, FIND_CONTAINERS_RESULTS } from '../actions/actions';
+import { FIND_RAILS_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER, FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS } from '../actions/actions';
 
 const defaultState = {
     suggestions: [],
@@ -9,8 +9,22 @@ const defaultState = {
 
 export function rootReducer(state = defaultState, {type,payload}) {
     switch (type) {
-        case FIND_SUGGESTIONS:{
+        case FIND_RAILS_SUGGESTIONS:{
             console.log(payload)
+            return {
+                ...state,
+                suggestions: payload
+            }
+        }
+
+        case FIND_CYCLES_SUGGESTIONS:{
+            return {
+                ...state,
+                suggestions: payload
+            }
+        }
+
+        case FIND_MICROCLIMATES_SUGGESTIONS:{
             return {
                 ...state,
                 suggestions: payload
