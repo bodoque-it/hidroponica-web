@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Page from './page';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import fetchUserCreate from '../../redux/rootReducer/fetchUserCreate';
 
 class Login extends Component {
     constructor(props) {
@@ -23,6 +25,7 @@ class Login extends Component {
 
     handleChange = input => e => {
         this.setState ({[input]: e.target.value})
+        this.props.fetchUserCreate('admin','admin','admin','admin','admin@gmail.com')
     }
 
     handleSubmit = event=> {
@@ -44,4 +47,14 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        
+    };
+};
+
+const mapDispatchToProps = {
+    fetchUserCreate
+};
+
+export default withRouter(connect( mapStateToProps, mapDispatchToProps)(Login));

@@ -1,4 +1,6 @@
-import { FIND_RAILS_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER, FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS } from '../actions/actions';
+import { FIND_RAILS_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER,
+         FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS,
+         USER_CREATE } from '../actions/actions';
 
 const defaultState = {
     suggestions: [],
@@ -52,6 +54,11 @@ export function rootReducer(state = defaultState, {type,payload}) {
             }
         }
 
+        case USER_CREATE:{
+            return {
+                ...state,
+            }
+        }
         default:
             return state;
     }
