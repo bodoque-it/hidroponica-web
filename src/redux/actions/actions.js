@@ -4,7 +4,8 @@ export const FIND_MICROCLIMATES_SUGGESTIONS = 'FIND_MICROCLIMATES_SUGGESTIONS';
 export const FIND_CONTAINERS_RESULTS = 'FIND_CONTAINERS_RESULTS';
 export const FIND_CURRENT_CONTAINER = 'FIND_CURRENT_CONTAINER';
 export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
-export const USER_CREATE = 'USER_CREATE';
+export const RAIL_CREATE = 'RAIL_CREATE';
+export const RAIL_DELETE = 'RAIL_DELETE';
 
 export function findRailsSuggestions(text) {
     return {
@@ -48,9 +49,16 @@ export function findRailsResults(id_user){
     }
 }
 
-export function userCreate(){
+export function railCreate(){
     return {
-        type: USER_CREATE,
+        type: RAIL_CREATE,
         
+    }
+}
+
+export function railDelete(id_rail){
+    return{
+        type: RAIL_DELETE,
+        payload: id_rail,
     }
 }

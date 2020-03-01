@@ -1,6 +1,6 @@
 import { FIND_RAILS_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER,
          FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS,
-         USER_CREATE } from '../actions/actions';
+         RAIL_CREATE,RAIL_DELETE } from '../actions/actions';
 
 const defaultState = {
     suggestions: [],
@@ -12,7 +12,7 @@ const defaultState = {
 export function rootReducer(state = defaultState, {type,payload}) {
     switch (type) {
         case FIND_RAILS_SUGGESTIONS:{
-            console.log(payload)
+            
             return {
                 ...state,
                 suggestions: payload
@@ -54,8 +54,13 @@ export function rootReducer(state = defaultState, {type,payload}) {
             }
         }
 
-        case USER_CREATE:{
+        case RAIL_CREATE:{
             return {
+                ...state,
+            }
+        }
+        case RAIL_DELETE:{
+            return{
                 ...state,
             }
         }

@@ -1,8 +1,7 @@
 //IMPORTS PARA ESTILO Y COLORES, Y REACT EN SI
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { ImageGradient } from 'material-ui/svg-icons';
 
 //IMPORTS NECESARIOS PARA LOS MENUS EXPANSIVOS
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -10,19 +9,26 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+// Formulario PopUp
+import { createPortal } from 'react-dom';
+import Popup from "reactjs-popup";
+import FormRail from './FormRail';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 //IMPORTS NECESARIOS PARA LAS TARJETAS
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+
 import Typography from '@material-ui/core/Typography';
 
 //IMPORTS NECESARIOS PARA BOTONES
 import DeleteIcon from '@material-ui/icons/Delete';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+
+
 
 //IMPORTS NECESARIOS PARA LA TABLA DENTRO DE LAS TARJETAS
 import Table from '@material-ui/core/Table';
@@ -76,12 +82,16 @@ const useStyles = makeStyles((theme) =>
 function Page(props) {
 	const {
 		suggestions,
+		deleteRail,
+		addRiel,
 	} = props;
 	const classes = useStyles();
     return (
         <div >
         	<Rieles
 				suggestions={suggestions}
+				deleteRail={deleteRail}
+				addRiel={addRiel}
 			/>
         </div>
     );
@@ -93,8 +103,9 @@ export function Riel(props) {
 		containers,
 		atr_1,
 		atr_2,
+		id,
+		deleteRail,
 	} = props;
-
 	const classes = useStyles();
 	return(
 		<div>
@@ -110,10 +121,15 @@ export function Riel(props) {
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
 					<div className="row">
-						<div className="col">
+						<div className="col" >
 							<Fab aria-label="add" className={classes.fab, classes.add}>
 								<AddIcon />
 							</Fab>
+							<form >
+								<Fab aria-label="delete" className={classes.fab, classes.add}>
+									<DeleteIcon onClick={ () => deleteRail(id)} />
+								</Fab>
+							</form>
 						</div>
 					</div>
 					<div className="row">
@@ -152,18 +168,35 @@ export function RielDesactivado(props) {
 export function Rieles(props){
 	const {
 		suggestions,
+		deleteRail,
+		addRiel,
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
 	const classes = useStyles();
+
+	const Modal = () => (
+		<Popup
+		  trigger={<Button className="button"> Agregar Riel </Button>}
+		  modal
+		  closeOnDocumentClick
+		>
+			<FormRail
+				addRiel={addRiel}
+			/>
+		</Popup>
+	  );
+	  
 	
 	return(
 		<div className={classes.root} >
 			<div className="row">
-				<div className="col">
-					<Fab aria-label="add" className={classes.fab, classes.add}>
-						<AddIcon />
-					</Fab>
+				<div className="col" >
+					<label>
+
+						<Modal/>
+						
+					</label>
 				</div>
 			</div>
 			<br></br>
@@ -179,6 +212,8 @@ export function Rieles(props){
 							containers={suggestion.containers}
 							atr_1={suggestion.name}
 							atr_2={suggestion.location}
+							id={suggestion.id}
+							deleteRail={deleteRail}
 						/>
 					)}
 				</div>
@@ -188,7 +223,7 @@ export function Rieles(props){
 }
 export function Contenedores(props){
 	const {
-		containers
+		containers,
 	} = props;
 	const classes = useStyles();
 	var tabla = [];
@@ -244,7 +279,7 @@ export function Contenedor(props) {
 		id,
 		name,
 		active,
-		volume
+		volume,
 	} = props;
 
   	const classes = useStyles();
@@ -271,7 +306,7 @@ export function ContenedorActivo(props) {
 	const {
 		id,
 		name,
-		volume
+		volume,
 	} = props;
 
   	const classes = useStyles();
@@ -284,9 +319,9 @@ export function ContenedorActivo(props) {
 					Nombre Contenedor: { name }
 				</Typography>
 				</div>
-				<div className="col-2">
+				<div className="col-2" >
 					<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
-						<DeleteIcon />
+						<DeleteIcon type="submit" />
 					</Fab>
 				</div>
 			</div>
@@ -307,7 +342,7 @@ export function ContenedorInactivo(props) {
 	const {
 		id,
 		name,
-		volume
+		volume,
 	} = props;
 
   	const classes = useStyles();
@@ -320,9 +355,9 @@ export function ContenedorInactivo(props) {
 					Nombre Contenedor: { name }
 				</Typography>
 				</div>
-				<div className="col-2">
+				<div className="col-2" >
 					<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
-						<DeleteIcon />
+						<DeleteIcon type="submit"/>
 					</Fab>
 				</div>
 			</div>

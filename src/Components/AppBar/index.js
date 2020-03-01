@@ -6,10 +6,11 @@ import fetchRailsSuggestions from '../../redux/rootReducer/fetchRailsSuggestions
 import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestions';
 import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
 
+
 class AppBar extends Component{
 	componentWillMount(){
         if ( this.state.title === "Rieles" ) {
-            this.props.fetchRailsSuggestions("");  
+            this.props.fetchRailsSuggestions("");
         }
         else if( this.state.title === "Ciclos"  ){
             this.props.fetchCyclesSuggestions("");
