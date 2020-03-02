@@ -18,17 +18,17 @@ import tomates from './images/tomates.jpg';
 const useStyles = makeStyles((theme) => {
     createStyles({
         card: {
-            width: 340,
+            width: 300,
         },
         media: {
-            height: 145,
-            width: 80,
+            height: '30%',
+            width: '20%',
         },
         root: {
             flexGrow: 1,
             height:'100%',
             width:'100%',
-            padding: '10px',
+            padding:'10%',
         },
         paper: {
             textAlign: 'center',
@@ -41,7 +41,7 @@ export default function Page(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div className={"root"}>
             <br/>
             <Grid container spacing={1}>
                 <Grid container item xs={10} sm={12} spacing={4}>
@@ -59,13 +59,13 @@ function RailCard(riel,contenedor,plantacion,temperatura,humedad,presion,foto){
     const classes = useStyles();
 
     return(
-        <Card className={classes.card}>
+        <Card className={"card"}>
             <CardMedia
-                className={classes.media}
+            	className={"media"}
                 alt="Lechugas"
                 title="Riel - Contenedor"
             />
-            <img src={foto} height={225} width={240} sizes/>
+            <img src={foto} height={200} width={200} sizes/>
             <CardContent>
                 <div component="h2">
                     <Typography variant="h5">Riel: {riel}</Typography>

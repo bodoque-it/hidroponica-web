@@ -32,7 +32,7 @@ function Page(props) {
     function MediaCard() {
         const classes = useStyles();
         return (
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '30%' }}>
                 <Card.Img variant="top" src={Contenedor} />
                 <Card.Body>
                     <Card.Title>Name Container</Card.Title>
@@ -48,7 +48,7 @@ function Page(props) {
     }
 
     return (
-        <div>
+        <div className="root">
             {MediaCard()}
         </div>
     );
