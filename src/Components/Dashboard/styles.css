@@ -2,11 +2,11 @@
     background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
 }
 card{
-	width: 30%;
+	width: 28%;
 }
-media{
-    height: 40%;
-    width: 30%;
+image{
+    height: 5em;
+    width: 5em;
 }
 root{
     flexGrow: 1;
