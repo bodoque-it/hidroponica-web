@@ -1,7 +1,8 @@
 #accordionSidebar{
-    border: ridge 0.35em rgb(200, 255, 0);
+    /*border: ridge 0.35em rgb(200, 255, 0);*/
 }
 
 .color-gradient{
-    background:linear-gradient(-45deg,rgba(99, 168, 97, 0.979),transparent);
+	background:rgb(0,0,0);
+    /*background:linear-gradient(-45deg,rgba(99, 168, 97, 0.979),transparent);*/
 }
