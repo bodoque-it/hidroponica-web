@@ -3,6 +3,11 @@ import './styles.css';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageGradient } from 'material-ui/svg-icons';
 
+//imagenes
+import blanca from './luz-blanca.png';
+import roja from './luz-infraroja.png';
+import verde from './luz-verde.png';
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -18,19 +23,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
+import Table from '@material-ui/core/Table';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 const useStyles = makeStyles((theme) => {
     createStyles({
-        card: {
-            width: 340,
-            float: 'right',
-        },
-        media: {
-            height: 145,
-            width: 80,
-        },
-        paper: {
-            textAlign: 'center',
-        },
         fab: {
 		  margin: theme.spacing(1),
 		  float:'right',
@@ -54,35 +52,55 @@ function RailCard(Name,TypeOfLight,IntesityOfLight,TypeOfPlant,Temperature,Humid
     const classes = useStyles();
 
     return(
-        <Card className={classes.card}>
+        <Card className={"card"}>
             <CardMedia className={"other-card-color-gradient"}>
             <CardContent>
-                <Grid container spacing={6}>
-                    <Grid item xs={6}>
-                        <Typography variant="h4">Nombre: {Name}</Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={9}>
+                        <Typography variant="h5">Nombre: {Name}</Typography>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                         <Button variant="contained" style={{float:"right",background:'#e53935',color:'#fff'}}>
-                            DELETE THIS
+                            Eliminar
                         </Button>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Tipo de luz: {TypeOfLight}</Paper>
+                        <Paper className={"paper"}>Tipo de luz:
+                            <br/> 
+                            <img src={blanca}/>
+                            <br/> 
+                            {TypeOfLight}
+                        </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Plantación: {TypeOfPlant}</Paper>
+                        <Paper className={"paper"}>Plantación:
+                            <br/>
+                            {TypeOfPlant}
+                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Temperatura: {Temperature}°C</Paper>
+                        <Paper className={"paper"}>T°:
+                            <br/> 
+                            {Temperature}°C
+                        </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Intensidad de la luz: {IntesityOfLight}</Paper>
+                        <Paper className={"paper"}>Intensidad de luz:
+                            <br/> 
+                            {IntesityOfLight}
+                        </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Humedad: {Humidity}%</Paper>
+                        <Paper className={"paper"}>Humedad:
+                            <br/> 
+                            {Humidity}%
+                        </Paper>
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper>Duración: {Duration}</Paper>
+                        <Paper className={"paper"}>Duración:
+                            <br/>
+                            {Duration} [Días]
+                        </Paper>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -93,34 +111,79 @@ function RailCard(Name,TypeOfLight,IntesityOfLight,TypeOfPlant,Temperature,Humid
 
 function FormRow() {
     const classes = useStyles();
+    var tabla = [];
+    const microclimas = [
+        {
+            "name":"Tomate Cherry",
+            "typeOfLight":"Natural",
+            "intesityOfLight":"Alta",
+            "typeOfPlant":"Acelga",
+            "temperature":10000000,
+            "humidity":600,
+            "duration":60000
+        },
+        {
+            "name":"Leshugah",
+            "typeOfLight":"verde",
+            "intesityOfLight":"normal",
+            "typeOfPlant":"Lechugas",
+            "temperature":24,
+            "humidity":70,
+            "duration":30
+        },
+        {
+            "name":"Leshugah",
+            "typeOfLight":"verde",
+            "intesityOfLight":"normal",
+            "typeOfPlant":"Lechugas",
+            "temperature":24,
+            "humidity":70,
+            "duration":30
+        }
+    ];
+    for (var i=0; i<microclimas.length; i+=2){
+        if(microclimas[i+1] != null){
+            tabla.push(
+                <TableRow>
+                    <TableCell align="center" width="50%">
+                        {RailCard(microclimas[i].Name,microclimas[i].typeOfLight,microclimas[i].intesityOfLight,microclimas[i].typeOfPlant,microclimas[i].temperature,microclimas[i].humidity,microclimas[i].duration)}
+                    </TableCell>
+                    <TableCell align="center">
+                        {RailCard(microclimas[i+1].Name,microclimas[i+1].typeOfLight,microclimas[i+1].intesityOfLight,microclimas[i+1].typeOfPlant,microclimas[i+1].temperature,microclimas[i+1].humidity,microclimas[i+1].duration)}
+                    </TableCell>
+                </TableRow>
+            )
+        } else{
+            tabla.push(
+                <TableRow>
+                    <TableCell align="center">
+                        {RailCard(microclimas[i].Name,microclimas[i].typeOfLight,microclimas[i].intesityOfLight,microclimas[i].typeOfPlant,microclimas[i].temperature,microclimas[i].humidity,microclimas[i].duration)}
+                    </TableCell>
+                    <TableCell align="center" width="50%">
+                    </TableCell>
+                </TableRow>
+            )
+        }
+    }
 
     return (
-    	<div>
-    		<div className="row">
-				<div className="col">
-					<Fab aria-label="add" className={classes.fab, "add"}>
-						<AddIcon />
-					</Fab>
-				</div>
-			</div>
-			<br/>
-			<div className="row">
-				<div className="col">
-				  <React.Fragment>
-					<Grid item xs={6} sm={6}>
-					  <Paper className={classes.paper} >{RailCard("Test-1","Natural","Alta","Acelga",10000000,600,60000)}</Paper>
-					</Grid>
-					<br/>
-					<Grid item xs={6} sm={20}>
-					  <Paper className={classes.paper} >{RailCard("Test-2","Natural","Alta","Acelga",10000000,600,60000)}</Paper>
-					</Grid>
-					<br/>
-					<Grid item xs={6}  sm={20}>
-					  <Paper className={classes.paper}>{RailCard("Test-3","Natural","Alta","Acelga",10000000,600,60000)}</Paper>
-					</Grid>
-				  </React.Fragment>
-		  		</div>
-			</div>
-		 </div>
+    	<Table className="table-borderless" aria-label="spanning table">
+            {tabla}
+        </Table>
+    );
+}
+
+//SIN USO ----->> GUARDAR SOLO POR SI ACASO
+function MicroclimeCol(){
+    const classes = useStyles();
+
+    return(
+        <div className="col">
+            <React.Fragment>
+                <Grid>
+                    <Paper className={"paper"} >{RailCard("Tomate Cherry","Natural","Alta","Acelga",10000000,600,60000)}</Paper>
+                </Grid>
+            </React.Fragment>
+        </div>
     );
 }

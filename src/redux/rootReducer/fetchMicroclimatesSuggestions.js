@@ -10,8 +10,11 @@ function fetchMicroclimatesSuggestions(text) {
             if(res.error) {
                 throw(res.error);
             }
-            const results = res.data.filter( n => regex.test(n.name) )
-            dispatch(findMicroclimatesSuggestions(results))
+            /*const results = res.data.filter( n => regex.test(n.name) )
+            dispatch(findMicroclimatesSuggestions(results))*/
+            const results = {
+            	
+            };
             return results;
         })
         .catch(error => {
