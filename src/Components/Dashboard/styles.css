@@ -1,3 +1,19 @@
 .card-color-gradient{
     background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
 }
+card{
+	width: 28%;
+}
+image{
+    height: 5em;
+    width: 5em;
+}
+root{
+    flexGrow: 1;
+    height: 100%;
+    width: 100%;
+    padding: 10%;
+}
+paper{
+    textAlign: 'center',
+}

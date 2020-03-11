@@ -1,5 +1,10 @@
 .other-card-color-gradient{
-    background:linear-gradient(-30deg,rgba(240, 209, 143, 0.979),transparent);
+  transition: 0.5s;
+  background:rgba(40, 167, 69, 1);
+}
+.other-card-color-gradient:hover{
+  transition: 0.5s;
+  background:rgba(40, 183, 69, 1);
 }
 
 .button-specs{
@@ -33,3 +38,22 @@
 .add:hover{
    background-color: #28C745;
 }
+.card{
+  width:100%;
+  float: right;
+}
+.card:hover{
+  transition: 3s !important;
+}
+.media{
+  height: 145;
+  width: 80;
+}
+.paper{
+  text-align: center;
+  height: 100%;
+  padding:0.02em !important;
+  border: 0.05em #000000 solid !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+

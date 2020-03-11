@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
   //Para los menus expansivos de los rieles
     root: {
         width:'100%',
-        padding:'50px',
+        padding:'5%',
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),

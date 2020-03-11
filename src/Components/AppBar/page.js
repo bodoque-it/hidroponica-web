@@ -17,8 +17,28 @@ function Page(props) {
         onChangeText,
         onChangeSelection,
     } = props;
-    
-    return(
+    if(title=="Rieles"){
+        return(
+            <AppBar position="relative" id="AppBar-general"   >
+                <Toolbar>
+                    <Typography variant="h4" color="inherit" >
+                        Cultivos
+                    </Typography>
+
+                    <AppBarAutocomplete 
+                        title={title}
+                        text={text}
+                        suggestions={suggestions}
+                        onChangeText={onChangeText}
+                        onChangeSelection={onChangeSelection}
+                    />
+
+                    <AccountCircle/>
+                </Toolbar>
+            </AppBar>           
+        )
+    }else{
+        return(
         <AppBar position="relative" id="AppBar-general"   >
             <Toolbar>
                 <Typography variant="h4" color="inherit" >
@@ -26,7 +46,7 @@ function Page(props) {
                 </Typography>
 
                 <AppBarAutocomplete 
-	                title={title}
+                    title={title}
                     text={text}
                     suggestions={suggestions}
                     onChangeText={onChangeText}
@@ -36,6 +56,8 @@ function Page(props) {
                 <AccountCircle/>
             </Toolbar>
         </AppBar>           
-    )
+        )
+    }
+    
 }
 export default Page;

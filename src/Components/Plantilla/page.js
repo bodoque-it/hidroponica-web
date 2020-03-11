@@ -59,7 +59,7 @@ function renderSidebar(){
 			</div>
 			<li class="nav-item active">
 		    	<a class="nav-link" href="/rails">
-					<span>Rieles</span>
+					<span>Cultivos</span>
 		    	</a>
 		    </li>
 			<li class="nav-item active">
