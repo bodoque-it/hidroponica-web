@@ -10,11 +10,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Formulario PopUp
-import { createPortal } from 'react-dom';
-import Popup from "reactjs-popup";
-import FormRail from './FormRail';
-import Button from 'react-bootstrap/Button';
+import FormAddRail from './FormAddRail';
+import FormUpdateRail from './FormUpdateRail';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Popup from "reactjs-popup";
+import Button from 'react-bootstrap/Button';
 
 
 //IMPORTS NECESARIOS PARA LAS TARJETAS
@@ -25,15 +25,14 @@ import Typography from '@material-ui/core/Typography';
 
 //IMPORTS NECESARIOS PARA BOTONES
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-
-
 
 //IMPORTS NECESARIOS PARA LA TABLA DENTRO DE LAS TARJETAS
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import { ButtonToolbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) =>
 	//Para el ícono delete de cada tarjeta
 	fab: {
       margin: theme.spacing(1),
-      float:'right',
+	  float:'right',
     },
     //Para los botones agregar
     add:{
@@ -74,6 +73,7 @@ const useStyles = makeStyles((theme) =>
     	'&:hover': {
 		   background: "#28C745",
 		},
+		padding:'8px',
     }
   }),
 );
@@ -84,6 +84,10 @@ function Page(props) {
 		suggestions,
 		deleteRail,
 		addRiel,
+		updateRiel,
+		addModalShow,
+		addModalClose,
+		addModalOpen,
 	} = props;
 	const classes = useStyles();
     return (
@@ -92,6 +96,10 @@ function Page(props) {
 				suggestions={suggestions}
 				deleteRail={deleteRail}
 				addRiel={addRiel}
+				updateRiel={updateRiel}
+				addModalShow={addModalShow}
+				addModalClose={addModalClose}
+				addModalOpen={addModalOpen}
 			/>
         </div>
     );
@@ -101,10 +109,11 @@ export default Page;
 export function Riel(props) {
 	const {
 		containers,
-		atr_1,
-		atr_2,
+		name,
+		location,
 		id,
 		deleteRail,
+		updateRiel
 	} = props;
 	const classes = useStyles();
 	return(
@@ -115,20 +124,33 @@ export function Riel(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  <Typography className={classes.heading}>{atr_1}</Typography>
-			  <Typography className={classes.secondaryHeading}> Ubicación: {atr_2} </Typography>
+			  <Typography className={classes.heading}>{name}</Typography>
+			  <Typography className={classes.secondaryHeading}> Ubicación: {location} </Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
 					<div className="row">
 						<div className="col" >
-							<Fab aria-label="add" className={classes.fab, classes.add}>
-								<AddIcon />
-							</Fab>
+							
 							<form >
 								<Fab aria-label="delete" className={classes.fab, classes.add}>
 									<DeleteIcon onClick={ () => deleteRail(id)} />
 								</Fab>
+									<Popup
+										trigger={<Fab aria-label="edit" className={classes.fab, classes.add}> 
+													<EditIcon/> 
+												</Fab>}
+										modal
+										closeOnDocumentClick
+									>
+										<FormUpdateRail
+											id={id}
+											name={name}
+											location={location}
+											updateRiel={updateRiel}
+										/>
+									</Popup>
+								
 							</form>
 						</div>
 					</div>
@@ -147,8 +169,8 @@ export function Riel(props) {
 }
 export function RielDesactivado(props) {
 	const {
-		atr_1,
-		atr_2,
+		name,
+		location,
 	} = props;
 		
 	const classes = useStyles();
@@ -159,8 +181,8 @@ export function RielDesactivado(props) {
 			aria-controls="panel3a-content"
 			id="panel3a-header"
 			>
-			<Typography className={classes.heading}> {atr_1} </Typography>
-			<Typography className={classes.secondaryHeading}> {atr_2} </Typography>
+			<Typography className={classes.heading}> {name} </Typography>
+			<Typography className={classes.secondaryHeading}> {location} </Typography>
 			</ExpansionPanelSummary>
 		</ExpansionPanel>
   	)
@@ -170,32 +192,30 @@ export function Rieles(props){
 		suggestions,
 		deleteRail,
 		addRiel,
+		updateRiel,
+		addModalShow,
+		addModalClose,
+		addModalOpen,
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
 	const classes = useStyles();
-
-	const Modal = () => (
-		<Popup
-		  trigger={<Button className="button"> Agregar Riel </Button>}
-		  modal
-		  closeOnDocumentClick
-		>
-			<FormRail
-				addRiel={addRiel}
-			/>
-		</Popup>
-	  );
-	  
-	
 	return(
 		<div className={classes.root} >
 			<div className="row">
 				<div className="col" >
 					<label>
-
-						<Modal/>
-						
+					<ButtonToolbar>
+						<Button variant="primary"
+								onClick={() => addModalOpen() }
+						 > Agregar Riel
+						</Button>
+							<FormAddRail
+								addRiel={addRiel}
+								show={addModalShow}
+								onHide={addModalClose}
+							/>
+					</ButtonToolbar>
 					</label>
 				</div>
 			</div>
@@ -210,10 +230,11 @@ export function Rieles(props){
 					suggestions.map( suggestion =>
 						<Riel
 							containers={suggestion.containers}
-							atr_1={suggestion.name}
-							atr_2={suggestion.location}
+							name={suggestion.name}
+							location={suggestion.location}
 							id={suggestion.id}
 							deleteRail={deleteRail}
+							updateRiel={updateRiel}
 						/>
 					)}
 				</div>

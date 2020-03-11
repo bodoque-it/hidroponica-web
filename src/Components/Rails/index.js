@@ -3,6 +3,7 @@ import Page from './page';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axiosRailDelete from '../../redux/rootReducer/axiosRailDelete';
+import axiosRailUpdate from '../../redux/rootReducer/axiosRailUpdate';
 import fetchRailCreate from '../../redux/rootReducer/fetchRailCreate';
 
 
@@ -10,11 +11,14 @@ class Rails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            
+            addModalShow : false
         };
 
         this.deleteRail = this.deleteRail.bind(this);
         this.addRiel = this.addRiel.bind(this);
+        this.updateRiel = this.updateRiel.bind(this);
+        this.addModalClose = this.addModalClose.bind(this);
+        this.addModalOpen = this.addModalOpen.bind(this);
     }
 
     deleteRail(id_rail){
@@ -27,6 +31,18 @@ class Rails extends Component {
         window.location.reload();
     }
 
+    updateRiel(id_rail,name,location){
+        this.props.axiosRailUpdate(id_rail,name,location);
+        window.location.reload();
+    }
+
+    addModalClose(){
+        this.setState({ addModalShow : false })
+    }
+    addModalOpen(){
+        this.setState({ addModalShow : true })
+    }
+
     render() {
         return(
             <div >
@@ -34,6 +50,10 @@ class Rails extends Component {
                     suggestions={this.props.suggestions}
                     deleteRail={this.deleteRail}
                     addRiel={this.addRiel}
+                    updateRiel={this.updateRiel}
+                    addModalShow={this.state.addModalShow}
+                    addModalClose={this.addModalClose}
+                    addModalOpen={this.addModalOpen}
                 />
             </div>
         )
@@ -48,6 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     axiosRailDelete,
+    axiosRailUpdate,
     fetchRailCreate,
 };
 

@@ -6,6 +6,7 @@ export const FIND_CURRENT_CONTAINER = 'FIND_CURRENT_CONTAINER';
 export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
 export const RAIL_CREATE = 'RAIL_CREATE';
 export const RAIL_DELETE = 'RAIL_DELETE';
+export const RAIL_UPDATE = 'RAIL_UPDATE';
 
 export function findRailsSuggestions(text) {
     return {
@@ -59,6 +60,13 @@ export function railCreate(){
 export function railDelete(id_rail){
     return{
         type: RAIL_DELETE,
+        payload: id_rail,
+    }
+}
+
+export function railUpdate(id_rail){
+    return{
+        type: RAIL_UPDATE,
         payload: id_rail,
     }
 }

@@ -4,7 +4,7 @@ function fetchRailsSuggestions(text) {
     return dispatch => {
         const regex = new RegExp(`^${text}`,'i');
 
-        fetch('http://localhost:8000/api/rails/1')
+        fetch('/api/rails/1')
         .then(res => res.json())
         .then(res => {
             if(res.error) {
