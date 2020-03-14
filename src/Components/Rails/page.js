@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormAddRail from './FormAddRail';
 import FormUpdateRail from './FormUpdateRail';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import Popup from './Popup/index'
 import Popup from "reactjs-popup";
 import Button from 'react-bootstrap/Button';
 
@@ -88,6 +89,9 @@ function Page(props) {
 		addModalShow,
 		addModalClose,
 		addModalOpen,
+		openModal,
+		closeModal,
+		open
 	} = props;
 	const classes = useStyles();
     return (
@@ -100,6 +104,9 @@ function Page(props) {
 				addModalShow={addModalShow}
 				addModalClose={addModalClose}
 				addModalOpen={addModalOpen}
+				openModal={openModal}
+				closeModal={closeModal}
+				open={open}
 			/>
         </div>
     );
@@ -113,7 +120,10 @@ export function Riel(props) {
 		location,
 		id,
 		deleteRail,
-		updateRiel
+		updateRiel,
+		openModal,
+		closeModal,
+		open
 	} = props;
 	const classes = useStyles();
 	return(
@@ -131,27 +141,23 @@ export function Riel(props) {
 				<div>
 					<div className="row">
 						<div className="col" >
-							
-							<form >
 								<Fab aria-label="delete" className={classes.fab, classes.add}>
 									<DeleteIcon onClick={ () => deleteRail(id)} />
 								</Fab>
-									<Popup
-										trigger={<Fab aria-label="edit" className={classes.fab, classes.add}> 
-													<EditIcon/> 
-												</Fab>}
-										modal
+								<Fab aria-label="edit" className={classes.fab, classes.add} >
+									<EditIcon onClick={openModal} />
+								</Fab>
+								<Popup  open={open}
 										closeOnDocumentClick
-									>
-										<FormUpdateRail
+										onClose={closeModal} >
+									<FormUpdateRail
 											id={id}
 											name={name}
 											location={location}
-											updateRiel={updateRiel}
-										/>
-									</Popup>
-								
-							</form>
+											updateRiel={updateRiel} 
+											closeModal={closeModal}
+											/>
+								</Popup>
 						</div>
 					</div>
 					<div className="row">
@@ -196,6 +202,9 @@ export function Rieles(props){
 		addModalShow,
 		addModalClose,
 		addModalOpen,
+		openModal,
+		closeModal,
+		open
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
@@ -235,6 +244,9 @@ export function Rieles(props){
 							id={suggestion.id}
 							deleteRail={deleteRail}
 							updateRiel={updateRiel}
+							openModal={openModal}
+							closeModal={closeModal}
+							open={open}
 						/>
 					)}
 				</div>

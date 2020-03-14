@@ -11,7 +11,8 @@ class Rails extends Component {
     constructor(props){
         super(props);
         this.state = {
-            addModalShow : false
+            addModalShow : false,
+            open: false
         };
 
         this.deleteRail = this.deleteRail.bind(this);
@@ -19,6 +20,8 @@ class Rails extends Component {
         this.updateRiel = this.updateRiel.bind(this);
         this.addModalClose = this.addModalClose.bind(this);
         this.addModalOpen = this.addModalOpen.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     deleteRail(id_rail){
@@ -43,6 +46,14 @@ class Rails extends Component {
         this.setState({ addModalShow : true })
     }
 
+    openModal() {
+        this.setState({ open: true });
+    }
+
+    closeModal() {
+        this.setState({ open: false });
+    }
+
     render() {
         return(
             <div >
@@ -54,6 +65,9 @@ class Rails extends Component {
                     addModalShow={this.state.addModalShow}
                     addModalClose={this.addModalClose}
                     addModalOpen={this.addModalOpen}
+                    openModal={this.openModal}
+                    closeModal={this.closeModal}
+                    open={this.state.open}
                 />
             </div>
         )

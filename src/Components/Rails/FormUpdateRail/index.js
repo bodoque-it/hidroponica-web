@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-
+import {Modal, ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
+// import {} from 'react-bootstrap';
 
 
 
@@ -15,34 +14,89 @@ class FormUpdateRail extends Component {
             location : props.location,
             name : props.name,
             updateRiel : props.updateRiel,
+
+            touched: {
+				name: false,
+				location: false,
+			}
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+        
     }
+
+    handleInputChange(event){
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value
+		});
+	}
+	handleSubmit(event){
+		
+		// alert("current State is: " + JSON.stringify(this.state))
+		event.preventDefault();
+	}
+
+	handleBlur = (field) => (event) => {
+		this.setState({
+			touched: {...this.state.touched, [field]: true }
+		});
+	}
+
+	validate(name,location){
+		const errors = {
+			name: '',
+			location: '',
+		};
+
+		if (this.state.touched.name && name.length <= 3 ) {
+			errors.name = 'No has escrito un nombre valido';
+		}
+		if (this.state.touched.location && location.length <= 3 ) {
+			errors.location = 'No has escrito una ubicación valida';
+		}
+		return errors;
+    }
+    
+    
  
     render(){
+        const errors = this.validate(this.state.name,this.state.location)
         return(
-            
-            <Form>
-                <Form.Group controlId="formBasicName">
-                    <Form.Label> Nombre </Form.Label>
-                    <Form.Control type="name" placeholder="Que miras....escribe ya tu nombre maldita sea!!" ref={this.nameInput} defaultValue={this.state.name} />
-                    <Form.Text className="text-muted">
-                    Escribe rápido Animal!!!
-                    </Form.Text>
-                </Form.Group>
+            <div>
+            <ModalHeader > Actualizar Riel </ModalHeader>
+                <Form onSubmit={this.handleSubmit} >
+                    <FormGroup row >
+                        <Label htmlFor="name" md={2} > Nombre </Label>
+                        <Col md={10} >
+                            <Input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={this.state.name} defaultValue={this.state.name} valid={errors.name === ''} invalid={errors.name !== ''} onBlur={this.handleBlur('name')} onChange={this.handleInputChange} />
+                            <FormFeedback>{errors.name}</FormFeedback>
+                        </Col>
+                    </FormGroup>
 
-                <Form.Group controlId="formBasicLocation">
-                    <Form.Label> Ubicación </Form.Label>
-                    <Form.Control type="location" placeholder="Donde vives estúpido?" ref={this.locationInput} defaultValue={this.state.location} />
-                </Form.Group>
-                
-                <Form.Row>
-                    <Button variant="primary" type="submit" onClick={ () => this.state.updateRiel(this.state.id,this.nameInput.current.value,this.locationInput.current.value) }>
+                    <FormGroup row >
+                        <Label htmlFor="location" md={2} > Ubicación </Label>
+                        <Col md={10} >
+                            <Input type="text" id="location" name="location" placeholder="Ingrese la ubicación" value={this.state.location} defaultValue={this.state.location} valid={errors.location === ''} invalid={errors.location !== ''} onBlur={this.handleBlur('location')} onChange={this.handleInputChange}/>
+                            <FormFeedback>{errors.location}</FormFeedback>
+                        </Col>
+                    </FormGroup>
+                    
+                    <Button type="submit" color="primary" 
+                    onClick={  (errors.name !== '' || errors.location !== '' || this.state.name.length == 0 || this.state.name.length == 0) ?
+                                 () =>  alert("no has completado el Formulario") 
+                                 : () => this.state.updateRiel(this.state.id,this.state.name,this.state.location) } >
                         Modificar
                     </Button>
-                
-                    <Button variant="danger">danger</Button>
-                </Form.Row>
-            </Form>
+                    <ModalFooter>
+                        <Button color="danger" onClick={() => this.props.closeModal() } > Cerrar </Button>
+                    </ModalFooter>
+                </Form>
+                </div>
 
         )
     }
@@ -50,3 +104,5 @@ class FormUpdateRail extends Component {
 
 
 export default FormUpdateRail ;
+
+

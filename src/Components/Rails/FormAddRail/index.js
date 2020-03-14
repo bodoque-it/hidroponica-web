@@ -1,29 +1,78 @@
 import React, { Component } from 'react';
-// import Form from 'react-bootstrap/Form';
-//import Button from 'react-bootstrap/Button';
-import {Input,Col} from 'reactstrap';
-import {Modal,Button,Row,Form} from 'react-bootstrap';
+import { Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
+import {Modal} from 'react-bootstrap';
 
 class FormAddRail extends Component {
     constructor(props){
         super(props);
-        this.nameInput = React.createRef(); 
-        this.locationInput = React.createRef(); 
         this.state = {
 			addRiel : props.addRiel,
 			name: '',
 			location: '',
 
-			message: '',
-        };
+			touched: {
+				name: false,
+				location: false,
+			}
+		};
+		
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
+		this.closeAndClear = this.closeAndClear.bind(this);
 
 	}
 
+	handleInputChange(event){
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value
+		});
+	}
+	handleSubmit(event){
+		
+		// alert("current State is: " + JSON.stringify(this.state))
+		event.preventDefault();
+	}
+
+	handleBlur = (field) => (event) => {
+		this.setState({
+			touched: {...this.state.touched, [field]: true }
+		});
+	}
+
+	validate(name,location){
+		const errors = {
+			name: '',
+			location: '',
+		};
+
+		if (this.state.touched.name && name.length <= 3 ) {
+			errors.name = 'No has escrito un nombre valido';
+		}
+		if (this.state.touched.location && location.length <= 3 ) {
+			errors.location = 'No has escrito una ubicación valida';
+		}
+		return errors;
+	}
+
+	closeAndClear(){
+		this.props.onHide();
+		this.setState({ name: '', location: '', 
+			touched:  {
+				name: false,
+				location: false,
+			}
+	 	});
+	}
+
     render(){
+		const errors = this.validate(this.state.name,this.state.location)
+		console.log("sasdasdasdasassdasdadd")
         return(
-			
-			
-			
 			<Modal
 			{...this.props}
 			size="lg"
@@ -37,26 +86,27 @@ class FormAddRail extends Component {
 				</Modal.Header>
 				<Modal.Body>
 					<div className="container" >
-					 	<Form>
-					 		<Form.Group row controlId="formBasicName">
-					 			<Form.Label htmlFor="firstname" md={2} > Nombre </Form.Label>
+					 	<Form onSubmit={this.handleSubmit} >
+					 		<FormGroup row >
+					 			<Label htmlFor="name" md={2} > Nombre </Label>
 					 			<Col md={10} >
-									<Input type="text" id="firstname" name="firstname" placeholder="First Name" Value={this.state.name} ></Input>
+									<Input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={this.state.name} valid={errors.name === ''} invalid={errors.name !== ''} onBlur={this.handleBlur('name')} onChange={this.handleInputChange} />
+									<FormFeedback>{errors.name}</FormFeedback>
 								</Col>
-					 			<Form.Text className="text-muted">
-					 			Escribe rápido Animal!!!
-					 			</Form.Text>
-					 		</Form.Group>
+					 		</FormGroup>
 
-					 		<Form.Group row controlId="formBasicLocation">
-					 			<Form.Label htmlFor="location" md={2} > Ubicación </Form.Label>
+					 		<FormGroup row >
+					 			<Label htmlFor="location" md={2} > Ubicación </Label>
 					 			<Col md={10} >
-									<Input type="text" id="location" name="location" placeholder="Location" Value={this.state.location} ></Input>
+									<Input type="text" id="location" name="location" placeholder="Ingrese la ubicación" value={this.state.location} valid={errors.location === ''} invalid={errors.location !== ''} onBlur={this.handleBlur('location')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.location}</FormFeedback>
 								</Col>
-					 		</Form.Group>
+					 		</FormGroup>
 							
-					 		<Button variant="primary" type="submit" onClick={ () => this.state.addRiel("name","location") }>
-							 {/* this.nameInput.current.value,this.locationInput.current.value */}
+							 <Button type="submit" color="primary" 
+							 onClick={  (errors.name !== '' || errors.location !== '' || this.state.name.length == 0 || this.state.name.length == 0 ) ?
+							  () =>  alert("no has completado el Formulario") 
+							  : () => this.state.addRiel(this.state.name,this.state.location) } >
 					 			Agregar
 					 		</Button>
 					 	</Form>
@@ -64,7 +114,7 @@ class FormAddRail extends Component {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="danger " onClick={this.props.onHide}>Close</Button>
+					<Button color="danger" onClick={ this.closeAndClear } >Close </Button>
 				</Modal.Footer>
 			</Modal> 
         )
