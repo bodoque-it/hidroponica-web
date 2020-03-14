@@ -14,6 +14,9 @@ import Grid from '@material-ui/core/Grid';
 import lechugas from './images/lechugas.jpg';
 import zanahorias from './images/zanahorias.jpg';
 import tomates from './images/tomates.jpg';
+//imports para gráfico
+import ReactDOM from 'react-dom'
+import AnyChart from '../../../node_modules/anychart-react/dist/anychart-react.min.js'
 
 const useStyles = makeStyles((theme) => {
     createStyles({
@@ -26,6 +29,7 @@ export default function Page(props) {
     return (
         <div className={"root"}>
             <br/>
+            <div id="graph"></div>
             <Grid container spacing={1}>
                 <Grid container item xs={10} sm={12} spacing={4}>
                 <FormRow />
@@ -71,6 +75,18 @@ function RailCard(riel,contenedor,plantacion,temperatura,humedad,presion,foto){
             </CardActions>
         </Card>
     )
+}
+function graphic(){
+
+    ReactDOM.render(
+      <AnyChart
+        id="pieChart"
+        width={800}
+        height={600}
+        type="pie"
+        data={[1, 2, 3, 4]}
+        title="Simple pie chart"
+      />, document.getElementById('graph'));
 }
 
 function FormRow() {
