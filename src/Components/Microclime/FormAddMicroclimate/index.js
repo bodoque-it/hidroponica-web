@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
 import {Modal} from 'react-bootstrap';
 
-class FormAddRail extends Component {
+class FormAddMicroclimate extends Component {
     constructor(props){
         super(props);
         this.state = {
-			addRiel : props.addRiel,
+			addMicroclimate : props.addMicroclimate,
 			name: '',
 			location: '',
 
@@ -71,7 +71,7 @@ class FormAddRail extends Component {
 
     render(){
 		const errors = this.validate(this.state.name,this.state.location)
-		console.log("sasdasdasdasassdasdadd")
+		
         return(
 			<Modal
 			{...this.props}
@@ -106,7 +106,7 @@ class FormAddRail extends Component {
 							 <Button type="submit" color="primary" 
 							 onClick={  (errors.name !== '' || errors.location !== '' || this.state.name.length == 0 || this.state.name.length == 0 ) ?
 							  () =>  alert("no has completado el Formulario") 
-							  : () => this.state.addRiel(this.state.name,this.state.location) } >
+							  : () => this.state.addMicroclimate(this.state.name,this.state.location) } >
 					 			Agregar
 					 		</Button>
 					 	</Form>
@@ -122,4 +122,4 @@ class FormAddRail extends Component {
 }
 
 
-export default FormAddRail ;
+export default FormAddMicroclimate ;

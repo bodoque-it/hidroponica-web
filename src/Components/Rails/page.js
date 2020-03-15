@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) =>
     },
     //Para los botones agregar
     add:{
-    	backgroundColor: '#28a745',
+    	
     	float:'right',
     	'&:hover': {
 		   background: "#28C745",
@@ -142,10 +142,10 @@ export function Riel(props) {
 					<div className="row">
 						<div className="col" >
 								<Fab aria-label="delete" className={classes.fab, classes.add}>
-									<DeleteIcon onClick={ () => deleteRail(id)} />
+									<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteRail(id)} />
 								</Fab>
 								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon onClick={openModal} />
+									<EditIcon color="primary" onClick={openModal} />
 								</Fab>
 								<Popup  open={open}
 										closeOnDocumentClick
