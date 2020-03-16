@@ -7,12 +7,24 @@ import axiosMicroclimateCreate from '../../redux/rootReducer/axiosMicroclimateCr
 import axiosMicroclimateUpdate from '../../redux/rootReducer/axiosMicroclimateUpdate';
 import axiosMicroclimateDelete from '../../redux/rootReducer/axiosMicroclimateDelete';
 
-class Microclimate extends Component {
+class Microclimate extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = {
-
+            microclimateSelect : {
+                idMicroclimate: null,
+                nameMicroclimate: null,
+                intensityMicroclimate: null,
+                lightTypeMicroclimate: null,
+                waterPHMicroclimate: null,
+                dailyHoursMicroclimate: null,
+                lightStartTimeMicroclimate: null
+            }
         };
+        
+        this.elegirMicroclima = this.elegirMicroclima.bind(this);
+        
+        
         this.addMicroclimate = this.addMicroclimate.bind(this);
         this.deleteMicroclimate = this.deleteMicroclimate.bind(this);
         this.updateMicroclimate = this.updateMicroclimate.bind(this);
@@ -20,6 +32,19 @@ class Microclimate extends Component {
         this.addModalOpen = this.addModalOpen.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+    }
+
+    elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime ) {
+        this.setState({     microclimateSelect:{
+                                idMicroclimate: id_microclimate,
+                                nameMicroclimate: name,
+                                intensityMicroclimate: intensity,
+                                lightTypeMicroclimate: lightType,
+                                waterPHMicroclimate: waterPH,
+                                dailyHoursMicroclimate: dailyHours,
+                                lightStartTimeMicroclimate: lightStartTime,
+                            }
+                        })
     }
 
     addMicroclimate( name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
@@ -44,8 +69,9 @@ class Microclimate extends Component {
         this.setState({ addModalShow : true })
     }
 
-    openModal() {
+    openModal( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime ) {
         this.setState({ open: true });
+        this.elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime )
     }
 
     closeModal() {
@@ -65,6 +91,7 @@ class Microclimate extends Component {
                 openModal={this.openModal}
                 closeModal={this.closeModal}
                 open={this.state.open}
+                microclimateSelect={this.state.microclimateSelect}
             />
         );
     }

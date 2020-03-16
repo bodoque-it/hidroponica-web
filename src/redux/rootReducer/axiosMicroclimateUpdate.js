@@ -1,7 +1,7 @@
 import { microclimateUpdate } from '../actions/actions';
 import axios from 'axios';
 
-function axiosMicroclimateUpdate(new_name, new_intensity, new_lightType, new_waterPH, new_dailyHours, new_lightStartTime)  {
+function axiosMicroclimateUpdate( id_microclimate, new_name, new_intensity, new_lightType, new_waterPH, new_dailyHours, new_lightStartTime)  {
     return dispatch  => {
         const microclimate = {
             name: new_name,
@@ -19,7 +19,7 @@ function axiosMicroclimateUpdate(new_name, new_intensity, new_lightType, new_wat
                 }
             };
             try {
-                const res = await axios.put('/api/microclimates/1', microclimate , JSON.stringify(config));
+                const res = await axios.put(`/api/microclimates/1/${id_microclimate}`, microclimate , JSON.stringify(config));
                 dispatch(microclimateUpdate())
             } catch (error) {
                 console.log(error);

@@ -1,17 +1,9 @@
 import { microclimateDelete } from '../actions/actions';
 import axios from 'axios';
 
-function axiosMicroclimateDelete(new_name, new_intensity, new_lightType, new_waterPH, new_dailyHours, new_lightStartTime)  {
+function axiosMicroclimateDelete( id_microclimate )  {
     return dispatch  => {
-        const microclimate = {
-            name: new_name,
-            intensity: new_intensity,
-            lightType: new_lightType,
-            waterPH: new_waterPH,
-            dailyHours: new_dailyHours,
-            lightStartTime: new_lightStartTime
-        };
-        const deleteMicroclimate = async microclimate => {
+        const deleteMicroclimate = async id_microclimate => {
             const config = {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
@@ -19,13 +11,13 @@ function axiosMicroclimateDelete(new_name, new_intensity, new_lightType, new_wat
                 }
             };
             try {
-                const res = await axios.delete('/api/microclimates/1', microclimate , JSON.stringify(config));
+                const res = await axios.delete(`/api/microclimates/1/${id_microclimate}`, JSON.stringify(config));
                 dispatch(microclimateDelete())
             } catch (error) {
                 console.log(error);
             }
         }
-        deleteMicroclimate(microclimate);
+        deleteMicroclimate(id_microclimate);
     }
 }
 

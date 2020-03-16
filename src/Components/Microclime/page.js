@@ -60,6 +60,7 @@ export default function Page(props) {
                 openModal={props.openModal}
                 closeModal={props.closeModal}
                 open={props.open}
+                microclimateSelect={props.microclimateSelect}
             />
 		</div>
     );
@@ -84,16 +85,27 @@ function RailCard( props ) {
                         </Grid>
                         <Grid item xs={4}>
 								<Fab aria-label="edit"  >
-									<EditIcon color="primary" style={{ float:"right" }} onClick={props.openModal} />
+                                    <EditIcon color="primary" style={{ float:"right" }} onClick={() => props.openModal(     props.id_microclimate,
+                                                                                                                            props.name, 
+                                                                                                                            props.intensity, 
+                                                                                                                            props.lightType,
+                                                                                                                            props.waterPH,
+                                                                                                                            props.dailyHours,
+                                                                                                                            props.lightStartTime)} />
 								</Fab>
 								<Popup  open={props.open}
 										closeOnDocumentClick
 										onClose={props.closeModal} >
 									<FormUpdateMicroclimate
-											id_microclimate={props.id_microclimate}
-											name={props.name}
-											location={props.location}
-											updateRiel={props.updateRiel} 
+											id_microclimate={props.microclimateSelect.idMicroclimate}
+                                            name={props.microclimateSelect.nameMicroclimate}
+                                            intensity={props.microclimateSelect.intensityMicroclimate}
+                                            lightType={props.microclimateSelect.lightTypeMicroclimate}
+                                            waterPH={props.microclimateSelect.waterPHMicroclimate}
+                                            dailyHours={props.microclimateSelect.dailyHoursMicroclimate}
+                                            lightStartTime={props.microclimateSelect.lightStartTimeMicroclimate}
+                                            
+                                            updateMicroclimate={props.updateMicroclimate} 
 											closeModal={props.closeModal}
 											/>
 								</Popup>
@@ -153,12 +165,14 @@ function FormRow(props) {
                                 waterPH={suggestion.waterPH}
                                 dailyHours={suggestion.dailyHours}
                                 lightStartTime={suggestion.lightStartTime.date}
-                                id_microclimate={props.id_microclimate}
+                                id_microclimate={suggestion.id}
+
                                 deleteMicroclimate={props.deleteMicroclimate}
                                 updateMicroclimate={props.updateMicroclimate}
                                 openModal={props.openModal}
                                 closeModal={props.closeModal}
                                 open={props.open}
+                                microclimateSelect={props.microclimateSelect}
                                 />
                 
             )
@@ -168,7 +182,7 @@ function FormRow(props) {
         <Table className="table-borderless" aria-label="spanning table">
             <div>  
                 <Button variant="contained" color="primary" style={{float:"left"}} onClick={ () => props.addModalOpen() } >
-                    Agregar Riel
+                    Agregar Microclima
                 </Button>
                     <FormAddMicroclimate
                         addMicroclimate={props.addMicroclimate}

@@ -7,12 +7,21 @@ class FormAddMicroclimate extends Component {
         super(props);
         this.state = {
 			addMicroclimate : props.addMicroclimate,
+
 			name: '',
-			location: '',
+			intensity: '',
+			lightType: '',
+			waterPH: '',
+			dailyHours: '',
+			lightStartTime: '',
 
 			touched: {
 				name: false,
-				location: false,
+				intensity: false,
+				lightType: false,
+				waterPH: false,
+				dailyHours: false,
+				lightStartTime: false,
 			}
 		};
 		
@@ -44,33 +53,68 @@ class FormAddMicroclimate extends Component {
 		});
 	}
 
-	validate(name,location){
+	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
 		const errors = {
 			name: '',
-			location: '',
+			intensity: '',
+			lightType: '',
+			waterPH: '',
+			dailyHours: '',
+			lightStartTime: '',
 		};
 
-		if (this.state.touched.name && name.length <= 3 ) {
+		if (this.state.touched.name && name.length < 1 ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
-		if (this.state.touched.location && location.length <= 3 ) {
-			errors.location = 'No has escrito una ubicación valida';
+
+		const regIntensity = /^\d*(\.\d{1})?\d{0,1}$/;
+		if (this.state.touched.intensity && !regIntensity.test(intensity) ) {
+			errors.intensity = 'Intensidad de luz no valida';
+		}
+		if (this.state.touched.lightType && lightType.length < 1 ) {
+			errors.lightType = 'No has escrito un tipo de luz valida';
+		}
+
+		const regWaterPH = /^\d*(\.\d{1})?\d{0,1}$/;
+		if (this.state.touched.waterPH && !regWaterPH.test(waterPH) ) {
+			errors.waterPH = 'PH del agua no valida';
+		}
+
+		const regDailyHours = /^\d+$/;
+		if (this.state.touched.dailyHours && !regDailyHours.test(dailyHours) ) {
+			errors.dailyHours = 'Horas diarias mal ingresadas';
+		}
+
+		const regLightStartTime = /^((((19|20)([2468][048]|[13579][26]|0[48])|2000)-02-29|((19|20)[0-9]{2}-(0[4678]|1[02])-(0[1-9]|[12][0-9]|30)|(19|20)[0-9]{2}-(0[1359]|11)-(0[1-9]|[12][0-9]|3[01])|(19|20)[0-9]{2}-02-(0[1-9]|1[0-9]|2[0-8])))\s([01][0-9]|2[0-3]):([012345][0-9]):([012345][0-9]))$/i; 
+		if (this.state.touched.lightStartTime && !regLightStartTime.test(lightStartTime) ) {
+			errors.lightStartTime = 'Inicio de la luz erróneas';
 		}
 		return errors;
 	}
 
 	closeAndClear(){
 		this.props.onHide();
-		this.setState({ name: '', location: '', 
-			touched:  {
+		this.setState({ 
+			name: '',
+			intensity: '',
+			lightType: '',
+			waterPH: '',
+			dailyHours: '',
+			lightStartTime: '',
+
+			touched: {
 				name: false,
-				location: false,
+				intensity: false,
+				lightType: false,
+				waterPH: false,
+				dailyHours: false,
+				lightStartTime: false,
 			}
 	 	});
 	}
 
     render(){
-		const errors = this.validate(this.state.name,this.state.location)
+		const errors = this.validate( this.state.name, this.state.intensity, this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime )
 		
         return(
 			<Modal
@@ -81,7 +125,7 @@ class FormAddMicroclimate extends Component {
 			>
 				<Modal.Header >
 					<Modal.Title id="contained-modal-title-vcenter">
-					Agregar Riel
+					Agregar Microclima
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
@@ -96,17 +140,49 @@ class FormAddMicroclimate extends Component {
 					 		</FormGroup>
 
 					 		<FormGroup row >
-					 			<Label htmlFor="location" md={2} > Ubicación </Label>
+					 			<Label htmlFor="intensity" md={2} > Intensidad de Luz </Label>
 					 			<Col md={10} >
-									<Input type="text" id="location" name="location" placeholder="Ingrese la ubicación" value={this.state.location} valid={errors.location === ''} invalid={errors.location !== ''} onBlur={this.handleBlur('location')} onChange={this.handleInputChange}/>
-									<FormFeedback>{errors.location}</FormFeedback>
+									<Input type="text" id="intensity" name="intensity" placeholder="Ingrese la intensidad de Luz" value={this.state.intensity} valid={errors.intensity === ''} invalid={errors.intensity !== ''} onBlur={this.handleBlur('intensity')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.intensity}</FormFeedback>
+								</Col>
+					 		</FormGroup>
+
+							 <FormGroup row >
+					 			<Label htmlFor="lightType" md={2} > Tipo de Luz </Label>
+					 			<Col md={10} >
+									<Input type="text" id="lightType" name="lightType" placeholder="Ingrese el Tipo de Luz" value={this.state.lightType} valid={errors.lightType === ''} invalid={errors.lightType !== ''} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.lightType}</FormFeedback>
+								</Col>
+					 		</FormGroup>
+
+							 <FormGroup row >
+					 			<Label htmlFor="waterPH" md={2} > PH del Agua </Label>
+					 			<Col md={10} >
+									<Input type="text" id="waterPH" name="waterPH" placeholder="Ingrese el PH del agua" value={this.state.waterPH} valid={errors.waterPH === ''} invalid={errors.waterPH !== ''} onBlur={this.handleBlur('waterPH')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.waterPH}</FormFeedback>
+								</Col>
+					 		</FormGroup>
+
+							 <FormGroup row >
+					 			<Label htmlFor="dailyHours" md={2} > Horas Diarias </Label>
+					 			<Col md={10} >
+									<Input type="text" id="dailyHours" name="dailyHours" placeholder="Ingrese Horas Diarias" value={this.state.dailyHours} valid={errors.dailyHours === ''} invalid={errors.dailyHours !== ''} onBlur={this.handleBlur('dailyHours')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.dailyHours}</FormFeedback>
+								</Col>
+					 		</FormGroup>
+
+							 <FormGroup row >
+					 			<Label htmlFor="lightStartTime" md={2} > Fecha y Hora de inicio </Label>
+					 			<Col md={10} >
+									<Input type="text" id="lightStartTime" name="lightStartTime" placeholder="Ingrese la Fecha y Hora" value={this.state.lightStartTime} valid={errors.lightStartTime === ''} invalid={errors.lightStartTime !== ''} onBlur={this.handleBlur('lightStartTime')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.lightStartTime}</FormFeedback>
 								</Col>
 					 		</FormGroup>
 							
 							 <Button type="submit" color="primary" 
-							 onClick={  (errors.name !== '' || errors.location !== '' || this.state.name.length == 0 || this.state.name.length == 0 ) ?
+							 onClick={  (errors.name !== '' || errors.intensity !== '' || errors.lightType !== '' || errors.waterPH !== '' || errors.dailyHours !== '' || errors.lightStartTime !== '' ) ?
 							  () =>  alert("no has completado el Formulario") 
-							  : () => this.state.addMicroclimate(this.state.name,this.state.location) } >
+							  : () => this.state.addMicroclimate( this.state.name, this.state.intensity ,this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime ) } >
 					 			Agregar
 					 		</Button>
 					 	</Form>
