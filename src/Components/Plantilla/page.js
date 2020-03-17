@@ -9,6 +9,7 @@ import Dashboard from '../Dashboard';
 import Cycle from '../Cycle';
 import Rails from '../Rails';
 import Container from '../Container';
+import Infrastructure from '../Infrastructure';
 
 
 function Page(props) {
@@ -55,9 +56,7 @@ function renderSidebar(){
 		    <hr class="sidebar-divider"/>
 			
 			<li class="nav-item active">
-		    	<a class="nav-link" href="/rails">
-					<span>Infraestructura</span>
-		    	</a>
+				<Infrastructure/>
 		    </li>
 			<li class="nav-item active">
 		    	<a class="nav-link" href="/rails">

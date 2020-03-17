@@ -7,6 +7,9 @@ export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
 export const RAIL_CREATE = 'RAIL_CREATE';
 export const RAIL_DELETE = 'RAIL_DELETE';
 export const RAIL_UPDATE = 'RAIL_UPDATE';
+export const MICROCLIMATE_CREATE = 'MICROCLIMATE_CREATE';
+export const MICROCLIMATE_DELETE = 'MICROCLIMATE_DELETE';
+export const MICROCLIMATE_UPDATE = 'MICROCLIMATE_UPDATE';
 
 export function findRailsSuggestions(text) {
     return {
@@ -68,5 +71,26 @@ export function railUpdate(id_rail){
     return{
         type: RAIL_UPDATE,
         payload: id_rail,
+    }
+}
+
+export function microclimateCreate(){
+    return {
+        type: MICROCLIMATE_CREATE,
+        
+    }
+}
+
+export function microclimateDelete(id_microclimate){
+    return{
+        type: MICROCLIMATE_DELETE,
+        payload: id_microclimate,
+    }
+}
+
+export function microclimateUpdate(id_microclimate){
+    return{
+        type: MICROCLIMATE_UPDATE,
+        payload: id_microclimate,
     }
 }

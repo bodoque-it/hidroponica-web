@@ -114,7 +114,7 @@ class FormAddRail extends Component {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button color="danger" onClick={ this.closeAndClear } >Close </Button>
+					<Button color="danger" onClick={ this.closeAndClear } > Cerrar </Button>
 				</Modal.Footer>
 			</Modal> 
         )

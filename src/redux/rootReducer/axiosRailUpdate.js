@@ -10,7 +10,6 @@ function axiosRailUpdate(id_rail,new_name,new_location)  {
             name: new_name,
             containers: []
         };
-        console.log(id_rail, new_location, new_name);
         const updateRail = async rail => {
             const config = {
                 headers: {

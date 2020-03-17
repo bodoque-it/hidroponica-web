@@ -4,11 +4,8 @@ import axios from 'axios';
 function fetchRailCreate(new_name,new_location)  {
     return dispatch  => {
         const rail = {
-            id: 1,
-            fk_user: 1,
             location: new_location,
             name: new_name,
-            containers: []
         };
         const createRail = async rail => {
             const config = {

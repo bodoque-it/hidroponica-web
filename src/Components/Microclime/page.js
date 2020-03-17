@@ -4,9 +4,16 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { ImageGradient } from 'material-ui/svg-icons';
 
 //imagenes
-import blanca from './luz-blanca.png';
-import roja from './luz-infraroja.png';
-import verde from './luz-verde.png';
+import blanca from './images/luz-blanca.png';
+import roja from './images/luz-infraroja.png';
+import verde from './images/luz-verde.png';
+
+import FormAddMicroclimate from './FormAddMicroclimate';
+import FormUpdateMicroclimate from './FormUpdateMicroclimate';
+
+import Popup from "reactjs-popup";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -19,7 +26,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 //IMPORTS NECESARIOS PARA BOTONES
-import DeleteIcon from '@material-ui/icons/Delete';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -43,132 +49,152 @@ export default function Page(props) {
 
     return (
 		<div className="root">
-		    {FormRow()}
+		    <FormRow
+                suggestions={props.suggestions}
+                addMicroclimate={props.addMicroclimate}
+                updateMicroclimate={props.updateMicroclimate}
+                deleteMicroclimate={props.deleteMicroclimate}
+                addModalShow={props.addModalShow}
+                addModalClose={props.addModalClose}
+                addModalOpen={props.addModalOpen}
+                openModal={props.openModal}
+                closeModal={props.closeModal}
+                open={props.open}
+                microclimateSelect={props.microclimateSelect}
+            />
 		</div>
     );
 }
 
-function RailCard(Name,TypeOfLight,IntesityOfLight,TypeOfPlant,Temperature,Humidity,Duration) {
-    const classes = useStyles();
+function RailCard( props ) {
 
     return(
-        <Card className={"card"}>
-            <CardMedia className={"other-card-color-gradient"}>
-            <CardContent>
-                <Grid container spacing={2}>
-                    <Grid item xs={9}>
-                        <Typography variant="h5">Nombre: {Name}</Typography>
+        <div className="col-md-4 " style={ { margin: '0.4rem' }} >
+            <Card className={"card"}>
+                <CardMedia className={"other-card-color-gradient"}>
+                <CardContent>
+                    <Grid container spacing={2}>
+                        <Grid item xs={9}>
+                            <Typography variant="h5">Nombre: {props.name}</Typography>
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <Fab aria-label="delete" >
+                                <DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => props.deleteMicroclimate(props.id_microclimate)} />
+                            </Fab>
+                        </Grid>
+                        <Grid item xs={4}>
+								<Fab aria-label="edit"  >
+                                    <EditIcon color="primary" style={{ float:"right" }} onClick={() => props.openModal(     props.id_microclimate,
+                                                                                                                            props.name, 
+                                                                                                                            props.intensity, 
+                                                                                                                            props.lightType,
+                                                                                                                            props.waterPH,
+                                                                                                                            props.dailyHours,
+                                                                                                                            props.lightStartTime)} />
+								</Fab>
+								<Popup  open={props.open}
+										closeOnDocumentClick
+										onClose={props.closeModal} >
+									<FormUpdateMicroclimate
+											id_microclimate={props.microclimateSelect.idMicroclimate}
+                                            name={props.microclimateSelect.nameMicroclimate}
+                                            intensity={props.microclimateSelect.intensityMicroclimate}
+                                            lightType={props.microclimateSelect.lightTypeMicroclimate}
+                                            waterPH={props.microclimateSelect.waterPHMicroclimate}
+                                            dailyHours={props.microclimateSelect.dailyHoursMicroclimate}
+                                            lightStartTime={props.microclimateSelect.lightStartTimeMicroclimate}
+                                            
+                                            updateMicroclimate={props.updateMicroclimate} 
+											closeModal={props.closeModal}
+											/>
+								</Popup>
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Tipo de luz:
+                                <br/> 
+                                <img src={blanca}/>
+                                <br/> 
+                                {props.lightType}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Intensidad de luz:
+                                <br/> 
+                                {props.intensity}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>PH del Agua:
+                                <br/> 
+                                {props.waterPH}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Hora comienzo de luz:
+                                <br/> 
+                                {props.lightStartTime}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Duración:
+                                <br/>
+                                {props.dailyHours} [Horas]
+                            </Paper>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                        <Button variant="contained" style={{float:"right",background:'#e53935',color:'#fff'}}>
-                            Eliminar
-                        </Button>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>Tipo de luz:
-                            <br/> 
-                            <img src={blanca}/>
-                            <br/> 
-                            {TypeOfLight}
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>Plantación:
-                            <br/>
-                            {TypeOfPlant}
-                         </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>T°:
-                            <br/> 
-                            {Temperature}°C
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>Intensidad de luz:
-                            <br/> 
-                            {IntesityOfLight}
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>Humedad:
-                            <br/> 
-                            {Humidity}%
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={"paper"}>Duración:
-                            <br/>
-                            {Duration} [Días]
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </CardContent>
-            </CardMedia>
-        </Card>
+                </CardContent>
+                </CardMedia>
+            </Card>
+        </div>
     )
 }
 
-function FormRow() {
-    const classes = useStyles();
+function FormRow(props) {
+    const isEmpty = props.suggestions.length === 0;
+    
     var tabla = [];
-    const microclimas = [
-        {
-            "name":"Tomate Cherry",
-            "typeOfLight":"Natural",
-            "intesityOfLight":"Alta",
-            "typeOfPlant":"Acelga",
-            "temperature":10000000,
-            "humidity":600,
-            "duration":60000
-        },
-        {
-            "name":"Leshugah",
-            "typeOfLight":"verde",
-            "intesityOfLight":"normal",
-            "typeOfPlant":"Lechugas",
-            "temperature":24,
-            "humidity":70,
-            "duration":30
-        },
-        {
-            "name":"Leshugah",
-            "typeOfLight":"verde",
-            "intesityOfLight":"normal",
-            "typeOfPlant":"Lechugas",
-            "temperature":24,
-            "humidity":70,
-            "duration":30
-        }
-    ];
-    for (var i=0; i<microclimas.length; i+=2){
-        if(microclimas[i+1] != null){
+    if (!isEmpty){
+        props.suggestions.map( (suggestion) =>
             tabla.push(
-                <TableRow>
-                    <TableCell align="center" width="50%">
-                        {RailCard(microclimas[i].Name,microclimas[i].typeOfLight,microclimas[i].intesityOfLight,microclimas[i].typeOfPlant,microclimas[i].temperature,microclimas[i].humidity,microclimas[i].duration)}
-                    </TableCell>
-                    <TableCell align="center">
-                        {RailCard(microclimas[i+1].Name,microclimas[i+1].typeOfLight,microclimas[i+1].intesityOfLight,microclimas[i+1].typeOfPlant,microclimas[i+1].temperature,microclimas[i+1].humidity,microclimas[i+1].duration)}
-                    </TableCell>
-                </TableRow>
-            )
-        } else{
-            tabla.push(
-                <TableRow>
-                    <TableCell align="center">
-                        {RailCard(microclimas[i].Name,microclimas[i].typeOfLight,microclimas[i].intesityOfLight,microclimas[i].typeOfPlant,microclimas[i].temperature,microclimas[i].humidity,microclimas[i].duration)}
-                    </TableCell>
-                    <TableCell align="center" width="50%">
-                    </TableCell>
-                </TableRow>
-            )
-        }
-    }
+                
+                    <RailCard   name={suggestion.name} 
+                                intensity={suggestion.intensity}
+                                lightType={suggestion.lightType}
+                                waterPH={suggestion.waterPH}
+                                dailyHours={suggestion.dailyHours}
+                                lightStartTime={suggestion.lightStartTime.date}
+                                id_microclimate={suggestion.id}
 
+                                deleteMicroclimate={props.deleteMicroclimate}
+                                updateMicroclimate={props.updateMicroclimate}
+                                openModal={props.openModal}
+                                closeModal={props.closeModal}
+                                open={props.open}
+                                microclimateSelect={props.microclimateSelect}
+                                />
+                
+            )
+        )
+    }                    
     return (
-    	<Table className="table-borderless" aria-label="spanning table">
-            {tabla}
+        <Table className="table-borderless" aria-label="spanning table">
+            <div>  
+                <Button variant="contained" color="primary" style={{float:"left"}} onClick={ () => props.addModalOpen() } >
+                    Agregar Microclima
+                </Button>
+                    <FormAddMicroclimate
+                        addMicroclimate={props.addMicroclimate}
+                        show={props.addModalShow}
+                        onHide={props.addModalClose}
+                    />
+            </div>
+            <div className="container-fluid d-flex justify-content-center " >
+                <div className="row justify-content-md-center" >
+                    {tabla}
+                </div>
+            </div>
         </Table>
     );
 }
