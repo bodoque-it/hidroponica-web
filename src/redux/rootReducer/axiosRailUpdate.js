@@ -18,7 +18,7 @@ function axiosRailUpdate(id_rail,new_name,new_location)  {
                 }
             };
             try {
-                const res = await axios.put(`/api/rails/1/${id_rail}`, rail , JSON.stringify(config));
+                const res = await axios.put(`/api/rails/${id_rail}`, rail , JSON.stringify(config));
                 dispatch(railUpdate())
             } catch (error) {
                 console.log(error);

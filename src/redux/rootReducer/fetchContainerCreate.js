@@ -1,13 +1,17 @@
-import { railCreate } from '../actions/actions';
+import { containerCreate } from '../actions/actions';
 import axios from 'axios';
 
-function fetchRailCreate(new_name,new_location)  {
+function fetchContainerCreate(new_name, new_volumen, is_active)  {
     return dispatch  => {
-        const rail = {
-            location: new_location,
-            name: new_name,
+        const container = {
+            id: 1,
+            owner_id: 1,
+            rail_id: 1,
+            nombre: new_name,
+            volumen: new_volumen,
+            activo: is_active,
         };
-        const createRail = async rail => {
+        const createContainer = async rail => {
             const config = {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
@@ -15,18 +19,17 @@ function fetchRailCreate(new_name,new_location)  {
                 }
             };
             try {
-                console.log(rail)
-                const res = await axios.post('http://localhost:8080/api/rails', rail , JSON.stringify(config));
-                dispatch(railCreate())
+                const res = await axios.post('/api/container/1', rail , JSON.stringify(config));
+                dispatch(containerCreate())
             } catch (error) {
                 console.log(error);
             }
         }
-        createRail(rail);
+        createContainer(container);
     }
 }
 
-export default fetchRailCreate;
+export default fetchContainerCreate;
 
 // request option 2 
 

@@ -10,6 +10,9 @@ export const RAIL_UPDATE = 'RAIL_UPDATE';
 export const MICROCLIMATE_CREATE = 'MICROCLIMATE_CREATE';
 export const MICROCLIMATE_DELETE = 'MICROCLIMATE_DELETE';
 export const MICROCLIMATE_UPDATE = 'MICROCLIMATE_UPDATE';
+export const CONTAINER_CREATE = 'CONTAINER_CREATE';
+export const CONTAINER_DELETE = 'CONTAINER_DELETE';
+export const CONTAINER_UPDATE = 'CONTAINER_UPDATE';
 
 export function findRailsSuggestions(text) {
     return {
