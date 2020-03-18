@@ -1,4 +1,5 @@
 export const FIND_RAILS_SUGGESTIONS = 'FIND_RAILS_SUGGESTIONS';
+export const FIND_CONTAINERS_SUGGESTIONS = 'FIND_CONTAINERS_SUGGESTIONS';
 export const FIND_CYCLES_SUGGESTIONS = 'FIND_CYCLES_SUGGESTIONS';
 export const FIND_MICROCLIMATES_SUGGESTIONS = 'FIND_MICROCLIMATES_SUGGESTIONS';
 export const FIND_CONTAINERS_RESULTS = 'FIND_CONTAINERS_RESULTS';
@@ -17,6 +18,13 @@ export const CONTAINER_UPDATE = 'CONTAINER_UPDATE';
 export function findRailsSuggestions(text) {
     return {
         type: FIND_RAILS_SUGGESTIONS,
+        payload: text,
+    }
+}
+
+export function findContainersSuggestions(text) {
+    return {
+        type: FIND_CONTAINERS_SUGGESTIONS,
         payload: text,
     }
 }
@@ -95,5 +103,26 @@ export function microclimateUpdate(id_microclimate){
     return{
         type: MICROCLIMATE_UPDATE,
         payload: id_microclimate,
+    }
+}
+
+export function containerCreate(){
+    return {
+        type: CONTAINER_CREATE,
+        
+    }
+}
+
+export function containerDelete(id_container){
+    return{
+        type: CONTAINER_DELETE,
+        payload: id_container,
+    }
+}
+
+export function containerUpdate(id_container){
+    return{
+        type: CONTAINER_UPDATE,
+        payload: id_container,
     }
 }
