@@ -87,7 +87,7 @@ class FormAddMicroclimate extends Component {
 
 		const regLightStartTime = /^((((19|20)([2468][048]|[13579][26]|0[48])|2000)-02-29|((19|20)[0-9]{2}-(0[4678]|1[02])-(0[1-9]|[12][0-9]|30)|(19|20)[0-9]{2}-(0[1359]|11)-(0[1-9]|[12][0-9]|3[01])|(19|20)[0-9]{2}-02-(0[1-9]|1[0-9]|2[0-8])))\s([01][0-9]|2[0-3]):([012345][0-9]):([012345][0-9]))$/i; 
 		if (this.state.touched.lightStartTime && !regLightStartTime.test(lightStartTime) ) {
-			errors.lightStartTime = 'Inicio de la luz erróneas';
+			errors.lightStartTime = 'Inicio de la luz erróneas, Debe ser así: yyyy-mm-dd hh:mm:ss';
 		}
 		return errors;
 	}
@@ -174,7 +174,7 @@ class FormAddMicroclimate extends Component {
 							 <FormGroup row >
 					 			<Label htmlFor="lightStartTime" md={2} > Fecha y Hora de inicio </Label>
 					 			<Col md={10} >
-									<Input type="text" id="lightStartTime" name="lightStartTime" placeholder="Ingrese la Fecha y Hora" value={this.state.lightStartTime} valid={errors.lightStartTime === ''} invalid={errors.lightStartTime !== ''} onBlur={this.handleBlur('lightStartTime')} onChange={this.handleInputChange}/>
+									<Input type="text" id="lightStartTime" name="lightStartTime" placeholder="Ingrese la Fecha y Hora ( yyyy-mm-dd hh:mm:ss )" value={this.state.lightStartTime} valid={errors.lightStartTime === ''} invalid={errors.lightStartTime !== ''} onBlur={this.handleBlur('lightStartTime')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.lightStartTime}</FormFeedback>
 								</Col>
 					 		</FormGroup>
