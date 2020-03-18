@@ -1,12 +1,17 @@
 export const FIND_RAILS_SUGGESTIONS = 'FIND_RAILS_SUGGESTIONS';
+export const FIND_CONTAINERS_SUGGESTIONS = 'FIND_CONTAINERS_SUGGESTIONS';
 export const FIND_CYCLES_SUGGESTIONS = 'FIND_CYCLES_SUGGESTIONS';
 export const FIND_MICROCLIMATES_SUGGESTIONS = 'FIND_MICROCLIMATES_SUGGESTIONS';
+export const FIND_INFRASTRUCTURES_SUGGESTIONS = 'FIND_INFRASTRUCTURES_SUGGESTIONS';
 export const FIND_CONTAINERS_RESULTS = 'FIND_CONTAINERS_RESULTS';
 export const FIND_CURRENT_CONTAINER = 'FIND_CURRENT_CONTAINER';
 export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
 export const RAIL_CREATE = 'RAIL_CREATE';
 export const RAIL_DELETE = 'RAIL_DELETE';
 export const RAIL_UPDATE = 'RAIL_UPDATE';
+export const CONTAINER_CREATE = 'CONTAINER_CREATE';
+export const CONTAINER_DELETE = 'CONTAINER_DELETE';
+export const CONTAINER_UPDATE = 'CONTAINER_UPDATE';
 export const MICROCLIMATE_CREATE = 'MICROCLIMATE_CREATE';
 export const MICROCLIMATE_DELETE = 'MICROCLIMATE_DELETE';
 export const MICROCLIMATE_UPDATE = 'MICROCLIMATE_UPDATE';
@@ -14,6 +19,13 @@ export const MICROCLIMATE_UPDATE = 'MICROCLIMATE_UPDATE';
 export function findRailsSuggestions(text) {
     return {
         type: FIND_RAILS_SUGGESTIONS,
+        payload: text,
+    }
+}
+
+export function findContainersSuggestions(text) {
+    return {
+        type: FIND_CONTAINERS_SUGGESTIONS,
         payload: text,
     }
 }
@@ -28,6 +40,13 @@ export function findCyclesSuggestions(text) {
 export function findMicroclimatesSuggestions(text) {
     return {
         type: FIND_MICROCLIMATES_SUGGESTIONS,
+        payload: text,
+    }
+}
+
+export function findInfrastructuresSuggestions(text) {
+    return {
+        type: FIND_INFRASTRUCTURES_SUGGESTIONS,
         payload: text,
     }
 }
@@ -92,5 +111,26 @@ export function microclimateUpdate(id_microclimate){
     return{
         type: MICROCLIMATE_UPDATE,
         payload: id_microclimate,
+    }
+}
+
+export function containerCreate(){
+    return {
+        type: CONTAINER_CREATE,
+        
+    }
+}
+
+export function containerDelete(id_container){
+    return{
+        type: CONTAINER_DELETE,
+        payload: id_container,
+    }
+}
+
+export function containerUpdate(id_container){
+    return{
+        type: CONTAINER_UPDATE,
+        payload: id_container,
     }
 }

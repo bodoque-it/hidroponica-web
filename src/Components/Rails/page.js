@@ -91,7 +91,8 @@ function Page(props) {
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		railSelect
 	} = props;
 	const classes = useStyles();
     return (
@@ -107,6 +108,7 @@ function Page(props) {
 				openModal={openModal}
 				closeModal={closeModal}
 				open={open}
+				railSelect={railSelect}
 			/>
         </div>
     );
@@ -117,13 +119,14 @@ export function Riel(props) {
 	const {
 		containers,
 		name,
-		location,
+		infrastructure_address,
 		id,
 		deleteRail,
 		updateRiel,
 		openModal,
 		closeModal,
-		open
+		open,
+		railSelect
 	} = props;
 	const classes = useStyles();
 	return(
@@ -135,7 +138,7 @@ export function Riel(props) {
 			  id="panel1a-header"
 			>
 			  <Typography className={classes.heading}>{name}</Typography>
-			  <Typography className={classes.secondaryHeading}> Ubicación: {location} </Typography>
+			  <Typography className={classes.secondaryHeading}> Ubicación: {infrastructure_address} </Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
@@ -145,15 +148,17 @@ export function Riel(props) {
 									<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteRail(id)} />
 								</Fab>
 								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon color="primary" onClick={openModal} />
+									<EditIcon color="primary" onClick={() => openModal(
+																				id, name, infrastructure_address
+									)} />
 								</Fab>
 								<Popup  open={open}
 										closeOnDocumentClick
 										onClose={closeModal} >
 									<FormUpdateRail
-											id={id}
-											name={name}
-											location={location}
+											id={railSelect.idRail}
+											name={railSelect.nameRail}
+											infrastructure_address={railSelect.infrastructure_addressRail}
 											updateRiel={updateRiel} 
 											closeModal={closeModal}
 											/>
@@ -176,7 +181,7 @@ export function Riel(props) {
 export function RielDesactivado(props) {
 	const {
 		name,
-		location,
+		infrastructure_address,
 	} = props;
 		
 	const classes = useStyles();
@@ -188,7 +193,7 @@ export function RielDesactivado(props) {
 			id="panel3a-header"
 			>
 			<Typography className={classes.heading}> {name} </Typography>
-			<Typography className={classes.secondaryHeading}> {location} </Typography>
+			<Typography className={classes.secondaryHeading}> {infrastructure_address} </Typography>
 			</ExpansionPanelSummary>
 		</ExpansionPanel>
   	)
@@ -204,7 +209,8 @@ export function Rieles(props){
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		railSelect
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
@@ -240,13 +246,14 @@ export function Rieles(props){
 						<Riel
 							containers={suggestion.containers}
 							name={suggestion.name}
-							location={suggestion.location}
+							infrastructure_address={suggestion.infrastructure_address}
 							id={suggestion.id}
 							deleteRail={deleteRail}
 							updateRiel={updateRiel}
 							openModal={openModal}
 							closeModal={closeModal}
 							open={open}
+							railSelect={railSelect}
 						/>
 					)}
 				</div>

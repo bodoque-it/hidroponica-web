@@ -12,7 +12,12 @@ class Rails extends Component {
         super(props);
         this.state = {
             addModalShow : false,
-            open: false
+            open: false,
+            railSelect : {
+                idRail: null,
+                nameRail: null,
+                infrastructure_addressRail:null
+            }
         };
 
         this.deleteRail = this.deleteRail.bind(this);
@@ -29,13 +34,13 @@ class Rails extends Component {
         window.location.reload();
     }
 
-    addRiel(name,location){
-        this.props.fetchRailCreate(name,location);
+    addRiel(name,infrastructure_address){
+        this.props.fetchRailCreate(name,infrastructure_address);
         window.location.reload();
     }
 
-    updateRiel(id_rail,name,location){
-        this.props.axiosRailUpdate(id_rail,name,location);
+    updateRiel(id_rail,name,infrastructure_address){
+        this.props.axiosRailUpdate(id_rail,name,infrastructure_address);
         window.location.reload();
     }
 
@@ -46,8 +51,14 @@ class Rails extends Component {
         this.setState({ addModalShow : true })
     }
 
-    openModal() {
+    openModal( id_rail, name, infrastructure_address ) {
         this.setState({ open: true });
+        this.setState({ railSelect:{
+                            idRail: id_rail,
+                            nameRail: name,
+                            infrastructure_addressRail: infrastructure_address
+
+        } })
     }
 
     closeModal() {
@@ -68,6 +79,7 @@ class Rails extends Component {
                     openModal={this.openModal}
                     closeModal={this.closeModal}
                     open={this.state.open}
+                    railSelect={this.state.railSelect}
                 />
             </div>
         )
