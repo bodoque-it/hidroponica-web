@@ -155,6 +155,14 @@ function RailCard( props ) {
                                 </div>
                             </Paper>
                         </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Temperatura:
+                                <br/>
+                                <div className={"dato"}>
+                                    24 [°C]
+                                </div>
+                            </Paper>
+                        </Grid>
                     </Grid>
                 </CardContent>
                 </CardMedia>
