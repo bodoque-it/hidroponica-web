@@ -55,9 +55,7 @@ function renderSidebar(){
 		    
 		    <hr class="sidebar-divider"/>
 			
-			<li class="nav-item active">
-				<Infrastructure/>
-		    </li>
+			<Infrastructure/>
 			<li class="nav-item active">
 		    	<a class="nav-link" href="/rails">
 					<span>Cultivos</span>
