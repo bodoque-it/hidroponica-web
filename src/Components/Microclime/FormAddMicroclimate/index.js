@@ -122,6 +122,7 @@ class FormAddMicroclimate extends Component {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			style={{paddingTop:'45px'}}
 			>
 				<Modal.Header >
 					<Modal.Title id="contained-modal-title-vcenter">
