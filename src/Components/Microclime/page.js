@@ -69,46 +69,50 @@ export default function Page(props) {
 function RailCard( props ) {
 
     return(
-        <div className="col-md-4 " style={ { margin: '0.4rem' }} >
+        <div className="col-sm-5" style={ { margin: '0.4rem' }} >
             <Card className={"card"}>
                 <CardMedia className={"other-card-color-gradient"}>
                 <CardContent>
                     <Grid container spacing={2}>
-                        <Grid item xs={9}>
-                            <Typography variant="h5">Nombre: {props.name}</Typography>
+                        <Grid item xs={8}>
+                            <Typography variant="h6">Nombre: {props.name}</Typography>
                         </Grid>
 
                         <Grid item xs={4}>
-                            <Fab aria-label="delete" >
-                                <DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => props.deleteMicroclimate(props.id_microclimate)} />
-                            </Fab>
-                        </Grid>
-                        <Grid item xs={4}>
-								<Fab aria-label="edit"  >
-                                    <EditIcon color="primary" style={{ float:"right" }} onClick={() => props.openModal(     props.id_microclimate,
-                                                                                                                            props.name, 
-                                                                                                                            props.intensity, 
-                                                                                                                            props.lightType,
-                                                                                                                            props.waterPH,
-                                                                                                                            props.dailyHours,
-                                                                                                                            props.lightStartTime)} />
-								</Fab>
-								<Popup  open={props.open}
-										closeOnDocumentClick
-										onClose={props.closeModal} >
-									<FormUpdateMicroclimate
-											id_microclimate={props.microclimateSelect.idMicroclimate}
-                                            name={props.microclimateSelect.nameMicroclimate}
-                                            intensity={props.microclimateSelect.intensityMicroclimate}
-                                            lightType={props.microclimateSelect.lightTypeMicroclimate}
-                                            waterPH={props.microclimateSelect.waterPHMicroclimate}
-                                            dailyHours={props.microclimateSelect.dailyHoursMicroclimate}
-                                            lightStartTime={props.microclimateSelect.lightStartTimeMicroclimate}
-                                            
-                                            updateMicroclimate={props.updateMicroclimate} 
-											closeModal={props.closeModal}
-											/>
-								</Popup>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <Fab aria-label="delete" color="secondary" size="small">
+                                        <DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => props.deleteMicroclimate(props.id_microclimate)} />
+                                    </Fab>
+                                </Grid>
+                                <Grid item xs={6}>
+        							<Fab aria-label="edit" size="small">
+                                        <EditIcon color="primary" style={{ float:"right" }} onClick={() => props.openModal(     props.id_microclimate,
+                                                                                                                                props.name, 
+                                                                                                                                props.intensity, 
+                                                                                                                                props.lightType,
+                                                                                                                                props.waterPH,
+                                                                                                                                props.dailyHours,
+                                                                                                                                props.lightStartTime)} />
+        							</Fab>
+        							<Popup  open={props.open}
+        									closeOnDocumentClick
+        									onClose={props.closeModal} >
+        								<FormUpdateMicroclimate
+        										id_microclimate={props.microclimateSelect.idMicroclimate}
+                                                name={props.microclimateSelect.nameMicroclimate}
+                                                intensity={props.microclimateSelect.intensityMicroclimate}
+                                                lightType={props.microclimateSelect.lightTypeMicroclimate}
+                                                waterPH={props.microclimateSelect.waterPHMicroclimate}
+                                                dailyHours={props.microclimateSelect.dailyHoursMicroclimate}
+                                                lightStartTime={props.microclimateSelect.lightStartTimeMicroclimate}
+                                                
+                                                updateMicroclimate={props.updateMicroclimate} 
+        										closeModal={props.closeModal}
+        										/>
+        							</Popup>
+                                </Grid>
+                            </Grid>
                         </Grid>
 
                         <Grid item xs={4}>
@@ -119,28 +123,36 @@ function RailCard( props ) {
                                 {props.lightType}
                             </Paper>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={4} alignItems="center">
                             <Paper className={"paper"}>Intensidad de luz:
-                                <br/> 
-                                {props.intensity}
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.intensity}
+                                </div>
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>PH del Agua:
                                 <br/> 
-                                {props.waterPH}
+                                <div className={"dato"}>
+                                    {props.waterPH}
+                                </div>
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Hora comienzo de luz:
-                                <br/> 
-                                {props.lightStartTime}
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.lightStartTime}
+                                </div>
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Duración:
                                 <br/>
-                                {props.dailyHours} [Horas]
+                                <div className={"dato"}>
+                                    {props.dailyHours} [Horas]
+                                </div>
                             </Paper>
                         </Grid>
                     </Grid>
