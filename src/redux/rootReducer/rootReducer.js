@@ -1,9 +1,10 @@
 import { FIND_RAILS_SUGGESTIONS, FIND_RAILS_RESULTS, FIND_CURRENT_CONTAINER,
-         FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS,
+         FIND_CONTAINERS_RESULTS, FIND_CYCLES_SUGGESTIONS, FIND_MICROCLIMATES_SUGGESTIONS, FIND_INFRASTRUCTURES_SUGGESTIONS , FIND_CONTAINERS_SUGGESTIONS,
          RAIL_CREATE,RAIL_DELETE, RAIL_UPDATE, MICROCLIMATE_CREATE,MICROCLIMATE_DELETE, MICROCLIMATE_UPDATE } from '../actions/actions';
-
+         
 const defaultState = {
     suggestions: [],
+    infrastructures: [],
     containers: [],
     container: {},
     rails: [],
@@ -32,6 +33,13 @@ export function rootReducer(state = defaultState, {type,payload}) {
                 suggestions: payload
             }
         }
+
+        case FIND_INFRASTRUCTURES_SUGGESTIONS:{
+            return {
+                ...state,
+                infrastructures: payload
+            }
+        }
         
         case FIND_CURRENT_CONTAINER:{
             return {
@@ -51,6 +59,13 @@ export function rootReducer(state = defaultState, {type,payload}) {
             return {
                 ...state,
                 containers: payload
+            }
+        }
+
+        case FIND_CONTAINERS_SUGGESTIONS:{
+            return {
+                ...state,
+                suggestions: payload
             }
         }
 

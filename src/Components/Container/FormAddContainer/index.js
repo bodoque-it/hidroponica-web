@@ -2,34 +2,27 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
 import {Modal} from 'react-bootstrap';
 
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axiosInfrastructuresSuggestions from '../../../redux/rootReducer/axiosInfrastructuresSuggestions';
-
-class FormAddRail extends Component {
-	componentWillMount(){
-		this.props.axiosInfrastructuresSuggestions("");
-	}
+class FormAddContainer extends Component {
     constructor(props){
         super(props);
-        this.state = {
-			addRiel : props.addRiel,
+		this.state = {
+			addContainer : props.addContainer,
 			name: '',
-			infrastructure_address: '',
+			volume: '',
 
 			touched: {
 				name: false,
-				infrastructure_address: false,
+				location: false,
 			}
 		};
-		
+
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleBlur = this.handleBlur.bind(this);
 		this.closeAndClear = this.closeAndClear.bind(this);
 
 	}
-
+	
 	handleInputChange(event){
 		const target = event.target;
 		const value = target.value;
@@ -39,6 +32,7 @@ class FormAddRail extends Component {
 			[name]: value
 		});
 	}
+
 	handleSubmit(event){
 		
 		// alert("current State is: " + JSON.stringify(this.state))
@@ -51,32 +45,34 @@ class FormAddRail extends Component {
 		});
 	}
 
-	validate(name,infrastructure_address){
+	validate(name,volume){
 		const errors = {
 			name: '',
-			infrastructure_address: '',
+			volume: '',
 		};
 
-		if (this.state.touched.name && name.length < 1 ) {
+		if (this.state.touched.name && name.length <= 3 ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
-		
+		if (this.state.touched.volume && volume.length <= 3 ) {
+			errors.volume = 'No has escrito una ubicación valida';
+		}
 		return errors;
 	}
 
 	closeAndClear(){
 		this.props.onHide();
-		this.setState({ name: '', infrastructure_address: '', 
+		this.setState({ name: '', volume: '', 
 			touched:  {
 				name: false,
-				infrastructure_address: false,
+				volume: false,
 			}
 	 	});
 	}
 
     render(){
-		const errors = this.validate(this.state.name,this.state.infrastructure_address)
-		const isEmpty = this.props.infrastructures.length === 0;
+		const errors = this.validate(this.state.name,this.state.volume)
+		console.log("sasdasdasdasassdasdadd")
         return(
 			<Modal
 			{...this.props}
@@ -86,7 +82,7 @@ class FormAddRail extends Component {
 			>
 				<Modal.Header >
 					<Modal.Title id="contained-modal-title-vcenter">
-					Agregar Riel
+					Agregar Container
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
@@ -101,25 +97,17 @@ class FormAddRail extends Component {
 					 		</FormGroup>
 
 					 		<FormGroup row >
-					 			<Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
+					 			<Label htmlFor="volume" md={2} > Volumen </Label>
 					 			<Col md={10} >
-									<Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address} onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
-									{ isEmpty ?
-										<option>""</option>
-										:
-											this.props.infrastructures.map( infrastructure =>
-													<option> { infrastructure.address } </option>
-												 )
-									}
-									</Input>
-									<FormFeedback>{errors.infrastructure_address}</FormFeedback>
+									<Input type="text" id="volume" name="volume" placeholder="Ingrese el volumen" value={this.state.volume} valid={errors.volume === ''} invalid={errors.volume !== ''} onBlur={this.handleBlur('volume')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.volume}</FormFeedback>
 								</Col>
 					 		</FormGroup>
 							
 							 <Button type="submit" color="primary" 
-							 onClick={  (errors.name !== '' || this.state.name.length === 0  || errors.infrastructure_address !== '' ) ?
+							 onClick={  (errors.name !== '' || errors.volume !== '' || this.state.name.length == 0 || this.state.name.length == 0 ) ?
 							  () =>  alert("no has completado el Formulario") 
-							  : () => this.state.addRiel(this.state.name,this.state.infrastructure_address) } >
+							  : () => this.state.addContainer(this.state.name,this.state.volume) } >
 					 			Agregar
 					 		</Button>
 					 	</Form>
@@ -127,22 +115,12 @@ class FormAddRail extends Component {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button color="danger" onClick={ this.closeAndClear } > Cerrar </Button>
+					<Button color="danger" onClick={ this.closeAndClear } >Close </Button>
 				</Modal.Footer>
 			</Modal> 
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        infrastructures: state.infrastructures,
-    };
-};
 
-const mapDispatchToProps = {
-    axiosInfrastructuresSuggestions,
-};
-
-export default withRouter(connect( mapStateToProps, mapDispatchToProps)(FormAddRail));
-
+export default FormAddContainer ;

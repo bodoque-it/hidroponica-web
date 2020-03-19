@@ -1,11 +1,11 @@
 import { railCreate } from '../actions/actions';
 import axios from 'axios';
 
-function fetchRailCreate(new_name,new_location)  {
+function fetchRailCreate(new_name,new_infrastructure)  {
     return dispatch  => {
         const rail = {
-            location: new_location,
             name: new_name,
+            infrastructure_address: new_infrastructure,
         };
         const createRail = async rail => {
             const config = {
@@ -15,6 +15,7 @@ function fetchRailCreate(new_name,new_location)  {
                 }
             };
             try {
+                console.log(rail.name + "  " + rail.infrastructure_address)
                 const res = await axios.post('/api/rails/1', rail , JSON.stringify(config));
                 dispatch(railCreate())
             } catch (error) {

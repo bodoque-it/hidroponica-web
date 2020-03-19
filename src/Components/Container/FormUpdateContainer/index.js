@@ -2,25 +2,22 @@ import React, { Component } from 'react';
 import {Modal, ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
 // import {} from 'react-bootstrap';
 
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axiosInfrastructuresSuggestions from '../../../redux/rootReducer/axiosInfrastructuresSuggestions';
+
 
 class FormUpdateRail extends Component {
-    componentWillMount(){
-		this.props.axiosInfrastructuresSuggestions("");
-	}
     constructor(props){
         super(props);
+        this.nameInput = React.createRef(); 
+        this.locationInput = React.createRef(); 
         this.state = {
             id : props.id,
+            location : props.location,
             name : props.name,
-            infrastructure_address : props.infrastructure_address,
             updateRiel : props.updateRiel,
 
             touched: {
 				name: false,
-				infrastructure_address: false,
+				location: false,
 			}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,14 +47,17 @@ class FormUpdateRail extends Component {
 		});
 	}
 
-	validate(name,infrastructure_address){
+	validate(name,location){
 		const errors = {
 			name: '',
-			infrastructure_address: '',
+			location: '',
 		};
 
-		if (this.state.touched.name && name.length < 1 ) {
+		if (this.state.touched.name && name.length <= 3 ) {
 			errors.name = 'No has escrito un nombre valido';
+		}
+		if (this.state.touched.location && location.length <= 3 ) {
+			errors.location = 'No has escrito una ubicación valida';
 		}
 		return errors;
     }
@@ -65,8 +65,7 @@ class FormUpdateRail extends Component {
     
  
     render(){
-        const errors = this.validate(this.state.name,this.state.infrastructure_address)
-        const isEmpty = this.props.infrastructures.length === 0;
+        const errors = this.validate(this.state.name,this.state.location)
         return(
             <div>
             <ModalHeader > Actualizar Riel </ModalHeader>
@@ -80,47 +79,28 @@ class FormUpdateRail extends Component {
                     </FormGroup>
 
                     <FormGroup row >
-                        <Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
+                        <Label htmlFor="volume" md={2} > Ubicación </Label>
                         <Col md={10} >
-                            <Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address} defaultValue={this.state.infrastructure_address} onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
-                            { isEmpty ?
-                                <option>""</option>
-                                :
-                                    this.props.infrastructures.map( infrastructure =>
-                                            <option> { infrastructure.address } </option>
-                                            )
-                            }
-                            </Input>
-                            <FormFeedback>{errors.infrastructure_address}</FormFeedback>
+                            <Input type="text" id="volume" name="volume" placeholder="Ingrese la ubicación" value={this.state.volume} defaultValue={this.state.volume} valid={errors.volume === ''} invalid={errors.volume !== ''} onBlur={this.handleBlur('volume')} onChange={this.handleInputChange}/>
+                            <FormFeedback>{errors.volume}</FormFeedback>
                         </Col>
                     </FormGroup>
                     
                     <Button type="submit" color="primary" 
-                    onClick={  (errors.name !== '' || errors.infrastructure_address !== '' || this.state.name.length === 0 ) ?
+                    onClick={  (errors.name !== '' || errors.volume !== '' || this.state.name.length == 0 || this.state.name.length == 0) ?
                                  () =>  alert("no has completado el Formulario") 
-                                 : () => this.state.updateRiel(this.state.id,this.state.name,this.state.infrastructure_address) } >
+                                 : () => this.state.updateRiel(this.state.id,this.state.name,this.state.volume) } >
                         Modificar
                     </Button>
                     <ModalFooter>
                         <Button color="danger" onClick={() => this.props.closeModal() } > Cerrar </Button>
                     </ModalFooter>
                 </Form>
-            </div>
+                </div>
 
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        infrastructures: state.infrastructures,
-    };
-};
 
-const mapDispatchToProps = {
-    axiosInfrastructuresSuggestions,
-};
-
-export default withRouter(connect( mapStateToProps, mapDispatchToProps)( FormUpdateRail ));
-
-
+export default FormUpdateRail ;

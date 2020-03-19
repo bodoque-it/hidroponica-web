@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import fetchRailsSuggestions from '../../redux/rootReducer/fetchRailsSuggestions';
 import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestions';
 import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
-
+import fetchContainersSuggestions from '../../redux/rootReducer/fetchContainersSuggestions';
 
 class AppBar extends Component{
 	componentWillMount(){
@@ -17,6 +17,9 @@ class AppBar extends Component{
         }
         else if( this.state.title === "Microclimas"  ){
             this.props.fetchMicroclimatesSuggestions("");
+        }
+        else if( this.state.title === "Contenedores"  ){
+            this.props.fetchContainersSuggestions("");
         }
 	}
     constructor(props){
@@ -42,6 +45,9 @@ class AppBar extends Component{
         else if( this.state.title === "Microclimas"  ){
             this.props.fetchMicroclimatesSuggestions(text);
         }
+        else if( this.state.title === "Contenedores"  ){
+            this.props.fetchContainersSuggestions("");
+        }
     }
 
     onChangeSelection(text){
@@ -55,6 +61,9 @@ class AppBar extends Component{
         }
         else if( this.state.title === "Microclimas"  ){
             this.props.fetchMicroclimatesSuggestions(text);
+        }
+        else if( this.state.title === "Contenedores"  ){
+            this.props.fetchContainersSuggestions("");
         }
     }
 
@@ -82,6 +91,7 @@ const mapDispatchToProps = {
     fetchRailsSuggestions,
     fetchCyclesSuggestions,
     fetchMicroclimatesSuggestions,
+    fetchContainersSuggestions,
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(AppBar));
