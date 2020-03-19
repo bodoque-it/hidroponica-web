@@ -10,13 +10,14 @@ import Cycle from '../Cycle';
 import Rails from '../Rails';
 import Container from '../Container';
 import Infrastructure from '../Infrastructure';
+import Popup from 'reactjs-popup';
 
 
 function Page(props) {
-
+	
     return (
         <div id="wrapper">
-            {renderSidebar()}
+			{renderSidebar(  )}
             <div id="content-wrapper" class="d-flex flex-column color-gradient" height='100%'>
 			    <div id="content">
 					<Provider store={store}>
@@ -27,6 +28,7 @@ function Page(props) {
 								<Route path="/cycles" component={Cycle} />
 								<Route path="/rails" component={Rails} />
 								<Route path="/containers" component={Container} />
+								<Route path="/infrastructures" component={Infrastructure} />
 								
 							</Switch>
 						</BrowserRouter>
@@ -37,7 +39,7 @@ function Page(props) {
         
     );
 }
-function renderSidebar(){
+function renderSidebar(props) {
 	return(
 		<ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar" >
 			<a class="sidebar-brand d-flex align-items-center justify-content-center">
@@ -56,7 +58,8 @@ function renderSidebar(){
 		    <hr class="sidebar-divider"/>
 			
 			<li class="nav-item active">
-				<Infrastructure/>
+				
+						<Infrastructure  />
 		    </li>
 			<li class="nav-item active">
 		    	<a class="nav-link" href="/rails">

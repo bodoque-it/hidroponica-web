@@ -246,7 +246,7 @@ export function Rieles(props){
 						<Riel
 							containers={suggestion.containers}
 							name={suggestion.name}
-							infrastructure_address={suggestion.infrastructure_address}
+							infrastructure_address={suggestion.infrastructure.address}
 							id={suggestion.id}
 							deleteRail={deleteRail}
 							updateRiel={updateRiel}

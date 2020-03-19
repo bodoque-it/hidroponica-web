@@ -6,9 +6,11 @@ class Plantilla extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			title: props.title
+			title: props.title,
 		}
 	}
+
+	
     render() {
         return(
 			<div>
@@ -16,7 +18,7 @@ class Plantilla extends Component {
 				<AppBar
 					title = {this.state.title}
 				/>
-				<Page/>
+				<Page />
 			
 			</div>
         )
