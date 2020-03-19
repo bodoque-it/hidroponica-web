@@ -131,13 +131,23 @@ function RailCard( props ) {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Paper className={"paper"}>PH del Agua:
-                                <br/> 
-                                <div className={"dato"}>
-                                    {props.waterPH}
-                                </div>
-                            </Paper>
+                        <Grid container xs={4} spacing={1}>
+                            <Grid item xs={12} >
+                                <Paper className={"paper"} style={{padding:'0'}}>PH del Agua:
+                                    <br/> 
+                                    <div className={"dato"}>
+                                        {props.waterPH}
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper className={"paper"} style={{padding:'0'}}>Humedad:
+                                    <br/> 
+                                    <div className={"dato"}>
+                                        50 [%]
+                                    </div>
+                                </Paper>
+                            </Grid>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Hora comienzo de luz:
@@ -148,7 +158,7 @@ function RailCard( props ) {
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
-                            <Paper className={"paper"}>Duración:
+                            <Paper className={"paper"}>Horas de luz:
                                 <br/>
                                 <div className={"dato"}>
                                     {props.dailyHours} [Horas]
