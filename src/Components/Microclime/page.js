@@ -93,7 +93,10 @@ function RailCard( props ) {
                                                                                                                                 props.lightType,
                                                                                                                                 props.waterPH,
                                                                                                                                 props.dailyHours,
-                                                                                                                                props.lightStartTime)} />
+                                                                                                                                props.lightStartTime,
+                                                                                                                                props.temperature,
+                                                                                                                                props.humidity
+                                                                                                                                )} />
         							</Fab>
         							<Popup  open={props.open}
         									closeOnDocumentClick
@@ -106,6 +109,8 @@ function RailCard( props ) {
                                                 waterPH={props.microclimateSelect.waterPHMicroclimate}
                                                 dailyHours={props.microclimateSelect.dailyHoursMicroclimate}
                                                 lightStartTime={props.microclimateSelect.lightStartTimeMicroclimate}
+                                                temperature={props.microclimateSelect.temperatureMicroclimate}
+                                                humidity={props.microclimateSelect.humidityMicroclimate}
                                                 
                                                 updateMicroclimate={props.updateMicroclimate} 
         										closeModal={props.closeModal}
@@ -159,7 +164,15 @@ function RailCard( props ) {
                             <Paper className={"paper"}>Temperatura:
                                 <br/>
                                 <div className={"dato"}>
-                                    24 [°C]
+                                    {props.temperature} [°C]
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Humdedad:
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.humidity} [%]
                                 </div>
                             </Paper>
                         </Grid>
@@ -185,6 +198,8 @@ function FormRow(props) {
                                 waterPH={suggestion.waterPH}
                                 dailyHours={suggestion.dailyHours}
                                 lightStartTime={suggestion.lightStartTime.date}
+                                temperature={suggestion.temperature}
+                                humidity={suggestion.humidity}
                                 id_microclimate={suggestion.id}
 
                                 deleteMicroclimate={props.deleteMicroclimate}

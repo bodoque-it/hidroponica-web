@@ -15,7 +15,7 @@ class FormAddRail extends Component {
         this.state = {
 			addRiel : props.addRiel,
 			name: '',
-			infrastructure_address: '',
+			infrastructure_address: 'Gabriel_Street',
 
 			touched: {
 				name: false,
@@ -56,8 +56,8 @@ class FormAddRail extends Component {
 			name: '',
 			infrastructure_address: '',
 		};
-
-		if (this.state.touched.name && name.length < 1 ) {
+		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9_-]{0,15})$/;
+		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
 		
@@ -66,7 +66,7 @@ class FormAddRail extends Component {
 
 	closeAndClear(){
 		this.props.onHide();
-		this.setState({ name: '', infrastructure_address: '', 
+		this.setState({ name: '',
 			touched:  {
 				name: false,
 				infrastructure_address: false,

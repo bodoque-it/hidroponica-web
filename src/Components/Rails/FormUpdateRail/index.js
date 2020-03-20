@@ -56,7 +56,8 @@ class FormUpdateRail extends Component {
 			infrastructure_address: '',
 		};
 
-		if (this.state.touched.name && name.length < 1 ) {
+		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9_-]{0,15})$/;
+		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
 		return errors;
@@ -82,7 +83,7 @@ class FormUpdateRail extends Component {
                     <FormGroup row >
                         <Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
                         <Col md={10} >
-                            <Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address} defaultValue={this.state.infrastructure_address} onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
+                            <Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address}  onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
                             { isEmpty ?
                                 <option>""</option>
                                 :

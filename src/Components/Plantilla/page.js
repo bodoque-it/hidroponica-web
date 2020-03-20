@@ -28,7 +28,6 @@ function Page(props) {
 								<Route path="/cycles" component={Cycle} />
 								<Route path="/rails" component={Rails} />
 								<Route path="/containers" component={Container} />
-								<Route path="/infrastructures" component={Infrastructure} />
 								
 							</Switch>
 						</BrowserRouter>
@@ -57,9 +56,9 @@ function renderSidebar(props) {
 		    
 		    <hr class="sidebar-divider"/>
 			
-			<li class="nav-item active">
+			<li class="nav-item active" >
 				
-						<Infrastructure  />
+						<Infrastructure style={{ width: '100%' }} />
 		    </li>
 			<li class="nav-item active">
 		    	<a class="nav-link" href="/rails">

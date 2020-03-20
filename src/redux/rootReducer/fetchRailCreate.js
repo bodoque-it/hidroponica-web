@@ -15,6 +15,7 @@ function fetchRailCreate(new_name,new_infrastructure)  {
                 }
             };
             try {
+                console.log("name: "+rail.name + "address: "+rail.infrastructure_address)
                 const res = await axios.post('/api/rails/1', rail , JSON.stringify(config));
                 dispatch(railCreate())
             } catch (error) {

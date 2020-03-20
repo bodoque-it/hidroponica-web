@@ -1,14 +1,12 @@
 import { railUpdate } from '../actions/actions';
 import axios from 'axios';
 
-function axiosRailUpdate(id_rail,new_name,new_location)  {
+function axiosRailUpdate( id_rail, new_name, new_infrastructure_address )  {
     return dispatch  => {
+        console.log("Update: "+new_infrastructure_address)
         const rail = {
-            id: id_rail,
-            fk_user: 1,
-            location: new_location,
             name: new_name,
-            containers: []
+            infrastructure: new_infrastructure_address
         };
         const updateRail = async rail => {
             const config = {

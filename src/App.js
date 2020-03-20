@@ -36,7 +36,6 @@ class App extends Component {
                     <Route path="/cycles" render={() => (<Plantilla title="Ciclos" />) } />
                     <Route path="/rails" render={() => (<Plantilla title="Rieles" />) } />
                     <Route path="/containers" render={() => (<Plantilla title="Contenedores" />) } />
-                    <Route path="/infrastructures" render={() => (<Plantilla title="Infraestructuras" />) } />
                     <Redirect from="/" to="/login" />
                 </Switch>
             </BrowserRouter>

@@ -1,7 +1,7 @@
 import { microclimateUpdate } from '../actions/actions';
 import axios from 'axios';
 
-function axiosMicroclimateUpdate( id_microclimate, new_name, new_intensity, new_lightType, new_waterPH, new_dailyHours, new_lightStartTime)  {
+function axiosMicroclimateUpdate( id_microclimate, new_name, new_intensity, new_lightType, new_waterPH, new_dailyHours, new_lightStartTime, new_temperature, new_humidity)  {
     return dispatch  => {
         const microclimate = {
             name: new_name,
@@ -9,7 +9,9 @@ function axiosMicroclimateUpdate( id_microclimate, new_name, new_intensity, new_
             lightType: new_lightType,
             waterPH: new_waterPH,
             dailyHours: new_dailyHours,
-            lightStartTime: new_lightStartTime
+            lightStartTime: new_lightStartTime,
+            temperature: new_temperature,
+            humidity: new_humidity
         };
         const updateMicroclimate = async microclimate => {
             const config = {

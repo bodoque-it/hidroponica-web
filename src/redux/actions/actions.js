@@ -15,6 +15,9 @@ export const CONTAINER_UPDATE = 'CONTAINER_UPDATE';
 export const MICROCLIMATE_CREATE = 'MICROCLIMATE_CREATE';
 export const MICROCLIMATE_DELETE = 'MICROCLIMATE_DELETE';
 export const MICROCLIMATE_UPDATE = 'MICROCLIMATE_UPDATE';
+export const INFRASTRUCTURE_CREATE = 'INFRASTRUCTURE_CREATE';
+export const INFRASTRUCTURE_DELETE = 'INFRASTRUCTURE_DELETE';
+export const INFRASTRUCTURE_UPDATE = 'INFRASTRUCTURE_UPDATE';
 
 export function findRailsSuggestions(text) {
     return {
@@ -132,5 +135,26 @@ export function containerUpdate(id_container){
     return{
         type: CONTAINER_UPDATE,
         payload: id_container,
+    }
+}
+
+export function infrastructureCreate(){
+    return {
+        type: INFRASTRUCTURE_CREATE,
+        
+    }
+}
+
+export function infrastructureDelete(id_infrastructure){
+    return{
+        type: INFRASTRUCTURE_DELETE,
+        payload: id_infrastructure,
+    }
+}
+
+export function infrastructureUpdate(id_infrastructure){
+    return{
+        type: INFRASTRUCTURE_UPDATE,
+        payload: id_infrastructure,
     }
 }

@@ -16,6 +16,8 @@ class FormUpdateMicroclimate extends React.PureComponent {
             waterPH : props.waterPH,
             dailyHours : props.dailyHours,
             lightStartTime : props.lightStartTime,
+            temperature : props.temperature,
+            humidity : props.humidity,
 
             touched: {
 				name: false,
@@ -23,7 +25,9 @@ class FormUpdateMicroclimate extends React.PureComponent {
 				lightType: false,
 				waterPH: false,
 				dailyHours: false,
-				lightStartTime: false,
+                lightStartTime: false,
+                temperature: false,
+				humidity: false,
 			}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,14 +56,16 @@ class FormUpdateMicroclimate extends React.PureComponent {
 		});
 	}
 
-	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
+	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
 		const errors = {
 			name: '',
 			intensity: '',
 			lightType: '',
 			waterPH: '',
 			dailyHours: '',
-			lightStartTime: '',
+            lightStartTime: '',
+            temperature: '',
+			humidity: '',
 		};
 
 		if (this.state.touched.name && name.length < 1 ) {
@@ -87,6 +93,16 @@ class FormUpdateMicroclimate extends React.PureComponent {
 		const regLightStartTime = /^(([01][0-9]|2[0-3]):([012345][0-9]):([012345][0-9]))$/i; 
 		if (this.state.touched.lightStartTime && !regLightStartTime.test(lightStartTime) ) {
 			errors.lightStartTime = 'Inicio de la luz erróneas, ingresar de la siguiente manera: hh:mm:ss';
+        }
+        
+        const regTemperature = /^\d*(\.\d{1})?\d{0,1}$/;
+		if (this.state.touched.temperature && !regTemperature.test(temperature) ) {
+			errors.temperature = 'Temperatura mal ingresada';
+		}
+
+		const regHumidity = /^\d+$/; 
+		if (this.state.touched.humidity && !regHumidity.test(humidity) || humidity>100 || humidity<0 ) {
+			errors.humidity = 'Es un porcentaje de humedad';
 		}
 		return errors;
     }
@@ -94,7 +110,14 @@ class FormUpdateMicroclimate extends React.PureComponent {
     
  
     render(){
-        const errors = this.validate( this.state.name, this.state.intensity, this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime )
+        const errors = this.validate(   this.state.name,
+                                        this.state.intensity,
+                                        this.state.lightType,
+                                        this.state.waterPH,
+                                        this.state.dailyHours,
+                                        this.state.lightStartTime,
+                                        this.state.temperature,
+                                        this.state.humidity )
         
         return(
             <div>
@@ -116,7 +139,7 @@ class FormUpdateMicroclimate extends React.PureComponent {
                             </Col>
                         </FormGroup>
 
-                            <FormGroup row >
+                        <FormGroup row >
                             <Label htmlFor="lightType" md={2} > Tipo de Luz </Label>
                             <Col md={10} >
                                 <Input type="text" id="lightType" name="lightType" placeholder="Ingrese el Tipo de Luz" value={this.state.lightType} defaultValue={this.state.lightType} valid={errors.lightType === ''} invalid={errors.lightType !== ''} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange}/>
@@ -124,7 +147,7 @@ class FormUpdateMicroclimate extends React.PureComponent {
                             </Col>
                         </FormGroup>
 
-                            <FormGroup row >
+                        <FormGroup row >
                             <Label htmlFor="waterPH" md={2} > PH del Agua </Label>
                             <Col md={10} >
                                 <Input type="text" id="waterPH" name="waterPH" placeholder="Ingrese el PH del agua" value={this.state.waterPH} defaultValue={this.state.waterPH} valid={errors.waterPH === ''} invalid={errors.waterPH !== ''} onBlur={this.handleBlur('waterPH')} onChange={this.handleInputChange}/>
@@ -132,7 +155,7 @@ class FormUpdateMicroclimate extends React.PureComponent {
                             </Col>
                         </FormGroup>
 
-                            <FormGroup row >
+                        <FormGroup row >
                             <Label htmlFor="dailyHours" md={2} > Horas Diarias </Label>
                             <Col md={10} >
                                 <Input type="text" id="dailyHours" name="dailyHours" placeholder="Ingrese Horas Diarias" value={this.state.dailyHours} defaultValue={this.state.dailyHours} valid={errors.dailyHours === ''} invalid={errors.dailyHours !== ''} onBlur={this.handleBlur('dailyHours')} onChange={this.handleInputChange}/>
@@ -140,13 +163,30 @@ class FormUpdateMicroclimate extends React.PureComponent {
                             </Col>
                         </FormGroup>
 
-                            <FormGroup row >
+                        <FormGroup row >
                             <Label htmlFor="lightStartTime" md={2} > Hora de inicio(hh:mm:ss) </Label>
                             <Col md={10} >
                                 <Input type="text" id="lightStartTime" name="lightStartTime" placeholder="Ingrese la Hora(hh:mm:ss)" value={this.state.lightStartTime} defaultValue={this.state.lightStartTime} valid={errors.lightStartTime === ''} invalid={errors.lightStartTime !== ''} onBlur={this.handleBlur('lightStartTime')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.lightStartTime}</FormFeedback>
                             </Col>
                         </FormGroup>
+
+                        <FormGroup row >
+                            <Label htmlFor="temperature" md={2} > Temperature </Label>
+                            <Col md={10} >
+                                <Input type="text" id="temperature" name="temperature" placeholder="Ingrese la temperatura" value={this.state.temperature} defaultValue={this.state.temperature} valid={errors.temperature === ''} invalid={errors.temperature !== ''} onBlur={this.handleBlur('temperature')} onChange={this.handleInputChange}/>
+                                <FormFeedback>{errors.temperature}</FormFeedback>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row >
+                            <Label htmlFor="humidity" md={2} > Humedad </Label>
+                            <Col md={10} >
+                                <Input type="text" id="humidity" name="humidity" placeholder="Ingrese la Humedad(%)" value={this.state.humidity} defaultValue={this.state.humidity} valid={errors.humidity === ''} invalid={errors.humidity !== ''} onBlur={this.handleBlur('humidity')} onChange={this.handleInputChange}/>
+                                <FormFeedback>{errors.humidity}</FormFeedback>
+                            </Col>
+                        </FormGroup>
+                        
                         
                         <Button type="submit" color="primary" 
                         onClick={  (errors.name !== '' ||
@@ -155,14 +195,26 @@ class FormUpdateMicroclimate extends React.PureComponent {
                                     errors.waterPH !== '' ||
                                     errors.dailyHours !== '' ||
                                     errors.lightStartTime !== ''||
+                                    errors.temperature !== '' ||
+                                    errors.humidity !== ''||
                                     this.state.name.length === 0 ||
                                     this.state.intensity.length === 0 ||
                                     this.state.lightType.length === 0 ||
                                     this.state.waterPH.length === 0 ||
                                     this.state.dailyHours.length === 0 ||
-                                    this.state.lightStartTime.length === 0 
+                                    this.state.lightStartTime.length === 0 ||
+                                    this.state.temperature.length === 0 ||
+                                    this.state.humidity.length === 0 
                                     ) ? () =>  alert("no has completado el Formulario") 
-                                    : () => this.state.updateMicroclimate( this.state.id_microclimate, this.state.name, this.state.intensity ,this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime ) 
+                                    : () => this.state.updateMicroclimate(  this.state.id_microclimate,
+                                                                            this.state.name,
+                                                                            this.state.intensity,
+                                                                            this.state.lightType,
+                                                                            this.state.waterPH,
+                                                                            this.state.dailyHours,
+                                                                            this.state.lightStartTime,
+                                                                            this.state.temperature,
+                                                                            this.state.humidity ) 
                         } >
                             Modificar
                         </Button>

@@ -18,7 +18,9 @@ class Microclimate extends React.PureComponent {
                 lightTypeMicroclimate: null,
                 waterPHMicroclimate: null,
                 dailyHoursMicroclimate: null,
-                lightStartTimeMicroclimate: null
+                lightStartTimeMicroclimate: null,
+                temperatureMicroclimate: null,
+                humidityMicroclimate: null
             }
         };
         
@@ -34,7 +36,7 @@ class Microclimate extends React.PureComponent {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime ) {
+    elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ) {
         this.setState({     microclimateSelect:{
                                 idMicroclimate: id_microclimate,
                                 nameMicroclimate: name,
@@ -43,12 +45,14 @@ class Microclimate extends React.PureComponent {
                                 waterPHMicroclimate: waterPH,
                                 dailyHoursMicroclimate: dailyHours,
                                 lightStartTimeMicroclimate: lightStartTime,
+                                temperatureMicroclimate: temperature,
+                                humidityMicroclimate: humidity,
                             }
                         })
     }
 
-    addMicroclimate( name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
-        this.props.axiosMicroclimateCreate( name, intensity, lightType, waterPH, dailyHours, lightStartTime );
+    addMicroclimate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
+        this.props.axiosMicroclimateCreate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity );
         window.location.reload();
     }
 
@@ -57,8 +61,8 @@ class Microclimate extends React.PureComponent {
         window.location.reload();
     }
 
-    updateMicroclimate(id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
-        this.props.axiosMicroclimateUpdate( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime );
+    updateMicroclimate(id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
+        this.props.axiosMicroclimateUpdate( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity );
         window.location.reload();
     }
 
@@ -69,9 +73,9 @@ class Microclimate extends React.PureComponent {
         this.setState({ addModalShow : true })
     }
 
-    openModal( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime ) {
+    openModal( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ) {
         this.setState({ open: true });
-        this.elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime )
+        this.elegirMicroclima( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity )
     }
 
     closeModal() {

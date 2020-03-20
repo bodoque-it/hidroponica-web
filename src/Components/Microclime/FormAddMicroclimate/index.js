@@ -14,6 +14,8 @@ class FormAddMicroclimate extends Component {
 			waterPH: '',
 			dailyHours: '',
 			lightStartTime: '',
+			temperature : '',
+            humidity : '',
 
 			touched: {
 				name: false,
@@ -22,6 +24,8 @@ class FormAddMicroclimate extends Component {
 				waterPH: false,
 				dailyHours: false,
 				lightStartTime: false,
+				temperature: false,
+				humidity: false,
 			}
 		};
 		
@@ -53,7 +57,7 @@ class FormAddMicroclimate extends Component {
 		});
 	}
 
-	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime ){
+	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
 		const errors = {
 			name: '',
 			intensity: '',
@@ -61,6 +65,8 @@ class FormAddMicroclimate extends Component {
 			waterPH: '',
 			dailyHours: '',
 			lightStartTime: '',
+			temperature: '',
+			humidity: '',
 		};
 
 		if (this.state.touched.name && name.length < 1 ) {
@@ -89,6 +95,16 @@ class FormAddMicroclimate extends Component {
 		if (this.state.touched.lightStartTime && !regLightStartTime.test(lightStartTime) ) {
 			errors.lightStartTime = 'Inicio de la luz erróneas, Debe ser así: hh:mm:ss';
 		}
+
+		const regTemperature = /^\d*(\.\d{1})?\d{0,1}$/;
+		if (this.state.touched.temperature && !regTemperature.test(temperature) ) {
+			errors.temperature = 'Temperatura mal ingresada';
+		}
+
+		const regHumidity = /^\d+$/; 
+		if (this.state.touched.humidity && !regHumidity.test(humidity) || humidity>100 || humidity<0 ) {
+			errors.humidity = 'Es un porcentaje de humedad';
+		}
 		return errors;
 	}
 
@@ -109,12 +125,21 @@ class FormAddMicroclimate extends Component {
 				waterPH: false,
 				dailyHours: false,
 				lightStartTime: false,
+				temperature: false,
+				humidity: false,
 			}
 	 	});
 	}
 
     render(){
-		const errors = this.validate( this.state.name, this.state.intensity, this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime )
+		const errors = this.validate(   this.state.name,
+										this.state.intensity,
+										this.state.lightType,
+										this.state.waterPH,
+										this.state.dailyHours,
+										this.state.lightStartTime,
+										this.state.temperature,
+										this.state.humidity )
 		
         return(
 			<Modal
@@ -178,6 +203,22 @@ class FormAddMicroclimate extends Component {
 									<FormFeedback>{errors.lightStartTime}</FormFeedback>
 								</Col>
 					 		</FormGroup>
+
+							 <FormGroup row >
+								<Label htmlFor="temperature" md={2} > Temperature </Label>
+								<Col md={10} >
+									<Input type="text" id="temperature" name="temperature" placeholder="Ingrese la temperatura" value={this.state.temperature} defaultValue={this.state.temperature} valid={errors.temperature === ''} invalid={errors.temperature !== ''} onBlur={this.handleBlur('temperature')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.temperature}</FormFeedback>
+								</Col>
+							</FormGroup>
+
+							<FormGroup row >
+								<Label htmlFor="humidity" md={2} > Humedad </Label>
+								<Col md={10} >
+									<Input type="text" id="humidity" name="humidity" placeholder="Ingrese la Humedad(%)" value={this.state.humidity} defaultValue={this.state.humidity} valid={errors.humidity === ''} invalid={errors.humidity !== ''} onBlur={this.handleBlur('humidity')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.humidity}</FormFeedback>
+								</Col>
+							</FormGroup>
 							
 							 <Button type="submit" color="primary" 
 							onClick={  (errors.name !== '' ||
@@ -186,14 +227,25 @@ class FormAddMicroclimate extends Component {
 										errors.waterPH !== '' ||
 										errors.dailyHours !== '' ||
 										errors.lightStartTime !== ''||
+										errors.temperature !== '' ||
+                                    	errors.humidity !== ''||
 										this.state.name.length === 0 ||
 										this.state.intensity.length === 0 ||
 										this.state.lightType.length === 0 ||
 										this.state.waterPH.length === 0 ||
 										this.state.dailyHours.length === 0 ||
-										this.state.lightStartTime.length === 0 
+										this.state.lightStartTime.length === 0 ||
+										this.state.temperature.length === 0 ||
+                                    	this.state.humidity.length === 0
 										) ? () =>  alert("no has completado el Formulario") 
-										: () => this.state.addMicroclimate( this.state.name, this.state.intensity ,this.state.lightType, this.state.waterPH, this.state.dailyHours, this.state.lightStartTime ) 
+										: () => this.state.addMicroclimate( this.state.name,
+																			this.state.intensity,
+																			this.state.lightType,
+																			this.state.waterPH,
+																			this.state.dailyHours,
+																			this.state.lightStartTime,
+																			this.state.temperature,
+                                                                            this.state.humidity  ) 
 							} >
 					 			Agregar
 					 		</Button>
