@@ -65,9 +65,18 @@ export default function Page(props) {
 		</div>
     );
 }
-
+function LightType(props){
+    console.log(props.type);
+    if(props.type == "blanca"){
+        return (<img src={blanca}/>);
+    }else if(props.type == "violeta"){
+        return (<img src={roja}/>);
+    }else{
+        return (<img src={verde}/>);
+    }
+}
 function RailCard( props ) {
-
+    
     return(
         <div className="col-sm-5" style={ { margin: '0.4rem' }} >
             <Card className={"card"}>
@@ -100,7 +109,8 @@ function RailCard( props ) {
         							</Fab>
         							<Popup  open={props.open}
         									closeOnDocumentClick
-        									onClose={props.closeModal} >
+        									onClose={props.closeModal}
+                                            className={"modal"} >
         								<FormUpdateMicroclimate
         										id_microclimate={props.microclimateSelect.idMicroclimate}
                                                 name={props.microclimateSelect.nameMicroclimate}
@@ -123,7 +133,7 @@ function RailCard( props ) {
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Tipo de luz:
                                 <br/> 
-                                <img src={blanca}/>
+                                <LightType type={props.lightType}/>
                                 <br/> 
                                 {props.lightType}
                             </Paper>
@@ -136,13 +146,23 @@ function RailCard( props ) {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Paper className={"paper"}>PH del Agua:
-                                <br/> 
-                                <div className={"dato"}>
-                                    {props.waterPH}
-                                </div>
-                            </Paper>
+                        <Grid container xs={4} spacing={1}>
+                            <Grid item xs={12} >
+                                <Paper className={"paper"} style={{padding:'0'}}>PH del Agua:
+                                    <br/> 
+                                    <div className={"dato"}>
+                                        {props.waterPH}
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper className={"paper"} style={{padding:'0'}}>Humedad:
+                                    <br/> 
+                                    <div className={"dato"}>
+                                        50 [%]
+                                    </div>
+                                </Paper>
+                            </Grid>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Hora comienzo de luz:
@@ -153,7 +173,7 @@ function RailCard( props ) {
                             </Paper>
                         </Grid>
                         <Grid item xs={4}>
-                            <Paper className={"paper"}>Duración:
+                            <Paper className={"paper"}>Horas de luz:
                                 <br/>
                                 <div className={"dato"}>
                                     {props.dailyHours} [Horas]

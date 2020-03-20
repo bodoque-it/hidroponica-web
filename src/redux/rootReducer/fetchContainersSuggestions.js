@@ -6,7 +6,7 @@ function fetchContainersSuggestions(text) {
 
         const regex = new RegExp(`^${text}`,'i');
 
-        fetch('api/containers/1')
+        fetch('http://localhost:8080/api/containers/1')
         .then(res => res.json())
         .then(res => {
             if(res.error) {
