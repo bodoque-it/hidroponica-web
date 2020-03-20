@@ -11,7 +11,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Formulario PopUp
-import FormAddContainer from './FormAddContainer';
 import FormUpdateContainer from './FormUpdateContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Popup from './Popup/index'
@@ -38,7 +37,7 @@ import { ButtonToolbar } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-  //Para los menus expansivos de los rieles
+  //Para los menus expansivos de los containers
     root: {
         width:'100%',
         padding:'50px',
@@ -119,6 +118,7 @@ export function Container(props) {
 		name,
 		volume,
 		id,
+		active,
 		deleteContainer,
 		updateContainer,
 		openModal,
@@ -134,8 +134,8 @@ export function Container(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  <Typography className={classes.heading}>{name}</Typography>
-			  <Typography className={classes.secondaryHeading}> Volume: {volume} </Typography>
+			  <Typography className={classes.heading}>NAME: {name}</Typography>
+			  <Typography className={classes.secondaryHeading}> VOLUME: {volume} <p/> IS ACTIVE: {active}</Typography>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
@@ -154,6 +154,7 @@ export function Container(props) {
 											id={id}
 											name={name}
 											volume={volume}
+											active={active}
 											updateContainer={updateContainer} 
 											closeModal={closeModal}
 											/>
@@ -170,6 +171,7 @@ export function ContainerDesactivado(props) {
 	const {
 		name,
 		volume,
+		active,
 	} = props;
 		
 	const classes = useStyles();
@@ -181,7 +183,7 @@ export function ContainerDesactivado(props) {
 			id="panel3a-header"
 			>
 			<Typography className={classes.heading}> {name} </Typography>
-			<Typography className={classes.secondaryHeading}> {volume} </Typography>
+			<Typography className={classes.secondaryHeading}> {volume}</Typography>
 			</ExpansionPanelSummary>
 		</ExpansionPanel>
   	)
@@ -205,24 +207,6 @@ export function Containers(props){
 	return(
 		<div className={classes.root} >
 			<div className="row">
-				<div className="col" >
-					<label>
-					<ButtonToolbar>
-						<Button variant="primary"
-								onClick={() => addModalOpen() }
-						 > Agregar Container
-						</Button>
-							<FormAddContainer
-								addContainer={addContainer}
-								show={addModalShow}
-								onHide={addModalClose}
-							/>
-					</ButtonToolbar>
-					</label>
-				</div>
-			</div>
-			<br></br>
-			<div className="row">
 				<div className="col">
 				{ isEmpty?
 					<Typography variant="h5" component="h3" className="page-message">
@@ -234,6 +218,7 @@ export function Containers(props){
 							containers={suggestion.containers}
 							name={suggestion.name}
 							volume={suggestion.volume}
+							active={suggestions.active}
 							id={suggestion.id}
 							deleteContainer={deleteContainer}
 							updateContainer={updateContainer}

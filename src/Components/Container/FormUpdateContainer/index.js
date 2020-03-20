@@ -8,16 +8,17 @@ class FormUpdateRail extends Component {
     constructor(props){
         super(props);
         this.nameInput = React.createRef(); 
-        this.locationInput = React.createRef(); 
+        this.volumeInput = React.createRef(); 
         this.state = {
             id : props.id,
-            location : props.location,
+            volume : props.volume,
             name : props.name,
-            updateRiel : props.updateRiel,
+            active: props.active,
+            updateContainer : props.updateContainer,
 
             touched: {
 				name: false,
-				location: false,
+				volume: false,
 			}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,17 +48,17 @@ class FormUpdateRail extends Component {
 		});
 	}
 
-	validate(name,location){
+	validate(name,volume){
 		const errors = {
 			name: '',
-			location: '',
+			volume: '',
 		};
 
 		if (this.state.touched.name && name.length <= 3 ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
-		if (this.state.touched.location && location.length <= 3 ) {
-			errors.location = 'No has escrito una ubicación valida';
+		if (this.state.touched.volume && volume.length <= 3 ) {
+			errors.volume = 'No has escrito una ubicación valida';
 		}
 		return errors;
     }
@@ -65,7 +66,7 @@ class FormUpdateRail extends Component {
     
  
     render(){
-        const errors = this.validate(this.state.name,this.state.location)
+        const errors = this.validate(this.state.name,this.state.volume)
         return(
             <div>
             <ModalHeader > Actualizar Riel </ModalHeader>

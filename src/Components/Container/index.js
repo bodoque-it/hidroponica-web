@@ -7,7 +7,7 @@ import axiosContainerUpdate from '../../redux/rootReducer/axiosContainerUpdate';
 import fetchContainerCreate from '../../redux/rootReducer/fetchContainerCreate';
 
 
-class Rails extends Component {
+class Containers extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -86,4 +86,4 @@ const mapDispatchToProps = {
     fetchContainerCreate,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Rails) ) ;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Containers) ) ;
