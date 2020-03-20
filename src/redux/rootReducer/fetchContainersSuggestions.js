@@ -14,6 +14,7 @@ function fetchContainersSuggestions(text) {
             }
             const results = res.data.filter( n => regex.test(n.name) )
             dispatch(findContainersSuggestions(results))
+            console.log(results)
             return results;
         })
         .catch(error => {

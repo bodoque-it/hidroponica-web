@@ -204,6 +204,7 @@ export function Containers(props){
 	
 	const isEmpty = suggestions.length === 0;
 	const classes = useStyles();
+	console.log("ACTIVE ",suggestions.active)
 	return(
 		<div className={classes.root} >
 			<div className="row">
@@ -218,8 +219,8 @@ export function Containers(props){
 							containers={suggestion.containers}
 							name={suggestion.name}
 							volume={suggestion.volume}
-							active={suggestions.active}
 							id={suggestion.id}
+							active={suggestions.active}
 							deleteContainer={deleteContainer}
 							updateContainer={updateContainer}
 							openModal={openModal}
