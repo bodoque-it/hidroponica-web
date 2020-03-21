@@ -60,7 +60,7 @@ class FormUpdateRail extends Component {
 		if (this.state.touched.name && name.length <= 3 ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
-		if (this.state.touched.volume && volume.length <= 3 ) {
+		if (this.state.touched.volume && volume.length < 1 ) {
 			errors.volume = 'No has escrito una ubicación valida';
         }
         //if (this.state.touched.active && (active==='false' || active==='true') ) {
@@ -104,7 +104,7 @@ class FormUpdateRail extends Component {
                     <Button type="submit" color="primary" 
                     onClick={  (errors.name !== '' || errors.volume !== '' || this.state.name.length == 0 || this.state.volume.length == 0 )?//|| this.state.active.length == 0) ?
                                  () =>  alert("no has completado el Formulario") 
-                                 : () => this.state.updateRiel(this.state.id,this.state.name,this.state.volume) } >
+                                 : () => this.state.updateContainer(this.state.id,this.state.name,this.state.volume) } >
                         Modificar
                     </Button>
                     <ModalFooter>

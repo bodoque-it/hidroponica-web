@@ -13,7 +13,8 @@ import { FIND_RAILS_SUGGESTIONS,
         MICROCLIMATE_UPDATE,
         INFRASTRUCTURE_CREATE,
         INFRASTRUCTURE_DELETE,
-        INFRASTRUCTURE_UPDATE
+        INFRASTRUCTURE_UPDATE,
+        CONTAINER_ADD_IN_RAIL
 } from '../actions/actions';
          
 const defaultState = {
@@ -132,6 +133,12 @@ export function rootReducer(state = defaultState, {type,payload}) {
         }
 
         case INFRASTRUCTURE_UPDATE:{
+            return{
+                ...state,
+            }
+        }
+
+        case CONTAINER_ADD_IN_RAIL:{
             return{
                 ...state,
             }

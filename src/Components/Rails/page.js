@@ -12,6 +12,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // Formulario PopUp
 import FormAddRail from './FormAddRail';
 import FormUpdateRail from './FormUpdateRail';
+import FormAddContainer from './FormAddContainer';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Popup from './Popup/index'
 import Popup from "reactjs-popup";
@@ -152,6 +154,12 @@ export function Riel(props) {
 																				id, name, infrastructure_address
 									)} />
 								</Fab>
+								
+								<Fab aria-label="edit" className={classes.fab, classes.add} >
+									<FormAddContainer
+										id_rail={id}
+									/>
+								</Fab>
 								<Popup  open={open}
 										closeOnDocumentClick
 										onClose={closeModal} >
@@ -274,7 +282,7 @@ export function Contenedores(props){
 				<TableRow>
 					<TableCell align="center" width="50%">
 						{ <Contenedor
-							id={containers[i].id_container}
+							id={containers[i].id}
 							name={containers[i].name}
 							active={containers[i].active}
 							volume={containers[i].volume}
@@ -282,7 +290,7 @@ export function Contenedores(props){
 					</TableCell>
 					<TableCell align="center">
 						{ <Contenedor
-							id={containers[i+1].id_container}
+							id={containers[i+1].id}
 							name={containers[i+1].name}
 							active={containers[i+1].active}
 							volume={containers[i+1].volume}
@@ -359,11 +367,6 @@ export function ContenedorActivo(props) {
 					Nombre Contenedor: { name }
 				</Typography>
 				</div>
-				<div className="col-2" >
-					<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
-						<DeleteIcon type="submit" />
-					</Fab>
-				</div>
 			</div>
 			<div>
 				<Table className={classes.table} aria-label="spanning table">
@@ -394,11 +397,6 @@ export function ContenedorInactivo(props) {
 				<Typography className={classes.cardHeader} float="center" color="textSecondary">
 					Nombre Contenedor: { name }
 				</Typography>
-				</div>
-				<div className="col-2" >
-					<Fab color="secondary" size="small" aria-label="delete" className={classes.fab}>
-						<DeleteIcon type="submit"/>
-					</Fab>
 				</div>
 			</div>
 			<div>
