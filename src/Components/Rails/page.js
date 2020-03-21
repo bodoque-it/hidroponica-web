@@ -34,6 +34,7 @@ import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { ButtonToolbar } from 'react-bootstrap';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -137,34 +138,42 @@ export function Riel(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  <Typography className={classes.heading}>{name}</Typography>
-			  <Typography className={classes.secondaryHeading}> Ubicación: {infrastructure_address} </Typography>
+			  	<Typography className={classes.heading}>{name}</Typography>
+			  	<div style={{width:"50%"}}>
+			  		<Typography className={classes.secondaryHeading}> Ubicación: {infrastructure_address} </Typography>
+		  		</div>
+			  	<div className="row" style={{width:"40%", foat:"right"}}>
+					<Grid container spacing={0}>
+						<Grid item xs={8}>
+						</Grid>
+						<Grid item xs={2}>
+							<Fab aria-label="delete" color="secondary" size="small" className={classes.fab}>
+								<DeleteIcon style={{float:"right"}} onClick={ () => deleteRail(id)} />
+							</Fab>
+						</Grid>
+						<Grid item xs={2}>
+							<Fab aria-label="edit" size="small" className={classes.fab} >
+								<EditIcon color="primary" onClick={() => openModal(
+																			id, name, infrastructure_address
+								)} />
+							</Fab>
+							<Popup  open={open}
+									closeOnDocumentClick
+									onClose={closeModal} >
+								<FormUpdateRail
+										id={railSelect.idRail}
+										name={railSelect.nameRail}
+										infrastructure_address={railSelect.infrastructure_addressRail}
+										updateRiel={updateRiel} 
+										closeModal={closeModal}
+										/>
+							</Popup>
+						</Grid>
+					</Grid>
+				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
-					<div className="row">
-						<div className="col" >
-								<Fab aria-label="delete" className={classes.fab, classes.add}>
-									<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteRail(id)} />
-								</Fab>
-								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon color="primary" onClick={() => openModal(
-																				id, name, infrastructure_address
-									)} />
-								</Fab>
-								<Popup  open={open}
-										closeOnDocumentClick
-										onClose={closeModal} >
-									<FormUpdateRail
-											id={railSelect.idRail}
-											name={railSelect.nameRail}
-											infrastructure_address={railSelect.infrastructure_addressRail}
-											updateRiel={updateRiel} 
-											closeModal={closeModal}
-											/>
-								</Popup>
-						</div>
-					</div>
 					<div className="row">
 						<div className="col">
 							{ <Contenedores
