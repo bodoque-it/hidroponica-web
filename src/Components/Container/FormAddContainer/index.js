@@ -9,10 +9,12 @@ class FormAddContainer extends Component {
 			addContainer : props.addContainer,
 			name: '',
 			volume: '',
+			//active: '',
 
 			touched: {
 				name: false,
-				location: false,
+				volume: false,
+				//active: false,
 			}
 		};
 
@@ -45,10 +47,11 @@ class FormAddContainer extends Component {
 		});
 	}
 
-	validate(name,volume){
+	validate(name,volume,active){
 		const errors = {
 			name: '',
 			volume: '',
+			active: '',
 		};
 
 		if (this.state.touched.name && name.length <= 3 ) {
@@ -57,15 +60,19 @@ class FormAddContainer extends Component {
 		if (this.state.touched.volume && volume.length <= 3 ) {
 			errors.volume = 'No has escrito una ubicación valida';
 		}
+		//if (this.state.touched.active && (active==='false' || active==='true') ) {
+		//	errors.active = 'No has escrito un valor valido';
+        //}
 		return errors;
 	}
 
 	closeAndClear(){
 		this.props.onHide();
-		this.setState({ name: '', volume: '', 
+		this.setState({ name: '', volume: '', //active: '', 
 			touched:  {
 				name: false,
 				volume: false,
+				//active: false,
 			}
 	 	});
 	}
@@ -103,9 +110,17 @@ class FormAddContainer extends Component {
 									<FormFeedback>{errors.volume}</FormFeedback>
 								</Col>
 					 		</FormGroup>
+
+							{/*<FormGroup row >
+					 			<Label htmlFor="active" md={2} > Activo </Label>
+					 			<Col md={10} >
+									<Input type="text" id="active" name="active" placeholder="Ingrese si esta activo o no el container" value={this.state.active} valid={errors.active === ''} invalid={errors.active !== ''} onBlur={this.handleBlur('active')} onChange={this.handleInputChange}/>
+									<FormFeedback>{errors.active}</FormFeedback>
+								</Col>
+							</FormGroup>*/}
 							
 							 <Button type="submit" color="primary" 
-							 onClick={  (errors.name !== '' || errors.volume !== '' || this.state.name.length == 0 || this.state.name.length == 0 ) ?
+							 onClick={  (errors.name !== '' || errors.volume !== '' || this.state.name.length == 0 || this.state.volume.length == 0 )?//|| this.state.active.length == 0) ?
 							  () =>  alert("no has completado el Formulario") 
 							  : () => this.state.addContainer(this.state.name,this.state.volume) } >
 					 			Agregar
