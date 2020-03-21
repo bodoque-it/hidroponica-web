@@ -56,7 +56,7 @@ class FormUpdateRail extends Component {
 			infrastructure_address: '',
 		};
 
-		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9_-]{0,15})$/;
+		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 _-]{0,15})$/;
 		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
 		}

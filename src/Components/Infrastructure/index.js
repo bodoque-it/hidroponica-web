@@ -76,7 +76,7 @@ class Infrastructure extends Component{
 		const errors = {
 			address: ''
 		};
-        const regAddress = /^[a-zA-Z]{1,10}?([a-zA-Z0-9_-]{0,15})$/;
+        const regAddress = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 #_-]{0,15})$/;
 		if (this.state.touched.address && !regAddress.test(address) ) {
             errors.address = 'No has escrito una ubicación valida';
         }

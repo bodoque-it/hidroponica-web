@@ -69,7 +69,8 @@ class FormAddMicroclimate extends Component {
 			humidity: '',
 		};
 
-		if (this.state.touched.name && name.length < 1 ) {
+		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 _-]{0,15})$/;
+		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
 

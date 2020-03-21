@@ -21,6 +21,14 @@ function axiosMicroclimateCreate(new_name, new_intensity, new_lightType, new_wat
                 }
             };
             try {
+                console.log( "name: " + microclimate.name + 
+                                "intensity: " + microclimate.intensity +
+                                "lightType: " + microclimate.lightType + 
+                                "waterPH: " + microclimate.waterPH +
+                                "dailyHours: " + microclimate.dailyHours +
+                                "lightStartTime: " + microclimate.lightStartTime +
+                                "temperature: " + microclimate.temperature +
+                                "humidity: " + microclimate.humidity )
                 const res = await axios.post('/api/microclimates/1', microclimate , JSON.stringify(config));
                 dispatch(microclimateCreate())
             } catch (error) {
