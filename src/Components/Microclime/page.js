@@ -146,18 +146,16 @@ function RailCard( props ) {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid container xs={4} spacing={1}>
-                            <Grid item xs={12} >
+                        <Grid container xs={4} spacing={1} style={{padding:"8px"}}>
+                            <Grid item xs={12}>
                                 <Paper className={"paper"} style={{padding:'0'}}>PH del Agua:
-                                    <br/> 
                                     <div className={"dato"}>
                                         {props.waterPH}
                                     </div>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} >
+                            <Grid item xs={12}>
                                 <Paper className={"paper"}>Humedad:
-                                    <br/>
                                     <div className={"dato"}>
                                         {props.humidity} [%]
                                     </div>
