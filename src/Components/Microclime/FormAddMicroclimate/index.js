@@ -207,7 +207,7 @@ class FormAddMicroclimate extends Component {
 					 		</FormGroup>
 
 							 <FormGroup row >
-								<Label htmlFor="temperature" md={2} > Temperature </Label>
+								<Label htmlFor="temperature" md={2} > Temperatura </Label>
 								<Col md={10} >
 									<Input type="text" id="temperature" name="temperature" placeholder="Ingrese la temperatura" value={this.state.temperature} defaultValue={this.state.temperature} valid={errors.temperature === ''} invalid={errors.temperature !== ''} onBlur={this.handleBlur('temperature')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.temperature}</FormFeedback>

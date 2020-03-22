@@ -107,10 +107,11 @@ function RailCard( props ) {
                                                                                                                                 props.humidity
                                                                                                                                 )} />
         							</Fab>
-        							<Popup  open={props.open}
-        									closeOnDocumentClick
-        									onClose={props.closeModal}
-                                            className={"modal"} >
+        							<Popup
+                                        open={props.open}
+    									closeOnDocumentClick
+    									onClose={props.closeModal}
+                                        className={"modal"} >
         								<FormUpdateMicroclimate
         										id_microclimate={props.microclimateSelect.idMicroclimate}
                                                 name={props.microclimateSelect.nameMicroclimate}

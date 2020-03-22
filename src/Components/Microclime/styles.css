@@ -62,7 +62,8 @@
   align-items: center;
   height: 50%;
 }
-.modak{
-  height:80%;
+.modal{
+  height:80% !important;
+  overflow-y: auto;
 }
 

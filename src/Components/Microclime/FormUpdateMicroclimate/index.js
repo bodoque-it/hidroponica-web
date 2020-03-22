@@ -3,6 +3,7 @@ import {Modal, ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, C
 
 
 
+
 class FormUpdateMicroclimate extends React.PureComponent {
     constructor(props){
         super(props);
@@ -125,64 +126,64 @@ class FormUpdateMicroclimate extends React.PureComponent {
                 <ModalHeader > Actualizar Microclima </ModalHeader>
                     <Form onSubmit={this.handleSubmit} >
                         <FormGroup row >
-                            <Label htmlFor="name" md={2} > Nombre </Label>
-                            <Col md={10} >
+                            <Label htmlFor="name" md={3} > Nombre </Label>
+                            <Col md={9} >
                                 <Input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={this.state.name} defaultValue={this.state.name} valid={errors.name === ''} invalid={errors.name !== ''} onBlur={this.handleBlur('name')} onChange={this.handleInputChange} />
                                 <FormFeedback>{errors.name}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="intensity" md={2} > Intensidad de Luz </Label>
-                            <Col md={10} >
+                            <Label htmlFor="intensity" md={3} > Intensidad de Luz </Label>
+                            <Col md={9} >
                                 <Input type="text" id="intensity" name="intensity" placeholder="Ingrese la intensidad de Luz" value={this.state.intensity} defaultValue={this.state.intensity} valid={errors.intensity === ''} invalid={errors.intensity !== ''} onBlur={this.handleBlur('intensity')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.intensity}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="lightType" md={2} > Tipo de Luz </Label>
-                            <Col md={10} >
+                            <Label htmlFor="lightType" md={3} > Tipo de Luz </Label>
+                            <Col md={9} >
                                 <Input type="text" id="lightType" name="lightType" placeholder="Ingrese el Tipo de Luz" value={this.state.lightType} defaultValue={this.state.lightType} valid={errors.lightType === ''} invalid={errors.lightType !== ''} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.lightType}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="waterPH" md={2} > PH del Agua </Label>
-                            <Col md={10} >
+                            <Label htmlFor="waterPH" md={3} > PH del Agua </Label>
+                            <Col md={9} >
                                 <Input type="text" id="waterPH" name="waterPH" placeholder="Ingrese el PH del agua" value={this.state.waterPH} defaultValue={this.state.waterPH} valid={errors.waterPH === ''} invalid={errors.waterPH !== ''} onBlur={this.handleBlur('waterPH')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.waterPH}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="dailyHours" md={2} > Horas Diarias </Label>
-                            <Col md={10} >
+                            <Label htmlFor="dailyHours" md={3} > Horas Diarias </Label>
+                            <Col md={9} >
                                 <Input type="text" id="dailyHours" name="dailyHours" placeholder="Ingrese Horas Diarias" value={this.state.dailyHours} defaultValue={this.state.dailyHours} valid={errors.dailyHours === ''} invalid={errors.dailyHours !== ''} onBlur={this.handleBlur('dailyHours')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.dailyHours}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="lightStartTime" md={2} > Hora de inicio(hh:mm:ss) </Label>
-                            <Col md={10} >
+                            <Label htmlFor="lightStartTime" md={3} > Hora de inicio(hh:mm:ss) </Label>
+                            <Col md={9} >
                                 <Input type="text" id="lightStartTime" name="lightStartTime" placeholder="Ingrese la Hora(hh:mm:ss)" value={this.state.lightStartTime} defaultValue={this.state.lightStartTime} valid={errors.lightStartTime === ''} invalid={errors.lightStartTime !== ''} onBlur={this.handleBlur('lightStartTime')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.lightStartTime}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="temperature" md={2} > Temperature </Label>
-                            <Col md={10} >
+                            <Label htmlFor="temperature" md={3} > Temperature </Label>
+                            <Col md={9} >
                                 <Input type="text" id="temperature" name="temperature" placeholder="Ingrese la temperatura" value={this.state.temperature} defaultValue={this.state.temperature} valid={errors.temperature === ''} invalid={errors.temperature !== ''} onBlur={this.handleBlur('temperature')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.temperature}</FormFeedback>
                             </Col>
                         </FormGroup>
 
                         <FormGroup row >
-                            <Label htmlFor="humidity" md={2} > Humedad </Label>
-                            <Col md={10} >
+                            <Label htmlFor="humidity" md={3} > Humedad </Label>
+                            <Col md={9} >
                                 <Input type="text" id="humidity" name="humidity" placeholder="Ingrese la Humedad(%)" value={this.state.humidity} defaultValue={this.state.humidity} valid={errors.humidity === ''} invalid={errors.humidity !== ''} onBlur={this.handleBlur('humidity')} onChange={this.handleInputChange}/>
                                 <FormFeedback>{errors.humidity}</FormFeedback>
                             </Col>

@@ -27,10 +27,10 @@
 .card{
 	minWidth: 300;
 	maxWidth: 50%;
-	transition:0.5s;
+	transition:1s !important;
 }
 .card:hover{
-	transition:0.5s;
+	transition:1s !important;
 	background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
 }
 .card-color-gradient{

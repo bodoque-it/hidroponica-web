@@ -185,6 +185,9 @@ export function Riel(props) {
 				<div>
 					<div className="row">
 						<div className="col">
+							<Typography variant="h5" component="h3" className="page-message">
+								Contenedores
+							</Typography>
 							{ <Contenedores
 								containers={containers}
 							/> }
@@ -374,7 +377,7 @@ export function ContenedorActivo(props) {
 			<div className="row">
 				<div className="col">
 				<Typography className={classes.cardHeader} float="center" color="textSecondary">
-					Nombre Contenedor: { name }
+					Nombre: { name }
 				</Typography>
 				</div>
 			</div>
@@ -382,7 +385,7 @@ export function ContenedorActivo(props) {
 				<Table className={classes.table} aria-label="spanning table">
 					<TableRow>
 						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID</h6> { id } </TableCell>
-						<TableCell align="center" width="33%"><h6>ESTADO</h6> ACTIVO </TableCell>
+						<TableCell align="center" width="33%"><h6>ESTADO</h6>  <div className={"text-success"}>En ciclo</div> </TableCell>
 						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
 					</TableRow>
 				</Table>
@@ -405,7 +408,7 @@ export function ContenedorInactivo(props) {
 			<div className="row">
 				<div className="col">
 				<Typography className={classes.cardHeader} float="center" color="textSecondary">
-					Nombre Contenedor: { name }
+					Nombre: { name }
 				</Typography>
 				</div>
 			</div>
@@ -413,7 +416,7 @@ export function ContenedorInactivo(props) {
 				<Table className={classes.table} aria-label="spanning table">
 					<TableRow>
 						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID</h6> { id } </TableCell>
-						<TableCell align="center" width="33%"><h6>ESTADO</h6> zZzZ </TableCell>
+						<TableCell align="center" width="33%"><h6>ESTADO</h6><div className={"text-danger"}> Inactivo </div></TableCell>
 						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
 					</TableRow>
 					
