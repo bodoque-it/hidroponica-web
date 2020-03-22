@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Modal, ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
-// import {} from 'react-bootstrap';
+import { ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, Col, FormFeedback} from 'reactstrap';
+import { Modal } from 'react-bootstrap';
 
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -69,43 +69,43 @@ class FormUpdateRail extends Component {
         const errors = this.validate(this.state.name,this.state.infrastructure_address)
         const isEmpty = this.props.infrastructures.length === 0;
         return(
-            <div>
-            <ModalHeader > Actualizar Riel </ModalHeader>
-                <Form onSubmit={this.handleSubmit} >
-                    <FormGroup row >
-                        <Label htmlFor="name" md={2} > Nombre </Label>
-                        <Col md={10} >
-                            <Input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={this.state.name} defaultValue={this.state.name} valid={errors.name === ''} invalid={errors.name !== ''} onBlur={this.handleBlur('name')} onChange={this.handleInputChange} />
-                            <FormFeedback>{errors.name}</FormFeedback>
-                        </Col>
-                    </FormGroup>
+            <div >
+                <ModalHeader > Actualizar Riel </ModalHeader>
+                    <Form onSubmit={this.handleSubmit}  >
+                        <FormGroup row >
+                            <Label htmlFor="name" md={2} > Nombre </Label>
+                            <Col md={10} >
+                                <Input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={this.state.name} defaultValue={this.state.name} valid={errors.name === ''} invalid={errors.name !== ''} onBlur={this.handleBlur('name')} onChange={this.handleInputChange} />
+                                <FormFeedback>{errors.name}</FormFeedback>
+                            </Col>
+                        </FormGroup>
 
-                    <FormGroup row >
-                        <Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
-                        <Col md={10} >
-                            <Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address}  onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
-                            { isEmpty ?
-                                <option>""</option>
-                                :
-                                    this.props.infrastructures.map( infrastructure =>
-                                            <option> { infrastructure.address } </option>
-                                            )
-                            }
-                            </Input>
-                            <FormFeedback>{errors.infrastructure_address}</FormFeedback>
-                        </Col>
-                    </FormGroup>
-                    
-                    <Button type="submit" color="primary" 
-                    onClick={  (errors.name !== '' || errors.infrastructure_address !== '' || this.state.name.length === 0 ) ?
-                                 () =>  alert("no has completado el Formulario") 
-                                 : () => this.state.updateRiel(this.state.id,this.state.name,this.state.infrastructure_address) } >
-                        Modificar
-                    </Button>
-                    <ModalFooter>
-                        <Button color="danger" onClick={() => this.props.closeModal() } > Cerrar </Button>
-                    </ModalFooter>
-                </Form>
+                        <FormGroup row >
+                            <Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
+                            <Col md={10} >
+                                <Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address}  onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
+                                { isEmpty ?
+                                    <option>""</option>
+                                    :
+                                        this.props.infrastructures.map( infrastructure =>
+                                                <option> { infrastructure.address } </option>
+                                                )
+                                }
+                                </Input>
+                                <FormFeedback>{errors.infrastructure_address}</FormFeedback>
+                            </Col>
+                        </FormGroup>
+                        
+                        <Button type="submit" color="primary" 
+                        onClick={  (errors.name !== '' || errors.infrastructure_address !== '' || this.state.name.length === 0 ) ?
+                                    () =>  alert("no has completado el Formulario") 
+                                    : () => this.state.updateRiel(this.state.id,this.state.name,this.state.infrastructure_address) } >
+                            Modificar
+                        </Button>
+                        <ModalFooter>
+                            <Button color="danger" onClick={() => this.props.closeModal() } > Cerrar </Button>
+                        </ModalFooter>
+                    </Form>
             </div>
 
         )

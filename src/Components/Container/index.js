@@ -12,7 +12,12 @@ class Containers extends Component {
         super(props);
         this.state = {
             addModalShow : false,
-            open: false
+            open: false,
+            containerSelect : {
+                idContainer: null,
+                nameContainer: null,
+                volumeContainer: null,
+            }
         };
 
         this.deleteContainer = this.deleteContainer.bind(this);
@@ -46,8 +51,14 @@ class Containers extends Component {
         this.setState({ addModalShow : true })
     }
 
-    openModal() {
+    openModal( id_container, name, volume ) {
         this.setState({ open: true });
+        this.setState({ containerSelect:{
+            idContainer: id_container,
+            nameContainer: name,
+            volumeContainer: volume
+
+        } })
     }
 
     closeModal() {
@@ -68,6 +79,7 @@ class Containers extends Component {
                     openModal={this.openModal}
                     closeModal={this.closeModal}
                     open={this.state.open}
+                    containerSelect={this.state.containerSelect}
                 />
             </div>
         )

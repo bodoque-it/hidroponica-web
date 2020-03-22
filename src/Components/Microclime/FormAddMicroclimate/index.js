@@ -10,7 +10,7 @@ class FormAddMicroclimate extends Component {
 
 			name: '',
 			intensity: '',
-			lightType: '',
+			lightType: 'blanca',
 			waterPH: '',
 			dailyHours: '',
 			lightStartTime: '',
@@ -57,11 +57,10 @@ class FormAddMicroclimate extends Component {
 		});
 	}
 
-	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
+	validate( name, intensity, waterPH, dailyHours, lightStartTime, temperature, humidity ){
 		const errors = {
 			name: '',
 			intensity: '',
-			lightType: '',
 			waterPH: '',
 			dailyHours: '',
 			lightStartTime: '',
@@ -77,9 +76,6 @@ class FormAddMicroclimate extends Component {
 		const regIntensity = /^\d*(\.\d{1})?\d{0,1}$/;
 		if (this.state.touched.intensity && !regIntensity.test(intensity) ) {
 			errors.intensity = 'Intensidad de luz no valida';
-		}
-		if (this.state.touched.lightType && lightType.length < 1 ) {
-			errors.lightType = 'No has escrito un tipo de luz valida';
 		}
 
 		const regWaterPH = /^\d*(\.\d{1})?\d{0,1}$/;
@@ -114,7 +110,7 @@ class FormAddMicroclimate extends Component {
 		this.setState({ 
 			name: '',
 			intensity: '',
-			lightType: '',
+			lightType: 'verde',
 			waterPH: '',
 			dailyHours: '',
 			lightStartTime: '',
@@ -135,7 +131,6 @@ class FormAddMicroclimate extends Component {
     render(){
 		const errors = this.validate(   this.state.name,
 										this.state.intensity,
-										this.state.lightType,
 										this.state.waterPH,
 										this.state.dailyHours,
 										this.state.lightStartTime,
@@ -149,6 +144,7 @@ class FormAddMicroclimate extends Component {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 			style={{paddingTop:'45px'}}
+			scrollable="false"
 			>
 				<Modal.Header >
 					<Modal.Title id="contained-modal-title-vcenter">
@@ -169,20 +165,25 @@ class FormAddMicroclimate extends Component {
 					 		<FormGroup row >
 					 			<Label htmlFor="intensity" md={2} > Intensidad de Luz </Label>
 					 			<Col md={10} >
-									<Input type="text" id="intensity" name="intensity" placeholder="Ingrese la intensidad de Luz" value={this.state.intensity} valid={errors.intensity === ''} invalid={errors.intensity !== ''} onBlur={this.handleBlur('intensity')} onChange={this.handleInputChange}/>
+									<Input type="text" id="intensity" name="intensity" placeholder="Ingrese el Tipo de Luz" value={this.state.intensity} valid={errors.intensity === ''} invalid={errors.intensity !== ''} onBlur={this.handleBlur('intensity')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.intensity}</FormFeedback>
 								</Col>
 					 		</FormGroup>
 
-							 <FormGroup row >
+							<FormGroup row >
 					 			<Label htmlFor="lightType" md={2} > Tipo de Luz </Label>
 					 			<Col md={10} >
-									<Input type="text" id="lightType" name="lightType" placeholder="Ingrese el Tipo de Luz" value={this.state.lightType} valid={errors.lightType === ''} invalid={errors.lightType !== ''} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange}/>
+									<Input type="select" name="lightType" id="lightType" value={this.state.lightType} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange} >
+									
+										<option> blanca </option>
+										<option> verde </option>
+										<option> violeta </option>
+									</Input>
 									<FormFeedback>{errors.lightType}</FormFeedback>
 								</Col>
 					 		</FormGroup>
 
-							 <FormGroup row >
+							<FormGroup row >
 					 			<Label htmlFor="waterPH" md={2} > PH del Agua </Label>
 					 			<Col md={10} >
 									<Input type="text" id="waterPH" name="waterPH" placeholder="Ingrese el PH del agua" value={this.state.waterPH} valid={errors.waterPH === ''} invalid={errors.waterPH !== ''} onBlur={this.handleBlur('waterPH')} onChange={this.handleInputChange}/>
@@ -190,7 +191,7 @@ class FormAddMicroclimate extends Component {
 								</Col>
 					 		</FormGroup>
 
-							 <FormGroup row >
+							<FormGroup row >
 					 			<Label htmlFor="dailyHours" md={2} > Horas Diarias </Label>
 					 			<Col md={10} >
 									<Input type="text" id="dailyHours" name="dailyHours" placeholder="Ingrese Horas Diarias" value={this.state.dailyHours} valid={errors.dailyHours === ''} invalid={errors.dailyHours !== ''} onBlur={this.handleBlur('dailyHours')} onChange={this.handleInputChange}/>
@@ -206,7 +207,7 @@ class FormAddMicroclimate extends Component {
 								</Col>
 					 		</FormGroup>
 
-							 <FormGroup row >
+							<FormGroup row >
 								<Label htmlFor="temperature" md={2} > Temperatura </Label>
 								<Col md={10} >
 									<Input type="text" id="temperature" name="temperature" placeholder="Ingrese la temperatura" value={this.state.temperature} defaultValue={this.state.temperature} valid={errors.temperature === ''} invalid={errors.temperature !== ''} onBlur={this.handleBlur('temperature')} onChange={this.handleInputChange}/>
@@ -225,7 +226,6 @@ class FormAddMicroclimate extends Component {
 							 <Button type="submit" color="primary" 
 							onClick={  (errors.name !== '' ||
 										errors.intensity !== '' ||
-										errors.lightType !== '' ||
 										errors.waterPH !== '' ||
 										errors.dailyHours !== '' ||
 										errors.lightStartTime !== ''||
@@ -233,7 +233,6 @@ class FormAddMicroclimate extends Component {
                                     	errors.humidity !== ''||
 										this.state.name.length === 0 ||
 										this.state.intensity.length === 0 ||
-										this.state.lightType.length === 0 ||
 										this.state.waterPH.length === 0 ||
 										this.state.dailyHours.length === 0 ||
 										this.state.lightStartTime.length === 0 ||

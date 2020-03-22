@@ -11,7 +11,7 @@ function axiosContainerDelete(id_container){
                 }
             };
             try {
-                const res = await axios.delete(`/api/containers/1/${id_container}` , JSON.stringify(config));
+                const res = await axios.delete(`/api/containers/${id_container}` , JSON.stringify(config));
                 dispatch(containerDelete())
             } catch (error) {
                 console.log(error);

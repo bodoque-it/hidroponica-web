@@ -54,7 +54,6 @@ class FormAddRail extends Component {
 	validate(name,infrastructure_address){
 		const errors = {
 			name: '',
-			infrastructure_address: '',
 		};
 		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 _-]{0,15})$/;
 		if (this.state.touched.name && !regName.test(name) ) {
@@ -83,6 +82,7 @@ class FormAddRail extends Component {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			scrollable="false"
 			>
 				<Modal.Header >
 					<Modal.Title id="contained-modal-title-vcenter">

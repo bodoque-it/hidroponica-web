@@ -57,12 +57,15 @@ class FormUpdateRail extends Component {
             //active: '',
 		};
 
-		if (this.state.touched.name && name.length <= 3 ) {
+		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 _-]{0,15})$/;
+		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
-		}
-		if (this.state.touched.volume && volume.length < 1 ) {
-			errors.volume = 'No has escrito una ubicación valida';
         }
+        
+		const regVolume = /^\d*(\.\d{1})?\d{0,1}$/;
+		if (this.state.touched.volume && !regVolume.test(volume) ) {
+			errors.volume = 'Volumen no valido, máx 2 decimales de precisión';
+		}
         //if (this.state.touched.active && (active==='false' || active==='true') ) {
 		//	errors.active = 'No has escrito un valor valido';
         //}

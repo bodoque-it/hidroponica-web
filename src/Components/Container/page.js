@@ -15,13 +15,9 @@ import FormUpdateContainer from './FormUpdateContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Popup from './Popup/index'
 import Popup from "reactjs-popup";
-import Button from 'react-bootstrap/Button';
 
 
 //IMPORTS NECESARIOS PARA LAS TARJETAS
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 //IMPORTS NECESARIOS PARA BOTONES
@@ -35,7 +31,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { ButtonToolbar } from 'react-bootstrap';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) =>
@@ -90,7 +85,8 @@ function Page(props) {
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		containerSelect
 	} = props;
 	const classes = useStyles();
     return (
@@ -106,6 +102,7 @@ function Page(props) {
 				openModal={openModal}
 				closeModal={closeModal}
 				open={open}
+				containerSelect={containerSelect}
 			/>
         </div>
     );
@@ -176,7 +173,8 @@ export function ContainerTable(props) {
 		updateContainer,
 		openModal,
 		closeModal,
-		open
+		open,
+		containerSelect
 	} = props;
 	const classes = useStyles();
 	return(
@@ -194,15 +192,15 @@ export function ContainerTable(props) {
 					</Grid>
 					<Grid item xs={2}>
 						<Fab aria-label="edit" size="small" className={classes.fab} >
-							<EditIcon color="primary" onClick={openModal} />
+							<EditIcon color="primary" onClick={() => openModal( id , name, volume) } />
 						</Fab>
 						<Popup  open={open}
 								closeOnDocumentClick
 								onClose={closeModal}>
 							<FormUpdateContainer
-									id={id}
-									name={name}
-									volume={volume}
+									id={containerSelect.idContainer}
+									name={containerSelect.nameContainer}
+									volume={containerSelect.volumeContainer}
 									active={active}
 									updateContainer={updateContainer} 
 									closeModal={closeModal}
@@ -248,7 +246,8 @@ export function Containers(props){
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		containerSelect
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
@@ -283,6 +282,7 @@ export function Containers(props){
 								openModal={openModal}
 								closeModal={closeModal}
 								open={open}
+								containerSelect={containerSelect}
 							/>
 						)}
 				</TableBody>

@@ -140,13 +140,14 @@ export function Riel(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  	<Typography className={classes.heading}>{name}</Typography>
+			  	<Typography className={classes.heading}>Nombre: {name} </Typography>
 			  	<div style={{width:"50%"}}>
 			  		<Typography className={classes.secondaryHeading}> Ubicación: {infrastructure_address} </Typography>
 		  		</div>
-			  	<div className="row" style={{width:"40%", foat:"right"}}>
+			  	<div className="row" style={{width:"60%", foat:"right"}}>
 					<Grid container spacing={0}>
 						<Grid item xs={6}>
+							<Typography className={classes.heading}> Haga Click en el riel para ver sus contenedores </Typography>
 						</Grid>
 						<Grid item xs={2}>
 							<Fab aria-label="edit" size="small" className={classes.fab} >
@@ -316,7 +317,7 @@ export function Contenedores(props){
 				<TableRow>
 					<TableCell align="center">
 						{ <Contenedor
-							id={containers[i].id_container}
+							id={containers[i].id}
 							name={containers[i].name}
 							active={containers[i].active}
 							volume={containers[i].volume}

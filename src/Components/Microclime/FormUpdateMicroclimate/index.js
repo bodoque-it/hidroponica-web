@@ -57,11 +57,10 @@ class FormUpdateMicroclimate extends React.PureComponent {
 		});
 	}
 
-	validate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
+	validate( name, intensity, waterPH, dailyHours, lightStartTime, temperature, humidity ){
 		const errors = {
 			name: '',
 			intensity: '',
-			lightType: '',
 			waterPH: '',
 			dailyHours: '',
             lightStartTime: '',
@@ -77,9 +76,6 @@ class FormUpdateMicroclimate extends React.PureComponent {
 		const regIntensity = /^\d*(\.\d{1})?\d{0,1}$/;
 		if (this.state.touched.intensity && !regIntensity.test(intensity) ) {
 			errors.intensity = 'Intensidad de luz no valida';
-		}
-		if (this.state.touched.lightType && lightType.length < 1 ) {
-			errors.lightType = 'No has escrito un tipo de luz valida';
 		}
 
 		const regWaterPH = /^\d*(\.\d{1})?\d{0,1}$/;
@@ -114,7 +110,6 @@ class FormUpdateMicroclimate extends React.PureComponent {
     render(){
         const errors = this.validate(   this.state.name,
                                         this.state.intensity,
-                                        this.state.lightType,
                                         this.state.waterPH,
                                         this.state.dailyHours,
                                         this.state.lightStartTime,
@@ -144,7 +139,12 @@ class FormUpdateMicroclimate extends React.PureComponent {
                         <FormGroup row >
                             <Label htmlFor="lightType" md={3} > Tipo de Luz </Label>
                             <Col md={9} >
-                                <Input type="text" id="lightType" name="lightType" placeholder="Ingrese el Tipo de Luz" value={this.state.lightType} defaultValue={this.state.lightType} valid={errors.lightType === ''} invalid={errors.lightType !== ''} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange}/>
+                                <Input type="select" name="lightType" id="lightType" value={this.state.lightType} onBlur={this.handleBlur('lightType')} onChange={this.handleInputChange} >
+									
+                                    <option> blanca </option>
+                                    <option> verde </option>
+                                    <option> violeta </option>
+                                </Input>
                                 <FormFeedback>{errors.lightType}</FormFeedback>
                             </Col>
                         </FormGroup>
@@ -193,7 +193,6 @@ class FormUpdateMicroclimate extends React.PureComponent {
                         <Button type="submit" color="primary" 
                         onClick={  (errors.name !== '' ||
                                     errors.intensity !== '' ||
-                                    errors.lightType !== '' ||
                                     errors.waterPH !== '' ||
                                     errors.dailyHours !== '' ||
                                     errors.lightStartTime !== ''||
@@ -201,7 +200,6 @@ class FormUpdateMicroclimate extends React.PureComponent {
                                     errors.humidity !== ''||
                                     this.state.name.length === 0 ||
                                     this.state.intensity.length === 0 ||
-                                    this.state.lightType.length === 0 ||
                                     this.state.waterPH.length === 0 ||
                                     this.state.dailyHours.length === 0 ||
                                     this.state.lightStartTime.length === 0 ||

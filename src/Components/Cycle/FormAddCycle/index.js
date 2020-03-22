@@ -92,7 +92,7 @@ class FormAddCycle extends Component {
 	}
 
     render(){
-		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.startdate,this.state.estimatedDate,this.state.finishDate)
+		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.startDate,this.state.estimatedDate,this.state.finishDate)
 		console.log("sasdasdasdasassdasdadd")
         return(
 			<Modal
@@ -112,7 +112,7 @@ class FormAddCycle extends Component {
 					 		<FormGroup row >
 					 			<Label htmlFor="container_id" md={2} > ID contenedor </Label>
 					 			<Col md={10} >
-									<Input type="text" id="container_id" container_id="container_id" placeholder="Ingrese la id del container asociado" value={this.state.container_id} valid={errors.container_id === ''} invalid={errors.container_id !== ''} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} />
+									<Input type="text" id="container_id" name="container_id" placeholder="Ingrese la id del container asociado" value={this.state.container_id} valid={errors.container_id === ''} invalid={errors.container_id !== ''} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} />
 									<FormFeedback>{errors.container_id}</FormFeedback>
 								</Col>
 					 		</FormGroup>
@@ -158,9 +158,9 @@ class FormAddCycle extends Component {
                              || this.state.estimatedDate.length == 0
                              || this.state.finishDate.length == 0 ) ?
 							  () =>  alert("no has completado el Formulario") 
-                              : () => this.state.addRiel(this.state.container_id,
+                              : () => this.state.addCycle(this.state.container_id,
                                                         this.state.microclimate_id,
-                                                        this.state.startdate,
+                                                        this.state.startDate,
                                                         this.state.estimatedDate,
                                                         this.state.finishDate) } >
 					 			Agregar

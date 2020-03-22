@@ -197,7 +197,11 @@ function RailCard( props ) {
 
 function FormRow(props) {
     const isEmpty = props.suggestions.length === 0;
-    
+    const handleDatetime = datetime => {
+        datetime = datetime.split(/[- :]/)
+        datetime = datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
+        return datetime
+    }
     var tabla = [];
     if (!isEmpty){
         props.suggestions.map( (suggestion) =>
@@ -208,7 +212,7 @@ function FormRow(props) {
                                 lightType={suggestion.lightType}
                                 waterPH={suggestion.waterPH}
                                 dailyHours={suggestion.dailyHours}
-                                lightStartTime={suggestion.lightStartTime.date}
+                                lightStartTime={handleDatetime( suggestion.lightStartTime.date) }
                                 temperature={suggestion.temperature}
                                 humidity={suggestion.humidity}
                                 id_microclimate={suggestion.id}

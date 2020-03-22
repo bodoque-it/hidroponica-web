@@ -69,7 +69,7 @@ class FormAddContainer extends Component{
         }
         const regVolume = /^\d*(\.\d{1})?\d{0,1}$/;
 		if (this.state.touched.volume && !regVolume.test(volume) ) {
-            errors.volume = 'No has ingresado un volumen valido';
+            errors.volume = 'Volumen no valido, máx 2 decimales de precisión';
         }
 		
 		return errors;
