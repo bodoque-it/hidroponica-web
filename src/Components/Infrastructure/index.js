@@ -17,6 +17,12 @@ import axiosInfrastructuresSuggestions from '../../redux/rootReducer/axiosInfras
 import axiosInfrastructureCreate from '../../redux/rootReducer/axiosInfrastructureCreate';
 import axiosInfrastructureDelete from '../../redux/rootReducer/axiosInfrastructureDelete';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableContainer from '@material-ui/core/TableContainer';
 
 class Infrastructure extends Component{
     componentWillMount(){
@@ -108,32 +114,24 @@ class Infrastructure extends Component{
                 
                     <Modal className="custom-modal-style" isOpen={this.state.open}  size="xl"  >
                         <ModalHeader > Ubicaciones </ModalHeader  >
-                            <ModalBody className="panel" >
-                            { isEmpty ?
-                                <Typography > No hay Ubicaciones Disponibles </Typography>
-                                : this.props.infrastructures.map( infrastructure =>
-                                    
-                                    <ExpansionPanel className="card-color-gradient"  >
-                                        <ExpansionPanelSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1a-content"
-                                        id="panel1a-header"
-                                        >
-                                        
-                                        <Typography className="secondaryHeading" >  Ubicación:     {infrastructure.address} </Typography>
-                                        </ExpansionPanelSummary>
-                                        <ExpansionPanelDetails style={{display:'block'}}>
-                                            <div className="row">
-                                                <div className="col" >
-                                                <Fab aria-label="delete" className="fab">
-                                                    <DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick= { ()=> this.deleteUbicacion( infrastructure.address )} />
-                                                </Fab>
-                                                </div>
-                                            </div>
-                                        </ExpansionPanelDetails>
-                                    </ExpansionPanel>
-                                )
-                            }
+                            <ModalBody className="panel" style={{borderBottom:"1% solid"}} align="center">
+                                <Table style={{background:"#5cb85c", width:"90%"}}>
+                                    <TableBody>
+                                        { isEmpty ?
+                                            <Typography > No hay Ubicaciones Disponibles </Typography>
+                                            : this.props.infrastructures.map( infrastructure =>
+                                                <TableRow>
+                                                    <TableCell>{infrastructure.address}</TableCell>
+                                                    <TableCell>
+                                                        <Fab aria-label="delete" color="secondary" size="small" className="fab">
+                                                            <DeleteIcon style={{float:"right",color:'#fff'}} onClick= { ()=> this.deleteUbicacion( infrastructure.address )} />
+                                                        </Fab>
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        }
+                                    </TableBody>
+                                </Table>
                             </ModalBody>
                         <ModalHeader > Formulario para añadir una Ubicación </ModalHeader  >
 
