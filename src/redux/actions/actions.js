@@ -19,6 +19,9 @@ export const INFRASTRUCTURE_CREATE = 'INFRASTRUCTURE_CREATE';
 export const INFRASTRUCTURE_DELETE = 'INFRASTRUCTURE_DELETE';
 export const INFRASTRUCTURE_UPDATE = 'INFRASTRUCTURE_UPDATE';
 export const CONTAINER_ADD_IN_RAIL = 'CONTAINER_ADD_IN_RAIL';
+export const CYCLE_CREATE = 'CYCLE_CREATE';
+export const CYCLE_DELETE = 'CYCLE_DELETE';
+export const CYCLE_UPDATE = 'CYCLE_UPDATE';
 
 export function findRailsSuggestions(text) {
     return {
@@ -163,5 +166,26 @@ export function infrastructureUpdate(id_infrastructure){
 export function containerAddInRail(){
     return{
         type: CONTAINER_ADD_IN_RAIL,
+    }
+}
+
+export function cycleCreate(){
+    return {
+        type: CYCLE_CREATE,
+        
+    }
+}
+
+export function cycleDelete(id_cycle){
+    return{
+        type: CYCLE_DELETE,
+        payload: id_cycle,
+    }
+}
+
+export function cycleUpdate(id_cycle){
+    return{
+        type: CYCLE_UPDATE,
+        payload: id_cycle,
     }
 }
