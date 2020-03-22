@@ -142,7 +142,7 @@ class Infrastructure extends Component{
                                     <FormGroup row >
                                     <Label htmlFor="address" md={2} > Ubicación </Label>
                                     <Col md={5} >
-                                        <Input type="text" id="address" name="address" placeholder="Ingrese el nombre" value={this.state.address} valid={errors.address === ''} invalid={errors.address !== ''} onBlur={this.handleBlur('address')} onChange={this.handleInputChange} />
+                                        <Input type="text" id="address" name="address" placeholder="Ingrese la Nueva ubicación" value={this.state.address} valid={errors.address === ''} invalid={errors.address !== ''} onBlur={this.handleBlur('address')} onChange={this.handleInputChange} />
                                         <FormFeedback>{errors.address}</FormFeedback>
                                     </Col>
                                     </FormGroup>

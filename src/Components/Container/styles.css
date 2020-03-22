@@ -2,3 +2,6 @@ root{
 	maxWidth:245;
 	padding:10%;
 }
+cellHeader{
+	font-size: 30px !important;
+}

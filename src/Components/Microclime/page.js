@@ -155,14 +155,6 @@ function RailCard( props ) {
                                     </div>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Paper className={"paper"} style={{padding:'0'}}>Humedad:
-                                    <br/> 
-                                    <div className={"dato"}>
-                                        {props.humidity} [%]
-                                    </div>
-                                </Paper>
-                            </Grid>
                         </Grid>
                         <Grid item xs={4}>
                             <Paper className={"paper"}>Hora comienzo de luz:
@@ -185,6 +177,14 @@ function RailCard( props ) {
                                 <br/>
                                 <div className={"dato"}>
                                     {props.temperature} [°C]
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Humedad:
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.humidity} [%]
                                 </div>
                             </Paper>
                         </Grid>

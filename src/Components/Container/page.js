@@ -31,9 +31,12 @@ import Fab from '@material-ui/core/Fab';
 
 //IMPORTS NECESARIOS PARA LA TABLA DENTRO DE LAS TARJETAS
 import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { ButtonToolbar } from 'react-bootstrap';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -59,12 +62,8 @@ const useStyles = makeStyles((theme) =>
     	fontSize: 16
     },
     //Para la tabla dentro de las tarjetas
-	table: {
-		border: 0
-	},
 	//Para el ícono delete de cada tarjeta
 	fab: {
-      margin: theme.spacing(1),
 	  float:'right',
     },
     //Para los botones agregar
@@ -141,30 +140,80 @@ export function Container(props) {
 				<div>
 					<div className="row">
 						<div className="col" >
-								<Fab aria-label="delete" className={classes.fab, classes.add}>
-									<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteContainer(id)} />
-								</Fab>
-								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon color="primary" onClick={openModal} />
-								</Fab>
-								<Popup  open={open}
-										closeOnDocumentClick
-										onClose={closeModal} >
-									<FormUpdateContainer
-											id={id}
-											name={name}
-											volume={volume}
-											active={active}
-											updateContainer={updateContainer} 
-											closeModal={closeModal}
-											/>
-								</Popup>
+							<Fab aria-label="delete" className={classes.fab, classes.add}>
+								<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteContainer(id)} />
+							</Fab>
+							<Fab aria-label="edit" className={classes.fab, classes.add} >
+								<EditIcon color="primary" onClick={openModal} />
+							</Fab>
+							<Popup  open={open}
+									closeOnDocumentClick
+									onClose={closeModal}>
+								<FormUpdateContainer
+										id={id}
+										name={name}
+										volume={volume}
+										active={active}
+										updateContainer={updateContainer} 
+										closeModal={closeModal}
+										/>
+							</Popup>
 						</div>
 					</div>
 				</div>
 			</ExpansionPanelDetails>
 		  </ExpansionPanel>
 		 </div>
+	)
+}
+export function ContainerTable(props) {
+	const {
+		name,
+		volume,
+		id,
+		active,
+		deleteContainer,
+		updateContainer,
+		openModal,
+		closeModal,
+		open
+	} = props;
+	const classes = useStyles();
+	return(
+		<TableRow>
+			<TableCell>{name}</TableCell>
+			<TableCell>{volume}</TableCell>
+			<TableCell>{active?<div className={"text-success"}>En ciclo</div>:<div className={"text-danger"}>Inactivo</div>
+			}</TableCell>
+			<TableCell>
+				<Grid container spacing={2}>
+					<Grid item xs={2}>
+						<Fab aria-label="delete" color="secondary" size="small" className={classes.fab}>
+							<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteContainer(id)} />
+						</Fab>
+					</Grid>
+					<Grid item xs={2}>
+						<Fab aria-label="edit" size="small" className={classes.fab} >
+							<EditIcon color="primary" onClick={openModal} />
+						</Fab>
+						<Popup  open={open}
+								closeOnDocumentClick
+								onClose={closeModal}>
+							<FormUpdateContainer
+									id={id}
+									name={name}
+									volume={volume}
+									active={active}
+									updateContainer={updateContainer} 
+									closeModal={closeModal}
+									/>
+						</Popup>
+					</Grid>
+					<Grid item xs={8}>
+					</Grid>
+				</Grid>
+			</TableCell>
+		</TableRow>
 	)
 }
 export function ContainerDesactivado(props) {
@@ -207,29 +256,37 @@ export function Containers(props){
 	console.log("ACTIVE ",suggestions.active)
 	return(
 		<div className={classes.root} >
-			<div className="row">
-				<div className="col">
-				{ isEmpty?
-					<Typography variant="h5" component="h3" className="page-message">
-						No se encontraron Containers
-					</Typography>
-					:
-					suggestions.map( suggestion =>
-						<Container
-							containers={suggestion.containers}
-							name={suggestion.name}
-							volume={suggestion.volume}
-							id={suggestion.id}
-							active={suggestions.active}
-							deleteContainer={deleteContainer}
-							updateContainer={updateContainer}
-							openModal={openModal}
-							closeModal={closeModal}
-							open={open}
-						/>
-					)}
-				</div>
-			</div>
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableCell><h5>Nombre</h5></TableCell>
+						<TableCell><h5>Volumen</h5></TableCell>
+						<TableCell><h5>Actividad</h5></TableCell>
+						<TableCell><h5>Opciones</h5></TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{ isEmpty?
+						<Typography variant="h5" component="h3" className="page-message">
+							No se encontraron Containers
+						</Typography>
+						:
+						suggestions.map( suggestion =>
+							<ContainerTable
+								containers={suggestion.containers}
+								name={suggestion.name}
+								volume={suggestion.volume}
+								id={suggestion.id}
+								active={suggestions.active}
+								deleteContainer={deleteContainer}
+								updateContainer={updateContainer}
+								openModal={openModal}
+								closeModal={closeModal}
+								open={open}
+							/>
+						)}
+				</TableBody>
+			</Table>
 		</div>	
 	)
 };
