@@ -1,4 +1,7 @@
-import { FIND_RAILS_SUGGESTIONS,
+import { 
+        FIND_COUNTS_SUGGESTIONS,
+        FIND_CONTAINER_COUNT_SUGGESTIONS,
+        FIND_RAILS_SUGGESTIONS,
         FIND_RAILS_RESULTS, 
         FIND_CURRENT_CONTAINER,
         FIND_CONTAINERS_RESULTS,
@@ -27,6 +30,18 @@ const defaultState = {
 
 export function rootReducer(state = defaultState, {type,payload}) {
     switch (type) {
+        case FIND_CONTAINER_COUNT_SUGGESTIONS:{
+            return {
+                ...state,
+                suggestions: payload
+            }
+        }
+        case FIND_COUNTS_SUGGESTIONS:{
+            return {
+                ...state,
+                suggestions: payload
+            }
+        }
         case FIND_RAILS_SUGGESTIONS:{
             
             return {

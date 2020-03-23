@@ -24,8 +24,13 @@ const useStyles = makeStyles((theme) => {
 });
 
 export default function Page(props) {
+    const {
+        suggestions
+    } = props;
 
-
+    console.log(props.suggestions['data']);
+    const data = props.suggestions['data'];
+    console.log(suggestions['data']);
     return (
         <div className={"root"}>
             <br/>

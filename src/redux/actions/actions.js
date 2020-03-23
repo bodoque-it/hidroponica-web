@@ -1,3 +1,5 @@
+export const FIND_COUNTS_SUGGESTIONS = 'FIND_COUNTS_SUGGESTIONS';
+export const FIND_CONTAINER_COUNT_SUGGESTIONS = 'FIND_CONTAINER_COUNT_SUGGESTIONS';
 export const FIND_RAILS_SUGGESTIONS = 'FIND_RAILS_SUGGESTIONS';
 export const FIND_CONTAINERS_SUGGESTIONS = 'FIND_CONTAINERS_SUGGESTIONS';
 export const FIND_CYCLES_SUGGESTIONS = 'FIND_CYCLES_SUGGESTIONS';
@@ -22,6 +24,19 @@ export const CONTAINER_ADD_IN_RAIL = 'CONTAINER_ADD_IN_RAIL';
 export const CYCLE_CREATE = 'CYCLE_CREATE';
 export const CYCLE_DELETE = 'CYCLE_DELETE';
 export const CYCLE_UPDATE = 'CYCLE_UPDATE';
+
+export function findCountsSuggestions(text){
+    return {
+        type: FIND_COUNTS_SUGGESTIONS,
+        payload: text,
+    }
+}
+export function findContainerCountSuggestions(text){
+    return {
+        type: FIND_CONTAINER_COUNT_SUGGESTIONS,
+        payload: text,
+    }
+}
 
 export function findRailsSuggestions(text) {
     return {
