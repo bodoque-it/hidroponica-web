@@ -7,8 +7,10 @@ class FormAddCycle extends Component {
         super(props);
         this.state = {
             addCycle : props.addCycle,
-            container_id: '',
-            microclimate_id: '',
+			container_id: '',
+			container_name: '',
+			microclimate_id: '',
+			microclimate_name: '',
 			startDate: '',
             estimatedDate: '',
 			finishDate: '',
@@ -26,14 +28,13 @@ class FormAddCycle extends Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleBlur = this.handleBlur.bind(this);
 		this.closeAndClear = this.closeAndClear.bind(this);
-
 	}
 
 	handleInputChange(event){
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-
+		console.log("value: "+value)
 		this.setState({
 			[name]: value
 		});
@@ -59,10 +60,10 @@ class FormAddCycle extends Component {
             finishDate: '',
 		};
 
-		if (this.state.touched.container_id && container_id.length <1 ) {
+		if (this.state.touched.container_id && container_id.length <0 ) {
 			errors.container_id = 'No has escrito una id valida';
 		}
-		if (this.state.touched.microclimate_id && microclimate_id.length <1 ) {
+		if (this.state.touched.microclimate_id && microclimate_id.length <0 ) {
 			errors.microclimate_id = 'No has escrito una id valida';
         }
         if (this.state.touched.startDate && startDate.length < 8 ) {
@@ -111,15 +112,15 @@ class FormAddCycle extends Component {
 					<div className="container" >
 					 	<Form onSubmit={this.handleSubmit} >
 					 		<FormGroup row >
-					 			<Label htmlFor="container_id" md={2} > ID contenedor </Label>
+					 			<Label htmlFor="container_id" md={2} > Nombre contenedor </Label>
 					 			<Col md={10} >
-								 <Input type="select" name="container_id" id="container_id" value={this.state.container_id} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} >
+								 <Input type="select" name="container_name" id="container_name" value={this.state.container_name} onBlur={this.handleBlur('container_name')} onChange={this.handleInputChange} >
 									{ isEmpty ?
 										<option>""</option>
 										:
 											this.props.available.container_available.map( ava =>
-													<option> { ava[1] } </option>
-												 )
+													<option name="container_id" value={ava[0]} onChange={this.handleInputChange}> { ava[1] } </option> 
+													)
 									}
 									</Input>
 									<FormFeedback>{errors.container_id}</FormFeedback>
@@ -127,14 +128,14 @@ class FormAddCycle extends Component {
 					 		</FormGroup>
 
 					 		<FormGroup row >
-					 			<Label htmlFor="microclimate_id" md={2} > ID microclima </Label>
+					 			<Label htmlFor="microclimate_id" md={2} > Nombre microclima </Label>
 					 			<Col md={10} >
-								 <Input type="select" name="microclimate_id" id="microclimate_id" value={this.state.microclimate_id} onBlur={this.handleBlur('microclimate_id')} onChange={this.handleInputChange} >
+								 <Input type="select" name="microclimate_name" id="microclimate_name" value={this.state.microclimate_name} onBlur={this.handleBlur('microclimate_name')} onChange={this.handleInputChange} >
 									{ isEmpty ?
 										<option>""</option>
 										:
 											this.props.available.microclimates_available.map( ava =>
-													<option> { ava.name } </option>
+											<option name="microclimate_id" value={ava.id} onChange={this.handleInputChange}> { ava.name } </option>
 												 )
 									}
 									</Input>
@@ -142,29 +143,13 @@ class FormAddCycle extends Component {
 								</Col>
 					 		</FormGroup>
 
-                             {/*<FormGroup row >
-					 			<Label htmlFor="startDate" md={2} > Fecha inicio </Label>
-					 			<Col md={10} >
-									<Input type="text" id="startDate" name="startDate" placeholder="Ingrese la Fecha inicio" value={this.state.startDate} valid={errors.startDate === ''} invalid={errors.startDate !== ''} onBlur={this.handleBlur('startDate')} onChange={this.handleInputChange}/>
-									<FormFeedback>{errors.startDate}</FormFeedback>
-								</Col>
-							 </FormGroup>*/}
-
                              <FormGroup row >
 					 			<Label htmlFor="estimatedDate" md={2} > Fecha estimada </Label>
 					 			<Col md={10} >
-									<Input type="text" id="estimatedDate" name="estimatedDate" placeholder="Ingrese la Fecha estimada" value={this.state.estimatedDate} valid={errors.estimatedDate === ''} invalid={errors.estimatedDate !== ''} onBlur={this.handleBlur('estimatedDate')} onChange={this.handleInputChange}/>
+									<Input type="text" id="estimatedDate" name="estimatedDate" placeholder="Formato AAAA-MM-DD hh:mm:ss, p.ej 2020-06-06 12:30:15" value={this.state.estimatedDate} valid={errors.estimatedDate === ''} invalid={errors.estimatedDate !== ''} onBlur={this.handleBlur('estimatedDate')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.estimatedDate}</FormFeedback>
 								</Col>
 					 		</FormGroup>
-
-                             {/*<FormGroup row >
-					 			<Label htmlFor="finishDate" md={2} > Fecha fin </Label>
-					 			<Col md={10} >
-									<Input type="text" id="finishDate" name="finishDate" placeholder="Ingrese la Fecha fin" value={this.state.finishDate} valid={errors.finishDate === ''} invalid={errors.finishDate !== ''} onBlur={this.handleBlur('finishDate')} onChange={this.handleInputChange}/>
-									<FormFeedback>{errors.finishDate}</FormFeedback>
-								</Col>
-							 </FormGroup>*/}
 							
 							 <Button type="submit" color="primary" 
                              onClick={  (errors.container_id !== '' || errors.microclimate_id !== '' || errors.startDate !== '' 
@@ -175,11 +160,10 @@ class FormAddCycle extends Component {
                              || this.state.estimatedDate.length == 0
                              || this.state.finishDate.length == 0 ) ?
 							  () =>  alert("no has completado el Formulario") 
-                              : () => this.state.addRiel(this.state.container_id,
+                              : () => this.state.addCycle(this.state.container_id,
                                                         this.state.microclimate_id,
-                                                        this.state.startdate,
-                                                        this.state.estimatedDate,
-                                                        this.state.finishDate) } >
+														this.state.estimatedDate)
+													} >
 					 			Agregar
 					 		</Button>
 					 	</Form>

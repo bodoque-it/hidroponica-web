@@ -32,7 +32,7 @@ class FormUpdateCycle extends Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-
+		console.log("valor: "+value)
 		this.setState({
 			[name]: value
 		});
@@ -56,10 +56,10 @@ class FormUpdateCycle extends Component {
             estimatedDate: '',
 		};
 
-		if (this.state.touched.container_id && container_id.length <1 ) {
+		if (this.state.touched.container_id && container_id.length <0 ) {
 			errors.container_id = 'No has escrito una id valida';
 		}
-		if (this.state.touched.microclimate_id && microclimate_id.length <1 ) {
+		if (this.state.touched.microclimate_id && microclimate_id.length <0 ) {
 			errors.microclimate_id = 'No has escrito una id valida';
         }
         if (this.state.touched.estimatedDate && estimatedDate.length < 8 ) {
@@ -71,23 +71,40 @@ class FormUpdateCycle extends Component {
     
  
     render(){
-        const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimated_date)
+		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimated_date)
+		const isEmpty = this.props.available.length === 0;
         return(
             <div>
             <ModalHeader > Actualizar Ciclo </ModalHeader>
             <Form onSubmit={this.handleSubmit} >
 					 		<FormGroup row >
-					 			<Label htmlFor="container_id" md={2} > ID contenedor </Label>
+					 			<Label htmlFor="container_id" md={2} > Nombre contenedor </Label>
 					 			<Col md={10} >
-									<Input type="text" id="container_id" name="container_id" placeholder="Ingrese la id del container asociado" value={this.state.container_id} valid={errors.container_id === ''} invalid={errors.container_id !== ''} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} />
+								 <Input type="select" name="container_id" id="container_id" value={this.state.container_id} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} >
+									{ isEmpty ?
+										<option>""</option>
+										:
+											this.props.available.container_available.map( ava =>
+													<option name="container_id" value={ava[0]} onChange={this.handleInputChange}> { ava[1] } </option> 
+												 )
+									}
+									</Input>
 									<FormFeedback>{errors.container_id}</FormFeedback>
 								</Col>
 					 		</FormGroup>
 
 					 		<FormGroup row >
-					 			<Label htmlFor="microclimate_id" md={2} > ID microclima </Label>
+					 			<Label htmlFor="microclimate_id" md={2} > Nombre microclima </Label>
 					 			<Col md={10} >
-									<Input type="text" id="microclimate_id" name="microclimate_id" placeholder="Ingrese la ID microclima" value={this.state.microclimate_id} valid={errors.microclimate_id === ''} invalid={errors.microclimate_id !== ''} onBlur={this.handleBlur('microclimate_id')} onChange={this.handleInputChange}/>
+								 <Input type="select" name="microclimate_id" id="microclimate_id" value={this.state.microclimate_id} onBlur={this.handleBlur('microclimate_id')} onChange={this.handleInputChange} >
+									{ isEmpty ?
+										<option>""</option>
+										:
+											this.props.available.container_available.map( ava =>
+												<option name="microclimate_id" value={ava.id} onChange={this.handleInputChange}> { ava.name } </option>
+												)
+									}
+									</Input>
 									<FormFeedback>{errors.microclimate_id}</FormFeedback>
 								</Col>
 					 		</FormGroup>
@@ -103,7 +120,7 @@ class FormUpdateCycle extends Component {
                              <FormGroup row >
 					 			<Label htmlFor="estimatedDate" md={2} > Fecha estimada </Label>
 					 			<Col md={10} >
-									<Input type="text" id="estimatedDate" name="estimatedDate" placeholder="Ingrese la Fecha estimada" value={this.state.estimatedDate} valid={errors.estimatedDate === ''} invalid={errors.estimatedDate !== ''} onBlur={this.handleBlur('estimatedDate')} onChange={this.handleInputChange}/>
+									<Input type="text" id="estimatedDate" name="estimatedDate" placeholder="Formato AAAA-MM-DD hh:mm:ss, p.ej 2020-06-06 00:00:00" value={this.state.estimatedDate} valid={errors.estimatedDate === ''} invalid={errors.estimatedDate !== ''} onBlur={this.handleBlur('estimatedDate')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.estimatedDate}</FormFeedback>
 								</Col>
 					 		</FormGroup>

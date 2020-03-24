@@ -7,6 +7,7 @@ function fetchCycleCreate(fk_container, fk_microclimate, new_estimated_date)  {
             fk_user: 1,
             fk_container: fk_container,
             fk_microclimate: fk_microclimate,
+            
             estimated_date: new_estimated_date,
         };
         const createCycle = async cycle => {
