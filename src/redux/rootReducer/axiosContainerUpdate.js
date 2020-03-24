@@ -16,6 +16,7 @@ function axiosContainerUpdate(id_container, new_name, new_volume, is_active) {
                 headers: {
                     'Acces-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             }
             try {

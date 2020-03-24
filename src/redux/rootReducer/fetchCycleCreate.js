@@ -14,6 +14,7 @@ function fetchCycleCreate(fk_container, fk_microclimate, new_estimated_date)  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {

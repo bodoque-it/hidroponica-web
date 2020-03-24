@@ -44,7 +44,7 @@ class Infrastructure extends Component{
     addUbicacion( infrastructure_address ){
         console.log("ubicacion: "+infrastructure_address);
         this.props.axiosInfrastructureCreate( infrastructure_address );
-        window.location.reload();
+        
     }
 
     deleteUbicacion( address ){

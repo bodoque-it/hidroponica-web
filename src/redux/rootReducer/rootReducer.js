@@ -21,7 +21,9 @@ import {
         CYCLE_CREATE,
         CYCLE_DELETE,
         CYCLE_UPDATE,
-        CONTAINER_ADD_IN_RAIL
+        CONTAINER_ADD_IN_RAIL,
+        LOGIN_ERROR,
+        LOGIN_SUCCESS
 } from '../actions/actions';
          
 const defaultState = {
@@ -31,10 +33,28 @@ const defaultState = {
     cycles: [],
     container: {},
     rails: [],
+    authError: null,
+    token: null,
+    logged: false
 }
 
 export function rootReducer(state = defaultState, {type,payload}) {
     switch (type) {
+        case LOGIN_ERROR:{
+            console.log("Login error")
+            return{
+                ...state,
+                authError: 'Login failed'
+            }
+        }
+        case LOGIN_SUCCESS:{
+            localStorage.setItem( "token",payload.data )
+            return{
+                ...state,
+                authError: null,
+                logged: true
+            }
+        }
         case FIND_CONTAINER_COUNT_SUGGESTIONS:{
             return {
                 ...state,

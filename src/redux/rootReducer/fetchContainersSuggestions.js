@@ -6,7 +6,14 @@ function fetchContainersSuggestions(text) {
 
         const regex = new RegExp(`^${text}`,'i');
 
-        fetch('http://localhost:8080/api/containers/1')
+        var config = { method: 'GET',
+            headers: new Headers({
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }), 
+        };
+
+        fetch('http://localhost:8080/api/containers/1', config )
         .then(res => res.json())
         .then(res => {
             if(res.error) {

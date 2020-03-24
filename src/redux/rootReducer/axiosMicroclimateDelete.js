@@ -8,6 +8,7 @@ function axiosMicroclimateDelete( id_microclimate )  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {

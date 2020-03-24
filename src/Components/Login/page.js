@@ -5,24 +5,18 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/RaisedButton';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import GridList from 'material-ui/GridList';
-import Container from '@material-ui/core/Container';
-import { palette } from '@material-ui/system';
 import { Toolbar, Typography, IconButton } from '@material-ui/core';
 import './styles.css';
 
 function Page(props) {
     const {
-        username,
-        password,
-        validateForm,
+        authError,
         handleChange,
         handleSubmit,
     } = props;
     
     return(
-        <MuiThemeProvider>
-            <React.Fragment>
+       
                 <center>
                     <AppBar style={{background: '#43a047'}}>
                         <Toolbar>
@@ -38,41 +32,28 @@ function Page(props) {
                         height={300}
                         width={300}
                     >
-                        <br/>
-                        <Avatar>A</Avatar>
-                        <br/>
-                        <Box 
-                            bgcolor="white"
-                            width={280}
-                        >
-                        <TextField 
-                        hintText="Username"
-                        onChange={handleChange('username')}
-                        />
-                        </Box>
-                        <br/>
-                        <Box 
-                            bgcolor="white"
-                            width={280}
-                        >
-                        <TextField 
-                            hintText="Password"
-                            value={password}
-                            onChange={handleChange('password')}
-                            
-                        />
-                        </Box>
-                        <br/>
-                        <Button
-                        	onClick={validateForm}
-                            primary={true}
-                            label="Adelante"
-                        />
-                        <br/>
+                        <div className="container" >
+                            <form onSubmit={handleSubmit} className="white" >
+                                <br/> <Avatar>A</Avatar> <br/>
+                                <div className="input-field" >
+                                    <label htmlFor="username" > Nombre de Usuario </label>
+                                    <input type="username" id="username" onChange={handleChange} />
+                                </div>
+                                <div className="input-field" >
+                                    <label htmlFor="password" > Contraseña </label>
+                                    <input type="password" id="password" onChange={handleChange} />
+                                </div>
+                                <div className="input-field" >
+                                    <br/> <button className="btn pink lighten-1 z-depth-0" > Iniciar sesión </button>
+                                    <div className="red-text center"  >
+                                        { authError ? <p> {authError} </p> : null }
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </Box>
                 </center>
-            </React.Fragment>
-        </MuiThemeProvider>
+           
     );
 }
 

@@ -18,6 +18,7 @@ class AppBar extends Component{
             this.props.fetchAvailableSuggestions("");
         }
         else if( this.state.title === "Microclimas"  ){
+            console.log("AHHHHHHHHH")
             this.props.fetchMicroclimatesSuggestions("");
         }
         else if( this.state.title === "Contenedores"  ){

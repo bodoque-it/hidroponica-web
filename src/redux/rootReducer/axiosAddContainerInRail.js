@@ -13,6 +13,7 @@ function axiosAddContainerInRail(id_rail, new_name, new_volume) {
                 headers: {
                     'Acces-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             }
             try {

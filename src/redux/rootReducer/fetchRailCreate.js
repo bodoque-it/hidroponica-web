@@ -12,6 +12,7 @@ function fetchRailCreate(new_name,new_infrastructure)  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {

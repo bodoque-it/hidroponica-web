@@ -3,8 +3,15 @@ import { findInfrastructuresSuggestions } from '../actions/actions';
 function fetchInfrastructuresSuggestions(text) {
     return dispatch => {
         const regex = new RegExp(`^${text}`,'i');
+        
+        var config = { method: 'GET',
+            headers: new Headers({
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/json',
+            }), 
+        };
 
-        fetch('/api/infrastructures/1')
+        fetch('/api/infrastructures/1',config)
         .then(res => res.json())
         .then(res => {
             if(res.error) {

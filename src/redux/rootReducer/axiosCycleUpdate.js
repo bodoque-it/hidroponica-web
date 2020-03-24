@@ -10,12 +10,13 @@ function axiosCycleUpdate(id_cycle, fk_container, fk_microclimate,new_estimated_
             estimated_date: new_estimated_date,
         }
 
-        console.log(id_cycle, fk_container, fk_microclimate, new_estimated_date);
+        
         const updateCycle = async cycle => {
             const config = {
                 headers: {
                     'Acces-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             }
             try {

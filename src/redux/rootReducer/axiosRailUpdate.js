@@ -13,6 +13,7 @@ function axiosRailUpdate( id_rail, new_name, new_infrastructure_address )  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {
