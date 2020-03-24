@@ -92,7 +92,8 @@ class FormAddCycle extends Component {
 
     render(){
 		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.startdate,this.state.estimatedDate,this.state.finishDate)
-		console.log(this.props.available)
+		// console.log(this.props.available.microclimates_available)
+		// console.log(this.props.available.container_available)
 		const isEmpty = this.props.available.length === 0;
         return(
 			<Modal
@@ -116,8 +117,8 @@ class FormAddCycle extends Component {
 									{ isEmpty ?
 										<option>""</option>
 										:
-											this.props.available.map( ava =>
-													<option> { ava.name } </option>
+											this.props.available.container_available.map( ava =>
+													<option> { ava[1] } </option>
 												 )
 									}
 									</Input>
@@ -132,7 +133,7 @@ class FormAddCycle extends Component {
 									{ isEmpty ?
 										<option>""</option>
 										:
-											this.props.available.map( ava =>
+											this.props.available.microclimates_available.map( ava =>
 													<option> { ava.name } </option>
 												 )
 									}

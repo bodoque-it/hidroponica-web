@@ -10,8 +10,7 @@ function fetchAvailableSuggestions(text) {
             if(res.error) {
                 throw(res.error);
             }
-            console.log(res.data)
-            const results = res.data.microclimates_available
+            const results = res.data
             dispatch(findAvailableSuggestions(results))
             
         })
