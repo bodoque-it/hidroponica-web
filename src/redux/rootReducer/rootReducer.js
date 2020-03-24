@@ -9,6 +9,7 @@ import {
         FIND_MICROCLIMATES_SUGGESTIONS,
         FIND_INFRASTRUCTURES_SUGGESTIONS ,
         FIND_CONTAINERS_SUGGESTIONS,
+        FIND_AVALAIBLE_RESULTS,
         RAIL_CREATE,RAIL_DELETE,
         RAIL_UPDATE,
         MICROCLIMATE_CREATE,
@@ -17,6 +18,9 @@ import {
         INFRASTRUCTURE_CREATE,
         INFRASTRUCTURE_DELETE,
         INFRASTRUCTURE_UPDATE,
+        CYCLE_CREATE,
+        CYCLE_DELETE,
+        CYCLE_UPDATE,
         CONTAINER_ADD_IN_RAIL
 } from '../actions/actions';
          
@@ -24,6 +28,7 @@ const defaultState = {
     suggestions: [],
     infrastructures: [],
     containers: [],
+    cycle: [],
     container: {},
     rails: [],
 }
@@ -154,6 +159,24 @@ export function rootReducer(state = defaultState, {type,payload}) {
         }
 
         case CONTAINER_ADD_IN_RAIL:{
+            return{
+                ...state,
+            }
+        }
+
+        case CYCLE_CREATE:{
+            return {
+                ...state,
+            }
+        }
+
+        case CYCLE_DELETE:{
+            return{
+                ...state,
+            }
+        }
+
+        case CYCLE_UPDATE:{
             return{
                 ...state,
             }

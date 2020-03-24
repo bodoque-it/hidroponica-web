@@ -8,6 +8,7 @@ export const FIND_INFRASTRUCTURES_SUGGESTIONS = 'FIND_INFRASTRUCTURES_SUGGESTION
 export const FIND_CONTAINERS_RESULTS = 'FIND_CONTAINERS_RESULTS';
 export const FIND_CURRENT_CONTAINER = 'FIND_CURRENT_CONTAINER';
 export const FIND_RAILS_RESULTS = 'FIND_RAILS_RESULTS';
+export const FIND_AVALAIBLE_SUGGESTIONS = 'FIND_AVALAIBLE_SUGGESTIONS';
 export const RAIL_CREATE = 'RAIL_CREATE';
 export const RAIL_DELETE = 'RAIL_DELETE';
 export const RAIL_UPDATE = 'RAIL_UPDATE';
@@ -91,6 +92,13 @@ export function findRailsResults(id_user){
     return {
         type: FIND_RAILS_RESULTS,
         payload: id_user,
+    }
+}
+
+export function findAvalaibleSuggestions(text) {
+    return {
+        type: FIND_AVALAIBLE_SUGGESTIONS,
+        payload: text,
     }
 }
 

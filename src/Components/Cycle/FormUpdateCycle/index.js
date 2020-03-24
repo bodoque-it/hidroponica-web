@@ -9,23 +9,17 @@ class FormUpdateCycle extends Component {
         super(props);
         this.container_idInput = React.createRef(); 
         this.microclimate_idInput = React.createRef();
-        this.startDateInput = React.createRef();
         this.estimatedDateInput = React.createRef();
-        this.finishDateInput = React.createRef(); 
         this.state = {
             container_id: props.container_id,
             microclimate_id: props.microclimate_id,
-			startDate: props.startDate,
             estimatedDate: props.estimatedDate,
-            finishDate: props.finishDate,
             updateCycle: props.updateCycle,
 
             touched: {
 				container_id: false,
                 microclimate_id: false,
-                startDate: false,
                 estimatedDate: false,
-                finishDate: false,
 			}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,9 +53,7 @@ class FormUpdateCycle extends Component {
 		const errors = {
             container_id: '',
             microclimate_id: '',
-			startDate: '',
             estimatedDate: '',
-            finishDate: '',
 		};
 
 		if (this.state.touched.container_id && container_id.length <1 ) {
@@ -70,22 +62,16 @@ class FormUpdateCycle extends Component {
 		if (this.state.touched.microclimate_id && microclimate_id.length <1 ) {
 			errors.microclimate_id = 'No has escrito una id valida';
         }
-        if (this.state.touched.startDate && startDate.length < 8 ) {
-			errors.startDate = 'No has escrito una fecha valida';
-        }
         if (this.state.touched.estimatedDate && estimatedDate.length < 8 ) {
 			errors.estimatedDate = 'No has escrito una fecha valida';
         }
-        if (this.state.touched.finishDate && finishDate.length <= 3 ) {
-			errors.finishDate = 'No has escrito una fecha valida';
-		}
 		return errors;
 	}
     
     
  
     render(){
-        const errors = this.validate(this.state.name,this.state.location)
+        const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimated_date)
         return(
             <div>
             <ModalHeader > Actualizar Ciclo </ModalHeader>
@@ -93,7 +79,7 @@ class FormUpdateCycle extends Component {
 					 		<FormGroup row >
 					 			<Label htmlFor="container_id" md={2} > ID contenedor </Label>
 					 			<Col md={10} >
-									<Input type="text" id="container_id" container_id="container_id" placeholder="Ingrese la id del container asociado" value={this.state.container_id} valid={errors.container_id === ''} invalid={errors.container_id !== ''} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} />
+									<Input type="text" id="container_id" name="container_id" placeholder="Ingrese la id del container asociado" value={this.state.container_id} valid={errors.container_id === ''} invalid={errors.container_id !== ''} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} />
 									<FormFeedback>{errors.container_id}</FormFeedback>
 								</Col>
 					 		</FormGroup>
@@ -106,13 +92,13 @@ class FormUpdateCycle extends Component {
 								</Col>
 					 		</FormGroup>
 
-                             <FormGroup row >
+                             {/*<FormGroup row >
 					 			<Label htmlFor="startDate" md={2} > Fecha inicio </Label>
 					 			<Col md={10} >
 									<Input type="text" id="startDate" name="startDate" placeholder="Ingrese la Fecha inicio" value={this.state.startDate} valid={errors.startDate === ''} invalid={errors.startDate !== ''} onBlur={this.handleBlur('startDate')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.startDate}</FormFeedback>
 								</Col>
-					 		</FormGroup>
+							 </FormGroup>*/}
 
                              <FormGroup row >
 					 			<Label htmlFor="estimatedDate" md={2} > Fecha estimada </Label>
@@ -122,28 +108,25 @@ class FormUpdateCycle extends Component {
 								</Col>
 					 		</FormGroup>
 
-                             <FormGroup row >
+                            {/*<FormGroup row >
 					 			<Label htmlFor="finishDate" md={2} > Fecha fin </Label>
 					 			<Col md={10} >
 									<Input type="text" id="finishDate" name="finishDate" placeholder="Ingrese la Fecha fin" value={this.state.finishDate} valid={errors.finishDate === ''} invalid={errors.finishDate !== ''} onBlur={this.handleBlur('finishDate')} onChange={this.handleInputChange}/>
 									<FormFeedback>{errors.finishDate}</FormFeedback>
 								</Col>
-					 		</FormGroup>
+							</FormGroup>*/}
 							
 							 <Button type="submit" color="primary" 
-                             onClick={  (errors.container_id !== '' || errors.microclimate_id !== '' || errors.startDate !== '' 
-                             || errors.estimatedDate !== '' || errors.finishDate !== '' 
+                             onClick={  (errors.container_id !== '' || errors.microclimate_id !== ''
+                             || errors.estimatedDate !== ''  
                              || this.state.container_id.length == 0 
                              || this.state.microclimate_id.length == 0
-                             || this.state.startDate.length == 0
-                             || this.state.estimatedDate.length == 0
-                             || this.state.finishDate.length == 0 ) ?
+							 || this.state.estimatedDate.length == 0
+							 ) ?
 							  () =>  alert("no has completado el Formulario") 
                                  : () => this.state.updateCycle(this.state.container_id,
                                                                 this.state.microclimate_id,
-                                                                this.state.startdate,
-                                                                this.state.estimatedDate,
-                                                                this.state.finishDate
+                                                                this.state.estimatedDate
                                  ) } >
                         Modificar
                     </Button>

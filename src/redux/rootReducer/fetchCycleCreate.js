@@ -1,18 +1,15 @@
 import { cycleCreate } from '../actions/actions';
 import axios from 'axios';
 
-function fetchCycleCreate(new_begin_date, new_estimated_date, new_finish_date)  {
+function fetchCycleCreate(fk_container, fk_microclimate, new_estimated_date)  {
     return dispatch  => {
         const cycle = {
-            id: 1,
             fk_user: 1,
-            fk_container: 1,
-            fk_microclimate: 1,
-            begin_date: new_begin_date,
+            fk_container: fk_container,
+            fk_microclimate: fk_microclimate,
             estimated_date: new_estimated_date,
-            finish_date: new_finish_date,
         };
-        const createCycle = async rail => {
+        const createCycle = async cycle => {
             const config = {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
@@ -20,7 +17,7 @@ function fetchCycleCreate(new_begin_date, new_estimated_date, new_finish_date)  
                 }
             };
             try {
-                const res = await axios.post('/api/cycles/1', rail , JSON.stringify(config));
+                const res = await axios.post('/api/cycles/1', cycle , JSON.stringify(config));
                 dispatch(cycleCreate())
             } catch (error) {
                 console.log(error);

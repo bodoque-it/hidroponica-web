@@ -1,19 +1,16 @@
 import { cycleUpdate } from '../actions/actions';
 import axios from 'axios';
 
-function axiosCycleUpdate(id_cycle, new_begin_date, new_estimated_date, new_finish_date) {
+function axiosCycleUpdate(id_cycle, fk_container, fk_microclimate,new_estimated_date) {
     return dispatch => {
             const cycle = {
-            id: id_cycle,
             fk_user: 1,
-            fk_container: 1,
-            fk_microclimate: 1,
-            begin_date: new_begin_date,
+            fk_container: fk_container,
+            fk_microclimate: fk_microclimate,
             estimated_date: new_estimated_date,
-            finish_date: new_finish_date,
         }
 
-        console.log(id_cycle, new_begin_date, new_estimated_date, new_finish_date);
+        console.log(id_cycle, fk_container, fk_microclimate, new_estimated_date);
         const updateCycle = async cycle => {
             const config = {
                 headers: {

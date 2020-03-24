@@ -121,6 +121,7 @@ export function Cycle(props) {
 		startDate,
 		estimatedDate,
 		finishDate,
+		avalaible,
 		deleteCycle,
 		updateCycle,
 		openModal,
@@ -206,6 +207,7 @@ export function Cycle(props) {
 export function Ciclos(props){
 	const {
 		suggestions,
+		avalaible,
 		deleteCycle,
 		addCycle,
 		updateCycle,
@@ -233,6 +235,7 @@ export function Ciclos(props){
 								addCycle={addCycle}
 								show={addModalShow}
 								onHide={addModalClose}
+								avalaible={avalaible}
 							/>
 					</ButtonToolbar>
 					</label>
@@ -255,6 +258,7 @@ export function Ciclos(props){
 							startDate={suggestion.startDate}
 							estimatedDate={suggestion.estimatedDate}
 							finishDate={suggestion.finishDate}
+							avalaible={avalaible}
 							deleteCycle={deleteCycle}
 							updateCycle={updateCycle}
 							openModal={openModal}

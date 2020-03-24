@@ -25,17 +25,17 @@ class Cycles extends Component {
     }
 
     deleteCycle(id_cycle){
-        this.props.axiosCycleDelete(id_cycle);
+        this.props.axiosRailDelete(id_cycle);
         window.location.reload();
     }
 
     addCycle(begin_date, estimated_date, finish_date){
-        this.props.fetchCycleCreate(begin_date, estimated_date, finish_date);
+        this.props.fetchRailCreate(begin_date, estimated_date, finish_date);
         window.location.reload();
     }
 
     updateCycle(id_cycle,begin_date, estimated_date, finish_date){
-        this.props.axiosCycleUpdate(id_cycle,begin_date, estimated_date, finish_date);
+        this.props.axiosRailUpdate(id_cycle,begin_date, estimated_date, finish_date);
         window.location.reload();
     }
 
@@ -59,6 +59,7 @@ class Cycles extends Component {
             <div >
         	    <Page
                     suggestions={this.props.suggestions}
+                    avalaible={this.props.avalaible}
                     deleteCycle={this.deleteCycle}
                     addCycle={this.addCycle}
                     updateCycle={this.updateCycle}
@@ -76,7 +77,8 @@ class Cycles extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        suggestions: state.suggestions,
+        suggestions: state.cycles,
+        avalaible: state.suggestions,
     };
 };
 

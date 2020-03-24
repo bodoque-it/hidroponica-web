@@ -10,8 +10,10 @@ function fetchCyclesSuggestions(text) {
             if(res.error) {
                 throw(res.error);
             }
-            const results = res.data.filter( n => regex.test(n.name) )
+            const results = res.data.filter( n => regex.test(n.name))             
+            const dis = await axios.get('/api/users/avalaible/1',JSON.stringify(config));
             dispatch(findCyclesSuggestions(results))
+            dispatch(findAvalaibleSuggestions(dis))
             return results;
         })
         .catch(error => {
