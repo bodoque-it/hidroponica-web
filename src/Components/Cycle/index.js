@@ -59,7 +59,7 @@ class Cycles extends Component {
             <div >
         	    <Page
                     suggestions={this.props.suggestions}
-                    avalaible={this.props.avalaible}
+                    available={this.props.available}
                     deleteCycle={this.deleteCycle}
                     addCycle={this.addCycle}
                     updateCycle={this.updateCycle}
@@ -78,7 +78,7 @@ class Cycles extends Component {
 const mapStateToProps = (state) => {
     return {
         suggestions: state.cycles,
-        avalaible: state.suggestions,
+        available: state.suggestions,
     };
 };
 

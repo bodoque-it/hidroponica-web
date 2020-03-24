@@ -27,9 +27,14 @@
   max-width: 100%;
 }
 .root {
-    flex-grow: 1;
+  flex-grow: 1;
 	width: 100%;
 	padding: 50px;
+}
+.microclimateImage{
+  background-opacity: 0.5;
+  background-image: url(images/clima.jpg);
+  z-index: -100;
 }
 .add{
 	color: #28a745;

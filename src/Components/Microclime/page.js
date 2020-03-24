@@ -49,19 +49,21 @@ export default function Page(props) {
 
     return (
 		<div className="root">
-		    <FormRow
-                suggestions={props.suggestions}
-                addMicroclimate={props.addMicroclimate}
-                updateMicroclimate={props.updateMicroclimate}
-                deleteMicroclimate={props.deleteMicroclimate}
-                addModalShow={props.addModalShow}
-                addModalClose={props.addModalClose}
-                addModalOpen={props.addModalOpen}
-                openModal={props.openModal}
-                closeModal={props.closeModal}
-                open={props.open}
-                microclimateSelect={props.microclimateSelect}
-            />
+            <div className="microclimateImage">
+    		    <FormRow
+                    suggestions={props.suggestions}
+                    addMicroclimate={props.addMicroclimate}
+                    updateMicroclimate={props.updateMicroclimate}
+                    deleteMicroclimate={props.deleteMicroclimate}
+                    addModalShow={props.addModalShow}
+                    addModalClose={props.addModalClose}
+                    addModalOpen={props.addModalOpen}
+                    openModal={props.openModal}
+                    closeModal={props.closeModal}
+                    open={props.open}
+                    microclimateSelect={props.microclimateSelect}
+                />
+            </div>
 		</div>
     );
 }

@@ -6,6 +6,7 @@ import fetchRailsSuggestions from '../../redux/rootReducer/fetchRailsSuggestions
 import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestions';
 import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
 import fetchContainersSuggestions from '../../redux/rootReducer/fetchContainersSuggestions';
+import fetchAvailableSuggestions from '../../redux/rootReducer/fetchAvailableSuggestions';
 
 class AppBar extends Component{
 	componentWillMount(){
@@ -14,6 +15,7 @@ class AppBar extends Component{
         }
         else if( this.state.title === "Ciclos"  ){
             this.props.fetchCyclesSuggestions("");
+            this.props.fetchAvailableSuggestions("");
         }
         else if( this.state.title === "Microclimas"  ){
             this.props.fetchMicroclimatesSuggestions("");
@@ -92,6 +94,7 @@ const mapDispatchToProps = {
     fetchCyclesSuggestions,
     fetchMicroclimatesSuggestions,
     fetchContainersSuggestions,
+    fetchAvailableSuggestions,
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(AppBar));

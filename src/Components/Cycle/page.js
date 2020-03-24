@@ -83,6 +83,7 @@ const useStyles = makeStyles((theme) =>
 function Page(props) {
 	const {
 		suggestions,
+		available,
 		deleteCycle,
 		addCycle,
 		updateCycle,
@@ -98,6 +99,7 @@ function Page(props) {
         <div >
         	<Ciclos
 				suggestions={suggestions}
+				available={available}
 				deleteCycle={deleteCycle}
 				addCycle={addCycle}
 				updateCycle={updateCycle}
@@ -121,7 +123,7 @@ export function Cycle(props) {
 		startDate,
 		estimatedDate,
 		finishDate,
-		avalaible,
+		available,
 		deleteCycle,
 		updateCycle,
 		openModal,
@@ -207,7 +209,7 @@ export function Cycle(props) {
 export function Ciclos(props){
 	const {
 		suggestions,
-		avalaible,
+		available,
 		deleteCycle,
 		addCycle,
 		updateCycle,
@@ -235,9 +237,10 @@ export function Ciclos(props){
 								addCycle={addCycle}
 								show={addModalShow}
 								onHide={addModalClose}
-								avalaible={avalaible}
+								available={available}
 							/>
 					</ButtonToolbar>
+					
 					</label>
 				</div>
 			</div>
@@ -258,7 +261,7 @@ export function Ciclos(props){
 							startDate={suggestion.startDate}
 							estimatedDate={suggestion.estimatedDate}
 							finishDate={suggestion.finishDate}
-							avalaible={avalaible}
+							available={available}
 							deleteCycle={deleteCycle}
 							updateCycle={updateCycle}
 							openModal={openModal}
