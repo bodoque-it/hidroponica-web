@@ -27,17 +27,23 @@ export default function Page(props) {
     const data = props.suggestions;
     console.log("activos_container = ", data.active_container);
     return (
-        <div className={"root"}>
+        <div className={"root"} align="center">
+            <h3>Contadores y gráficos</h3>
             <br/>
-            <GraficoDona
-                activos = {data.active_container}
-                inactivos = {data.inactivate_container}
-            />
-            <GraficoColumna
-                rieles = {data.rails_quantity}
-                ciclos = {data.cycle_not_finish}
-                microclimas = {data.microclimate_quantity}
-            />
+            <div style={{border:' #5cb85c 0.1em solid'}}>
+                <GraficoDona
+                    activos = {data.active_container}
+                    inactivos = {data.inactivate_container}
+                />
+            </div>
+            <br/>
+            <div style={{border:' #5cb85c 0.1em solid'}}>
+                <GraficoColumna
+                    rieles = {data.rails_quantity}
+                    ciclos = {data.cycle_not_finish}
+                    microclimas = {data.microclimate_quantity}
+                />
+            </div>
             <br/>
         </div>
       

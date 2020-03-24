@@ -49,22 +49,20 @@ export default function Page(props) {
 
     return (
 		<div className="root">
-            <div className="microclimateImage">
-    		    <FormRow
-                    suggestions={props.suggestions}
-                    addMicroclimate={props.addMicroclimate}
-                    updateMicroclimate={props.updateMicroclimate}
-                    deleteMicroclimate={props.deleteMicroclimate}
-                    addModalShow={props.addModalShow}
-                    addModalClose={props.addModalClose}
-                    addModalOpen={props.addModalOpen}
-                    openModal={props.openModal}
-                    closeModal={props.closeModal}
-                    open={props.open}
-                    microclimateSelect={props.microclimateSelect}
-                />
-            </div>
-		</div>
+		    <FormRow
+                suggestions={props.suggestions}
+                addMicroclimate={props.addMicroclimate}
+                updateMicroclimate={props.updateMicroclimate}
+                deleteMicroclimate={props.deleteMicroclimate}
+                addModalShow={props.addModalShow}
+                addModalClose={props.addModalClose}
+                addModalOpen={props.addModalOpen}
+                openModal={props.openModal}
+                closeModal={props.closeModal}
+                open={props.open}
+                microclimateSelect={props.microclimateSelect}
+            />
+	   </div>
     );
 }
 function LightType(props){
@@ -181,7 +179,7 @@ function RailCard( props ) {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={4} style={{paddingRight:"8px !important"}}>
                             <Paper className={"paper"}>Temperatura:
                                 <br/>
                                 <div className={"dato"}>
