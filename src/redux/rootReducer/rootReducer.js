@@ -9,7 +9,7 @@ import {
         FIND_MICROCLIMATES_SUGGESTIONS,
         FIND_INFRASTRUCTURES_SUGGESTIONS ,
         FIND_CONTAINERS_SUGGESTIONS,
-        FIND_AVALAIBLE_RESULTS,
+        FIND_AVAILABLE_SUGGESTIONS,
         RAIL_CREATE,RAIL_DELETE,
         RAIL_UPDATE,
         MICROCLIMATE_CREATE,
@@ -28,7 +28,7 @@ const defaultState = {
     suggestions: [],
     infrastructures: [],
     containers: [],
-    cycle: [],
+    cycles: [],
     container: {},
     rails: [],
 }
@@ -36,6 +36,12 @@ const defaultState = {
 export function rootReducer(state = defaultState, {type,payload}) {
     switch (type) {
         case FIND_CONTAINER_COUNT_SUGGESTIONS:{
+            return {
+                ...state,
+                suggestions: payload
+            }
+        }
+        case FIND_AVAILABLE_SUGGESTIONS:{
             return {
                 ...state,
                 suggestions: payload
@@ -58,7 +64,7 @@ export function rootReducer(state = defaultState, {type,payload}) {
         case FIND_CYCLES_SUGGESTIONS:{
             return {
                 ...state,
-                suggestions: payload
+                cycles: payload
             }
         }
 
