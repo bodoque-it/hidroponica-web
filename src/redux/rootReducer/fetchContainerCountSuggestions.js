@@ -16,7 +16,7 @@ function fetchContainerCountSuggestions( new_address )  {
             try {
                 const res = await axios.get('/api/users/metrics/1' , JSON.stringify(config));
                 console.log(res);
-                dispatch(findContainerCountSuggestions(res.data));
+                dispatch(findContainerCountSuggestions(res.data.data));
             } catch (error) {
                 console.log(error);
             }

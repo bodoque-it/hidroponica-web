@@ -112,13 +112,6 @@ class FormAddCycle extends Component {
 					 			<Label htmlFor="container_id" md={2} > ID contenedor </Label>
 					 			<Col md={10} >
 								 <Input type="select" name="container_id" id="container_id" value={this.state.container_id} onBlur={this.handleBlur('container_id')} onChange={this.handleInputChange} >
-									{ isEmpty ?
-										<option>""</option>
-										:
-											this.props.avalaible.container_avalaible.map( avalaible.container_avalaible =>
-													<option> { avalaible.container_avalaible.name } </option>
-												 )
-									}
 									</Input>
 									<FormFeedback>{errors.container_id}</FormFeedback>
 								</Col>

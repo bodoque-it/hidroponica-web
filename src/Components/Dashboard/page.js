@@ -24,18 +24,20 @@ const useStyles = makeStyles((theme) => {
 });
 
 export default function Page(props) {
-    const {
-        suggestions
-    } = props;
-
-    console.log(props.suggestions['data']);
-    const data = props.suggestions['data'];
-    console.log(suggestions['data']);
+    const data = props.suggestions;
+    console.log("activos_container = ", data.active_container);
     return (
         <div className={"root"}>
             <br/>
-            <GraficoDona />
-            <GraficoColumna />
+            <GraficoDona
+                activos = {data.active_container}
+                inactivos = {data.inactivate_container}
+            />
+            <GraficoColumna
+                rieles = {data.rails_quantity}
+                ciclos = {data.cycle_not_finish}
+                microclimas = {data.microclimate_quantity}
+            />
             <br/>
         </div>
       
@@ -78,60 +80,53 @@ function RailCard(riel,contenedor,plantacion,temperatura,humedad,presion,foto){
     )
 }
 
-class GraficoDona extends React.Component {
-    
-    render() {
-        const data = [
-            ["contenedores", "contador"],
-            ["Activos", 11],
-            ["Inactivos", 2],
-            
-        ];
-        const options = {
-            title: "Contenedores",
-            pieHole: 0.4,
-            is3D: false,
-            pieSliceText: 'label',
-        };
-        return (
-            <div>
-                <Chart
-                    chartType="PieChart"
-                    width="100%"
-                    height="400px"
-                    data={data}
-                    options={options}
-                />
-            </div>
-        );
-    }
+function GraficoDona(props) {
+    const data = [
+        ["contenedores", "contador"],
+        ["Activos", props.activos],
+        ["Inactivos", props.inactivos],
+    ];
+    const options = {
+        title: "Contenedores",
+        pieHole: 0.4,
+        is3D: false,
+        pieSliceText: 'label',
+    };
+    return (
+        <div>
+            <Chart
+                chartType="PieChart"
+                width="100%"
+                height="400px"
+                data={data}
+                options={options}
+            />
+        </div>
+    );
 }
 
-class GraficoColumna extends React.Component {
-    
-    render() {
-        const data = [
-            ["Element", "Cantidad", { role: "style" }],
-            ["Rieles", 4, "#5555ff"],
-            ["Contenedores", 9, "#28a745"], // RGB value
-            ["Microclimas", 3, "#99ffff"], // English color name
-        ];
-        const options = {
-            title: "Contenedores, microclmas y rieles",
-            legend: { position: 'none' },
-        };
-        return (
-            <div>
-                <Chart
-                    chartType="ColumnChart"
-                    width="100%"
-                    height="400px"
-                    data={data}
-                    options={options}
-                />
-            </div>
-        );
-    }
+function GraficoColumna(props){
+    const data = [
+        ["Element", "Cantidad", { role: "style" }],
+        ["Rieles", props.rieles, "#5555ff"],
+        ["Ciclos activos", props.ciclos, "#28a745"], // RGB value
+        ["Microclimas", props.microclimas, "#99ffff"], // English color name
+    ];
+    const options = {
+        title: "Contenedores, microclmas y rieles",
+        legend: { position: 'none' },
+    };
+    return (
+        <div>
+            <Chart
+                chartType="ColumnChart"
+                width="100%"
+                height="400px"
+                data={data}
+                options={options}
+            />
+        </div>
+    );
 }
 
 function FormRow() {
