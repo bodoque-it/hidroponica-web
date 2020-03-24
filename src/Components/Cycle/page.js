@@ -240,7 +240,7 @@ export function Ciclos(props){
 								available={available}
 							/>
 					</ButtonToolbar>
-					available,
+					
 					</label>
 				</div>
 			</div>
