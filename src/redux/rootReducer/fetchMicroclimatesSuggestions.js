@@ -7,7 +7,7 @@ function fetchMicroclimatesSuggestions(text) {
         var config = { method: 'GET',
                 headers: new Headers({
                     'Authorization': `Bearer ${localStorage.getItem("token")}`,
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }),
         };
 

@@ -11,7 +11,7 @@ function fetchAvailableSuggestions(text) {
             }), 
         };
        
-        fetch('http://localhost:8080/api/users/available/1',config )
+        fetch('api/users/available/1',config )
         .then(res => res.json())
         .then(res => {
             if(res.error) {

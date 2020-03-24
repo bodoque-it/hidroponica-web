@@ -8,9 +8,9 @@ class FormAddCycle extends Component {
         this.state = {
             addCycle : props.addCycle,
 			container_id: '',
-			container_name: '',
+			container_name: 'raimundo',
 			microclimate_id: '',
-			microclimate_name: '',
+			microclimate_name: 'raimunduty',
 			startDate: '',
             estimatedDate: '',
 			finishDate: '',
@@ -34,10 +34,11 @@ class FormAddCycle extends Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-		console.log("value: "+value)
+		console.log("value: "+ name)
 		this.setState({
 			[name]: value
 		});
+		console.log(this.state)
 	}
 	handleSubmit(event){
 		
@@ -51,13 +52,11 @@ class FormAddCycle extends Component {
 		});
 	}
 
-	validate(container_id,microclimate_id,startDate,estimatedDate,finishDate){
+	validate(container_id,microclimate_id,estimatedDate){
 		const errors = {
             container_id: '',
             microclimate_id: '',
-			startDate: '',
             estimatedDate: '',
-            finishDate: '',
 		};
 
 		if (this.state.touched.container_id && container_id.length <0 ) {
@@ -66,15 +65,11 @@ class FormAddCycle extends Component {
 		if (this.state.touched.microclimate_id && microclimate_id.length <0 ) {
 			errors.microclimate_id = 'No has escrito una id valida';
         }
-        if (this.state.touched.startDate && startDate.length < 8 ) {
-			errors.startDate = 'No has escrito una fecha valida';
-        }
+        
         if (this.state.touched.estimatedDate && estimatedDate.length < 8 ) {
 			errors.estimatedDate = 'No has escrito una fecha valida';
         }
-        if (this.state.touched.finishDate && finishDate.length <= 3 ) {
-			errors.finishDate = 'No has escrito una fecha valida';
-		}
+        console.log(errors)
 		return errors;
 	}
 
@@ -92,7 +87,7 @@ class FormAddCycle extends Component {
 	}
 
     render(){
-		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.startdate,this.state.estimatedDate,this.state.finishDate)
+		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimatedDate)
 		// console.log(this.props.available.microclimates_available)
 		// console.log(this.props.available.container_available)
 		const isEmpty = this.props.available.length === 0;
@@ -152,16 +147,13 @@ class FormAddCycle extends Component {
 					 		</FormGroup>
 							
 							 <Button type="submit" color="primary" 
-                             onClick={  (errors.container_id !== '' || errors.microclimate_id !== '' || errors.startDate !== '' 
-                             || errors.estimatedDate !== '' || errors.finishDate !== '' 
-                             || this.state.container_id.length == 0 
-                             || this.state.microclimate_id.length == 0
-                             || this.state.startDate.length == 0
+                             onClick={  (errors.container_name !== '' || errors.microclimate_name !== '' 
+                             || errors.estimatedDate !== '' 
                              || this.state.estimatedDate.length == 0
-                             || this.state.finishDate.length == 0 ) ?
-							  () =>  alert("no has completado el Formulario") 
-                              : () => this.state.addCycle(this.state.container_id,
-                                                        this.state.microclimate_id,
+                             ) ?
+							  () =>  alert("no has completado el Formulario")
+                              : () => this.state.addCycle(this.state.container_name,
+                                                        this.state.microclimate_name,
 														this.state.estimatedDate)
 													} >
 					 			Agregar

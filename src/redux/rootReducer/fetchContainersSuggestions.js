@@ -13,7 +13,7 @@ function fetchContainersSuggestions(text) {
             }), 
         };
 
-        fetch('http://localhost:8080/api/containers/1', config )
+        fetch('api/containers/1', config )
         .then(res => res.json())
         .then(res => {
             if(res.error) {
