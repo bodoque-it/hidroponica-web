@@ -30,7 +30,7 @@ class Cycles extends Component {
     }
 
     addCycle(begin_date, estimated_date, finish_date){
-        this.props.fetchRailCreate(begin_date, estimated_date, finish_date);
+        this.props.fetchCycleCreate(begin_date, estimated_date, finish_date);
         window.location.reload();
     }
 

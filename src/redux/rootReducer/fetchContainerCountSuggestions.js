@@ -11,6 +11,7 @@ function fetchContainerCountSuggestions( new_address )  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {

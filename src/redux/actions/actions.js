@@ -25,6 +25,8 @@ export const CONTAINER_ADD_IN_RAIL = 'CONTAINER_ADD_IN_RAIL';
 export const CYCLE_CREATE = 'CYCLE_CREATE';
 export const CYCLE_DELETE = 'CYCLE_DELETE';
 export const CYCLE_UPDATE = 'CYCLE_UPDATE';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
 
 export function findCountsSuggestions(text){
     return {
@@ -210,5 +212,19 @@ export function cycleUpdate(id_cycle){
     return{
         type: CYCLE_UPDATE,
         payload: id_cycle,
+    }
+}
+
+export function loginSuccess( token ){
+    return{
+        type: LOGIN_SUCCESS,
+        payload: token
+    }
+}
+
+export function loginError(err){
+    return{
+        type: LOGIN_ERROR,
+        payload: err
     }
 }

@@ -15,10 +15,11 @@ function fetchCycleCreate(fk_container, fk_microclimate, new_estimated_date)  {
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {
-                const res = await axios.post('/api/cycles/1', cycle , JSON.stringify(config));
+                const res = await axios.post(`/api/cycles/1/${fk_container}/${fk_microclimate}`, cycle , JSON.stringify(config));
                 dispatch(cycleCreate())
             } catch (error) {
                 console.log(error);

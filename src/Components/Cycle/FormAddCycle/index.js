@@ -8,9 +8,9 @@ class FormAddCycle extends Component {
         this.state = {
             addCycle : props.addCycle,
 			container_id: '',
-			container_name: '',
+			container_name: 'raimundo',
 			microclimate_id: '',
-			microclimate_name: '',
+			microclimate_name: 'raimunduty',
 			startDate: '',
             estimatedDate: '',
 			finishDate: '',
@@ -37,6 +37,7 @@ class FormAddCycle extends Component {
 		this.setState({
 			[name]: value
 		});
+		console.log(this.state)
 	}
 	handleSubmit(event){
 		
@@ -51,13 +52,11 @@ class FormAddCycle extends Component {
 		});
 	}
 
-	validate(container_id,microclimate_id,startDate,estimatedDate,finishDate){
+	validate(container_id,microclimate_id,estimatedDate){
 		const errors = {
             container_id: '',
             microclimate_id: '',
-			startDate: '',
             estimatedDate: '',
-            finishDate: '',
 		};
 		if (this.state.touched.container_name && container_id.length <0 ) {
 			errors.container_id = 'No has escrito una id valida';
@@ -68,10 +67,7 @@ class FormAddCycle extends Component {
         if (this.state.touched.estimatedDate && estimatedDate.length < 8 ) {
 			errors.estimatedDate = 'No has escrito una fecha valida';
         }
-
-     	console.log(this.state.touched.container_name);
-     	console.log(this.state.touched.microclimate_name);
-     	console.log(this.state.touched.estimatedDate);
+        console.log(errors)
 		return errors;
 	}
 
@@ -89,7 +85,8 @@ class FormAddCycle extends Component {
 	}
 
     render(){
-		const errors = this.validate(this.state.container_name,this.state.microclimate_name,this.state.startdate,this.state.estimatedDate,this.state.finishDate)
+		const errors = this.validate(this.state.container_name,this.state.microclimate_name,this.state.estimatedDate)
+
 		// console.log(this.props.available.microclimates_available)
 		// console.log(this.props.available.container_available)
 		const isEmpty = this.props.available.length === 0;
@@ -161,6 +158,7 @@ class FormAddCycle extends Component {
 							    alert("no has completado el Formulario") 
                               : () => this.state.addCycle(this.state.container_id,
                                                         this.state.microclimate_id,
+
 														this.state.estimatedDate)
 													} >
 					 			Agregar

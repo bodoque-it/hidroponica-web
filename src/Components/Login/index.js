@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Page from './page';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import signIn  from '../../redux/rootReducer/signIn'
+import setAuthToken from '../../redux/rootReducer/authentication'
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state={
-            username: "",
-            password: "",
+            username: '',
+            password: '',
         };
 
         this.validateForm = this.validateForm.bind(this);
@@ -17,27 +19,26 @@ class Login extends Component {
     }
 
     validateForm() {
-        if(this.state.username==="Admin" && this.state.password==="Admin"){
-        	this.props.history.push("/dashboard");
-        }
+        
     }
 
-    handleChange = input => e => {
-        this.setState ({[input]: e.target.value})
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id] : e.target.value
+        })
     }
 
-    handleSubmit = event => {
-        event.preventDefault();     
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.signIn( this.state.username, this.state.password )
+        console.log(localStorage.getItem("token"))
+        this.props.history.push("/dashboard");
     }
 
     render(){
-        const { username } = this.state;
-        const { password } = this.state;
         return(
             <Page
-                username={username}
-                password={password}
-                validateForm={this.validateForm}
+                authError={this.props.authError}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
             />
@@ -47,12 +48,13 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        
+        authError: state.authError
     };
 };
 
 const mapDispatchToProps = {
-    
+    signIn,
+    setAuthToken
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(Login));

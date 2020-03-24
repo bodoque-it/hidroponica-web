@@ -18,6 +18,7 @@ function axiosMicroclimateUpdate( id_microclimate, new_name, new_intensity, new_
                 headers: {
                     'Access-Control-Allow-Origin': '*',        
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             };
             try {

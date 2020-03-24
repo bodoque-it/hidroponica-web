@@ -4,7 +4,14 @@ function fetchMicroclimatesSuggestions(text) {
     return dispatch => {
         const regex = new RegExp(`^${text}`,'i');
 
-        fetch('/api/microclimates/1')
+        var config = { method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }),
+        };
+
+        fetch('/api/microclimates/1',config )
         .then(res => res.json())
         .then(res => {
             if(res.error) {
