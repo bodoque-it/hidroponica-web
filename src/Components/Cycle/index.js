@@ -34,8 +34,9 @@ class Cycles extends Component {
         window.location.reload();
     }
 
-    updateCycle(id_cycle,begin_date, estimated_date, finish_date){
-        this.props.axiosCycleUpdate(id_cycle,begin_date, estimated_date, finish_date);
+    updateCycle(id_cycle,fk_container,fk_microclimate, estimated_date, isFinish){
+        console.log( "id_ciclo: "+id_cycle+ "container: "+fk_container+ "microclima: "+fk_microclimate+"estimated_date: "+estimated_date+"isFinisH: "+isFinish )
+        this.props.axiosCycleUpdate(id_cycle,fk_container,fk_microclimate, estimated_date, isFinish);
         window.location.reload();
     }
 

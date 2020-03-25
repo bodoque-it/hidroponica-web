@@ -160,12 +160,13 @@ export function Cycle(props) {
 									<EditIcon color="primary" onClick={openModal} />
 								</Fab>
 								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon color="secondary" onClick={openModal} />
+									<EditIcon color="secondary" onClick={() => updateCycle(id,container_id,microclimate_id,estimatedDate,true)} />
 								</Fab>
 								<Popup  open={open}
 										closeOnDocumentClick
 										onClose={closeModal} >
 									<FormUpdateCycle
+											id_cycle={id}
 											container_id={container_id}
 											microclimate_id={microclimate_id}
 											startDate={startDate}
@@ -265,7 +266,7 @@ export function Ciclos(props){
 							microclimate_id={suggestion.microclimate.id}
 							startDate={suggestion.start_date.date}
 							estimatedDate={suggestion.estimated_date.date}
-							finishDate={suggestion.finish_date}
+							finishDate={ suggestion.finish_date===null ? "Aún sin terminar " :suggestion.finish_date.date}
 							available={available}
 							deleteCycle={deleteCycle}
 							updateCycle={updateCycle}
