@@ -94,12 +94,9 @@ class AppBarAutocomplete extends Component{
 						</Paper>}
 					
 					</div>
-					<div width="10%" style={{ float:'right' }} >
-						<button onClick={ this.LogOut } class="btn btn-info btn-lg">
-							<span class="glyphicon glyphicon-log-out"></span> Log out
-						</button>
-					</div>
+
 				</div>
+
 		    );
         } else{
         	return(null);
