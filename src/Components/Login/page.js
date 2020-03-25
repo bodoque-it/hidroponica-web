@@ -31,10 +31,11 @@ function Page(props) {
                         marginLeft={0}
                         height={300}
                         width={300}
+                        style={{borderRadius:'5%'}}
                     >
-                        <div className="container" >
+                        <div className="container">
                             <form onSubmit={handleSubmit} className="white" >
-                                <br/> <Avatar>A</Avatar> <br/>
+                                <br/> <Avatar style={{backgroundColor:"#007bff"}}></Avatar> <br/>
                                 <div className="input-field" >
                                     <label htmlFor="username" > Nombre de Usuario </label>
                                     <input type="username" id="username" onChange={handleChange} />
@@ -44,7 +45,7 @@ function Page(props) {
                                     <input type="password" id="password" onChange={handleChange} />
                                 </div>
                                 <div className="input-field" >
-                                    <br/> <button className="btn pink lighten-1 z-depth-0" > Iniciar sesión </button>
+                                    <br/> <button className="btn btn-outline-primary" > Iniciar sesión </button>
                                     <div className="red-text center"  >
                                         { authError ? <p> {authError} </p> : null }
                                     </div>
