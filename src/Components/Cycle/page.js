@@ -130,6 +130,7 @@ export function Cycle(props) {
 		closeModal,
 		open
 	} = props;
+	console.log("ahhh heinz ql: "+props.data)
 	const classes = useStyles();
 	return(
 		<div>
@@ -256,11 +257,11 @@ export function Ciclos(props){
 						<Cycle
 							id={suggestion.id}
 							containers={suggestion.containers}
-							container_id={suggestion.container_id}
-							microclimate_id={suggestion.microclimate_id}
-							startDate={suggestion.startDate}
-							estimatedDate={suggestion.estimatedDate}
-							finishDate={suggestion.finishDate}
+							container_id={suggestion.container.id}
+							microclimate_id={suggestion.microclimate.id}
+							startDate={suggestion.start_date.date}
+							estimatedDate={suggestion.estimated_date.date}
+							finishDate={suggestion.finish_date}
 							available={available}
 							deleteCycle={deleteCycle}
 							updateCycle={updateCycle}

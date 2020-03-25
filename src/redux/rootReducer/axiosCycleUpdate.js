@@ -1,13 +1,14 @@
 import { cycleUpdate } from '../actions/actions';
 import axios from 'axios';
 
-function axiosCycleUpdate(id_cycle, fk_container, fk_microclimate,new_estimated_date) {
+function axiosCycleUpdate(id_cycle, fk_container, fk_microclimate,new_estimated_date, new_isFinish ) {
     return dispatch => {
             const cycle = {
             fk_user: 1,
             fk_container: fk_container,
             fk_microclimate: fk_microclimate,
             estimated_date: new_estimated_date,
+            isFinish: new_isFinish
         }
 
         

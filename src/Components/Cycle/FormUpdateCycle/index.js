@@ -7,9 +7,6 @@ import {Modal, ModalHeader,ModalFooter, Button, Form, FormGroup, Label, Input, C
 class FormUpdateCycle extends Component {
     constructor(props){
         super(props);
-        this.container_idInput = React.createRef(); 
-        this.microclimate_idInput = React.createRef();
-        this.estimatedDateInput = React.createRef();
         this.state = {
             container_id: props.container_id,
             microclimate_id: props.microclimate_id,
