@@ -38,6 +38,15 @@
 .card-color-gradient-terminated{
     background:linear-gradient(-30deg,rgba(213,138,18, 0.979),transparent);
 }
+.color-terminated{
+  color: rgba(213,138,18, 0.979);
+}
+.color-active{
+  color: rgba(99, 168, 97, 0.979);
+}
+.guia{
+  display:block;
+}
 .dato{
   text-align: center;
   display:grid;

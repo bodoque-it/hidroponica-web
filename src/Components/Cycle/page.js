@@ -13,6 +13,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CancelIcon from '@material-ui/icons/Cancel';
+import LensIcon from '@material-ui/icons/Lens';
 
 // Formulario PopUp
 import FormAddCycle from './FormAddCycle';
@@ -143,94 +145,155 @@ export function Cycle(props) {
 	} = props;
 	const classes = useStyles();
 	const handleFullDatetime = datetime => {
-        datetime = datetime.split(/[- :]/)
-        datetime = datetime[2] + "/" + datetime[1] + "/" + datetime[0] +"  " +  datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
-        return datetime
+		if(datetime!==null){
+	        datetime = datetime.split(/[- :]/)
+	        datetime = datetime[2] + "/" + datetime[1] + "/" + datetime[0] +"  " +  datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
+	        return datetime	
+		}
     }
 	const handleDatetime = datetime => {
         datetime = datetime.split(/[- :]/)
         datetime = datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
         return datetime
     }
-	return(
-		<div>
-		  <ExpansionPanel className={finishDate===null? "card-color-gradient":"card-color-gradient-terminated"}>
-			<ExpansionPanelSummary
-			  expandIcon={<ExpandMoreIcon />}
-			  aria-controls="panel1a-content"
-			  id="panel1a-header"
-			>
-			<div style={{width:"42.5%"}}>
-		  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)}</Typography>
-	  		</div>
-	  		<div style={{width:"42.5%"}}>
-		  		<Typography className={classes.heading}>Fecha de termino estimada: {handleFullDatetime( estimatedDate)}</Typography>
-	  		</div>
-		  	<div className="row" style={{width:"15%", foat:"right"}}>
-		  		<Grid container spacing={0}>
-			  		<Grid item xs={4}>
-			  			<Fab aria-label="edit" size="small" className={classes.fab} >
-							<EditIcon color="secondary" onClick={() => updateCycle(id, container.id, microclimate.id, estimatedDate, true)} />
-						</Fab>
-			  		</Grid>
-			  		<Grid item xs={4}>
-						<Fab aria-label="edit" size="small" className={classes.fab} >
-							<EditIcon color="primary" onClick={openModal} />
-						</Fab>
-						<Popup  open={open}
-								closeOnDocumentClick
-								onClose={closeModal} >
-							<FormUpdateCycle
-									id_cycle={id}
-									container_id={container.id}
-									microclimate_id={microclimate.id}
-									startDate={startDate}
-									estimatedDate={estimatedDate}
-									available={available}
-									finishDate={finishDate}
-									updateCycle={updateCycle} 
-									closeModal={closeModal}
-									/>
-						</Popup>
-					</Grid>
-					<Grid item xs={4}>
-			  			<Fab aria-label="delete" size="small" color="secondary" className={classes.fab}>
-							<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteCycle(id)} />
-						</Fab>
-			  		</Grid>
-				</Grid>
-		  	</div>
-			</ExpansionPanelSummary>
-			<ExpansionPanelDetails style={{display:'block'}}>
-				<div>
-					<Grid container spacing={1}>
-						<Grid item xs={6}>
-							<Microclima 
-								name={microclimate.name} 
-                                intensity={microclimate.intensity}
-                                lightType={microclimate.lightType}
-                                waterPH={microclimate.waterPH}
-                                dailyHours={microclimate.dailyHours}
-                                lightStartTime={handleDatetime( microclimate.lightStartTime.date) }
-                                temperature={microclimate.temperature}
-                                humidity={microclimate.humidity}
-							/>
+    if (finishDate===null){
+    	return(
+			<div>
+			  <ExpansionPanel className="card-color-gradient">
+				<ExpansionPanelSummary
+				  expandIcon={<ExpandMoreIcon />}
+				  aria-controls="panel1a-content"
+				  id="panel1a-header"
+				>
+				<div style={{width:"42.5%"}}>
+			  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)}</Typography>
+		  		</div>
+		  		<div style={{width:"42.5%"}}>
+			  		<Typography className={classes.heading}>Fecha de termino estimada: {handleFullDatetime( estimatedDate)}</Typography>
+		  		</div>
+			  	<div className="row" style={{width:"15%", foat:"right"}}>
+			  		<Grid container spacing={0}>
+			  			<Grid item xs={4}>
+				  			<Fab aria-label="Terminar" color="secondary" size="small" className={classes.fab} >
+								<CancelIcon  onClick={() => updateCycle(id, container.id, microclimate.id, estimatedDate, true)} />
+							</Fab>
+				  		</Grid>
+					  	<Grid item xs={4}>
+							<Fab aria-label="editar" size="small" className={classes.fab} >
+								<EditIcon color="primary" onClick={openModal} />
+							</Fab>
+							<Popup  open={open}
+									closeOnDocumentClick
+									onClose={closeModal} >
+								<FormUpdateCycle
+										id_cycle={id}
+										container_id={container.id}
+										microclimate_id={microclimate.id}
+										startDate={startDate}
+										estimatedDate={estimatedDate}
+										available={available}
+										finishDate={finishDate}
+										updateCycle={updateCycle} 
+										closeModal={closeModal}
+										/>
+							</Popup>
 						</Grid>
-						<Grid item xs={6}>
-							<div style={{margin:'0.4rem'}}>
-								<Container
-									id={container.id}
-									name={container.name}
-									volume={container.volume}
+						<Grid item xs={4}>
+				  			<Fab aria-label="delete" size="small" color="secondary" className={classes.fab}>
+								<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteCycle(id)} />
+							</Fab>
+				  		</Grid>
+					</Grid>
+			  	</div>
+				</ExpansionPanelSummary>
+				<ExpansionPanelDetails style={{display:'block'}}>
+					<div>
+						<Grid container spacing={1}>
+							<Grid item xs={6}>
+								<Microclima 
+									name={microclimate.name} 
+	                                intensity={microclimate.intensity}
+	                                lightType={microclimate.lightType}
+	                                waterPH={microclimate.waterPH}
+	                                dailyHours={microclimate.dailyHours}
+	                                lightStartTime={handleDatetime( microclimate.lightStartTime.date) }
+	                                temperature={microclimate.temperature}
+	                                humidity={microclimate.humidity}
 								/>
-							</div>
+							</Grid>
+							<Grid item xs={6}>
+								<div style={{margin:'0.4rem'}}>
+									<Container
+										id={container.id}
+										name={container.name}
+										volume={container.volume}
+									/>
+								</div>
+							</Grid>
 						</Grid>
+					</div>
+				</ExpansionPanelDetails>
+			  </ExpansionPanel>
+			 </div>
+		)
+    } else{
+    	return(
+			<div>
+			  <ExpansionPanel className="card-color-gradient-terminated">
+				<ExpansionPanelSummary
+				  expandIcon={<ExpandMoreIcon />}
+				  aria-controls="panel1a-content"
+				  id="panel1a-header"
+				>
+				<div style={{width:"42.5%"}}>
+			  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)}</Typography>
+		  		</div>
+		  		<div style={{width:"42.5%"}}>
+			  		<Typography className={classes.heading}>Fecha de termino: {handleFullDatetime( finishDate.date)}</Typography>
+		  		</div>
+			  	<div className="row" style={{width:"15%", foat:"right"}}>
+			  		<Grid container spacing={0}>
+						<Grid item xs={12}>
+				  			<Fab aria-label="delete" size="small" color="secondary" className={classes.fab}>
+								<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteCycle(id)} />
+							</Fab>
+				  		</Grid>
 					</Grid>
-				</div>
-			</ExpansionPanelDetails>
-		  </ExpansionPanel>
-		 </div>
-	)
+			  	</div>
+				</ExpansionPanelSummary>
+				<ExpansionPanelDetails style={{display:'block'}}>
+					<div>
+						<Grid container spacing={1}>
+							<Grid item xs={6}>
+								<Microclima 
+									name={microclimate.name} 
+	                                intensity={microclimate.intensity}
+	                                lightType={microclimate.lightType}
+	                                waterPH={microclimate.waterPH}
+	                                dailyHours={microclimate.dailyHours}
+	                                lightStartTime={handleDatetime( microclimate.lightStartTime.date) }
+	                                temperature={microclimate.temperature}
+	                                humidity={microclimate.humidity}
+								/>
+							</Grid>
+							<Grid item xs={6}>
+								<div style={{margin:'0.4rem'}}>
+									<Container
+										id={container.id}
+										name={container.name}
+										volume={container.volume}
+									/>
+								</div>
+							</Grid>
+						</Grid>
+					</div>
+				</ExpansionPanelDetails>
+			  </ExpansionPanel>
+			 </div>
+		)
+    }
+    
+	
 }
 export function Container(props) {
 	console.log("Container = ");
@@ -386,6 +449,14 @@ export function Ciclos(props){
 					</ButtonToolbar>
 					
 					</label>
+					<div className="row">
+						<div className="col" align="right">
+							<LensIcon className="color-active" fontSize="large"/> Ciclos Activos
+						</div>
+						<div className="col" align="left">
+							<LensIcon className="color-terminated" fontSize="large"/> Ciclos Terminados
+						</div>
+					</div>
 				</div>
 			</div>
 			<br></br>
