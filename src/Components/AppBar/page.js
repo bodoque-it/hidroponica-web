@@ -16,6 +16,7 @@ function Page(props) {
         suggestions,
         onChangeText,
         onChangeSelection,
+        LogOut
     } = props;
     if(title=="Rieles"){
         return(
@@ -32,16 +33,17 @@ function Page(props) {
                         onChangeText={onChangeText}
                         onChangeSelection={onChangeSelection}
                     />
-
                     <AccountCircle/>
+                   
                 </Toolbar>
+                
             </AppBar>           
         )
     }else{
         return(
         <AppBar position="relative" id="AppBar-general"   >
             <Toolbar>
-                <Typography variant="h4" color="inherit" >
+                <Typography variant="h4" color="inherit" width="30%" >
                     {title}
                 </Typography>
 
@@ -52,7 +54,12 @@ function Page(props) {
                     onChangeText={onChangeText}
                     onChangeSelection={onChangeSelection}
                 />
-
+                
+                <div width="10%" style={{ float:'right' }} >
+						<button onClick={ LogOut } class="btn btn-info btn-lg">
+							<span class="glyphicon glyphicon-log-out"></span> Log out
+						</button>
+					</div>
                 <AccountCircle/>
             </Toolbar>
         </AppBar>           

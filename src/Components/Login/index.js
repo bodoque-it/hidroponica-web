@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import signIn  from '../../redux/rootReducer/signIn'
 import setAuthToken from '../../redux/rootReducer/authentication'
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class Login extends Component {
         };
 
         this.validateForm = this.validateForm.bind(this);
+        this.iniciaSesion = this.iniciaSesion.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -28,20 +30,33 @@ class Login extends Component {
         })
     }
 
+    iniciaSesion(){
+        
+        this.props.history.push("/dashboard");
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.signIn( this.state.username, this.state.password )
         console.log(localStorage.getItem("token"))
-        this.props.history.push("/dashboard");
+        setTimeout(function() { //Start the timer
+             //After 1 second, set render to true
+             this.props.history.push("/dashboard");
+        }.bind(this), 500)
+        
     }
 
     render(){
         return(
-            <Page
-                authError={this.props.authError}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-            />
+            <div>
+              <Page
+                    authError={this.props.authError}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    iniciaSesion={this.iniciaSesion}
+                />
+            
+            </div>
         );
     }
 }

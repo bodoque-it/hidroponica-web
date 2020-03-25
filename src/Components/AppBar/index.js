@@ -7,6 +7,7 @@ import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestio
 import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
 import fetchContainersSuggestions from '../../redux/rootReducer/fetchContainersSuggestions';
 import fetchAvailableSuggestions from '../../redux/rootReducer/fetchAvailableSuggestions';
+import logOut from '../../redux/rootReducer/logOut';
 
 class AppBar extends Component{
 	componentWillMount(){
@@ -18,7 +19,6 @@ class AppBar extends Component{
             this.props.fetchAvailableSuggestions("");
         }
         else if( this.state.title === "Microclimas"  ){
-            console.log("AHHHHHHHHH")
             this.props.fetchMicroclimatesSuggestions("");
         }
         else if( this.state.title === "Contenedores"  ){
@@ -34,7 +34,14 @@ class AppBar extends Component{
 
         this.onChangeText = this.onChangeText.bind(this);
         this.onChangeSelection = this.onChangeSelection.bind(this);
+        this.LogOut = this.LogOut.bind(this);
     }
+
+    LogOut(){
+		this.props.logOut("");
+		console.log("salte de aqui wn")
+		this.props.history.push("/");
+	}
 
     onChangeText(text){
         this.setState({ text });
@@ -79,6 +86,7 @@ class AppBar extends Component{
                 suggestions={this.props.suggestions}
                 onChangeText={this.onChangeText}
                 onChangeSelection={this.onChangeSelection}
+                LogOut={this.LogOut}
             />
         )
     }
@@ -96,6 +104,7 @@ const mapDispatchToProps = {
     fetchMicroclimatesSuggestions,
     fetchContainersSuggestions,
     fetchAvailableSuggestions,
+    logOut
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(AppBar));

@@ -13,6 +13,7 @@ function Page(props) {
         authError,
         handleChange,
         handleSubmit,
+        iniciaSesion
     } = props;
     
     return(
@@ -45,7 +46,7 @@ function Page(props) {
                                     <input type="password" id="password" onChange={handleChange} />
                                 </div>
                                 <div className="input-field" >
-                                    <br/> <button className="btn btn-outline-primary" > Iniciar sesión </button>
+                                    <br/> <button  className="btn btn-outline-primary" > Iniciar sesión </button>
                                     <div className="red-text center"  >
                                         { authError ? <p> {authError} </p> : null }
                                     </div>
