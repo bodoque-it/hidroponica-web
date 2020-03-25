@@ -141,6 +141,7 @@ export function Cycle(props) {
 		closeModal,
 		open
 	} = props;
+	console.log("ahhh heinz ql: "+props.data)
 	const classes = useStyles();
 	const handleFullDatetime = datetime => {
         datetime = datetime.split(/[- :]/)
@@ -160,24 +161,28 @@ export function Cycle(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			<div style={{width:"80%"}}>
-		  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)} --> Fecha de terimno estimada: {handleFullDatetime( estimatedDate)}</Typography>
+			<div style={{width:"40%"}}>
+		  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)}</Typography>
+	  		</div>
+	  		<div style={{width:"40%"}}>
+		  		<Typography className={classes.heading}>Fecha de termino estimada: {handleFullDatetime( estimatedDate)}</Typography>
 	  		</div>
 		  	<div className="row" style={{width:"20%", foat:"right"}}>
 		  		<Grid container spacing={0}>
-			  		<Grid item xs={6}>
-			  			<Fab aria-label="delete" className={classes.fab, classes.add}>
-							<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteCycle(id)} />
+			  		<Grid item xs={4}>
+			  			<Fab aria-label="edit" size="small" className={classes.fab} >
+							<EditIcon color="secondary" onClick={() => updateCycle(id, container.id, microclimate.id, estimatedDate, true)} />
 						</Fab>
 			  		</Grid>
-			  		<Grid item xs={6}>
-						<Fab aria-label="edit" className={classes.fab, classes.add} >
+			  		<Grid item xs={4}>
+						<Fab aria-label="edit" size="small" className={classes.fab} >
 							<EditIcon color="primary" onClick={openModal} />
 						</Fab>
 						<Popup  open={open}
 								closeOnDocumentClick
 								onClose={closeModal} >
 							<FormUpdateCycle
+									id_cycle={id}
 									container_id={container.id}
 									microclimate_id={microclimate.id}
 									startDate={startDate}
@@ -189,6 +194,11 @@ export function Cycle(props) {
 									/>
 						</Popup>
 					</Grid>
+					<Grid item xs={4}>
+			  			<Fab aria-label="delete" size="small" color="secondary" className={classes.fab}>
+							<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteCycle(id)} />
+						</Fab>
+			  		</Grid>
 				</Grid>
 		  	</div>
 			</ExpansionPanelSummary>

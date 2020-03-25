@@ -12,7 +12,7 @@ function axiosCycleDelete(id_cycle){
                 }
             };
             try {
-                const res = await axios.delete(`/api/cycle/1/${id_cycle}` , JSON.stringify(config));
+                const res = await axios.delete(`/api/cycles/${id_cycle}` , JSON.stringify(config));
                 dispatch(cycleDelete())
             } catch (error) {
                 console.log(error);

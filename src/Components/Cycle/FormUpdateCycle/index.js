@@ -8,6 +8,7 @@ class FormUpdateCycle extends Component {
     constructor(props){
         super(props);
         this.state = {
+			id_cycle: props.id_cycle,
             container_id: props.container_id,
             microclimate_id: props.microclimate_id,
             estimatedDate: props.estimatedDate,
@@ -68,7 +69,7 @@ class FormUpdateCycle extends Component {
     
  
     render(){
-		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimated_date)
+		const errors = this.validate(this.state.container_id,this.state.microclimate_id,this.state.estimatedDate)
 		const isEmpty = this.props.available.length === 0;
         return(
             <div>
@@ -97,7 +98,7 @@ class FormUpdateCycle extends Component {
 									{ isEmpty ?
 										<option>""</option>
 										:
-											this.props.available.container_available.map( ava =>
+											this.props.available.microclimates_available.map( ava =>
 												<option name="microclimate_id" value={ava.id} onChange={this.handleInputChange}> { ava.name } </option>
 												)
 									}
@@ -138,9 +139,11 @@ class FormUpdateCycle extends Component {
 							 || this.state.estimatedDate.length == 0
 							 ) ?
 							  () =>  alert("no has completado el Formulario") 
-                                 : () => this.state.updateCycle(this.state.container_id,
+                                 : () => this.state.updateCycle(this.state.id_cycle,
+									 							this.state.container_id,
                                                                 this.state.microclimate_id,
-                                                                this.state.estimatedDate
+																this.state.estimatedDate,
+																false
                                  ) } >
                         Modificar
                     </Button>
