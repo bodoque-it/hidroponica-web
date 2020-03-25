@@ -156,8 +156,8 @@ class FormAddCycle extends Component {
                              || this.state.microclimate_name.length == 0) ?
 							  () =>
 							    alert("no has completado el Formulario") 
-                              : () => this.state.addCycle(this.state.container_id,
-                                                        this.state.microclimate_id,
+                              : () => this.state.addCycle(this.state.container_name,
+                                                        this.state.microclimate_name,
 
 														this.state.estimatedDate)
 													} >
