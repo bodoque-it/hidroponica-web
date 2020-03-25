@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import './styles.css';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
+//imagenes
+import blanca from './images/luz-blanca.png';
+import roja from './images/luz-infraroja.png';
+import verde from './images/luz-verde.png';
+
 //IMPORTS NECESARIOS PARA LOS MENUS EXPANSIVOS
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -13,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormAddCycle from './FormAddCycle';
 import FormUpdateCycle from './FormUpdateCycle';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 // import Popup from './Popup/index'
 import Popup from "reactjs-popup";
 import Button from 'react-bootstrap/Button';
@@ -21,8 +27,12 @@ import Button from 'react-bootstrap/Button';
 //IMPORTS NECESARIOS PARA LAS TARJETAS
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
 
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 //IMPORTS NECESARIOS PARA BOTONES
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -34,6 +44,7 @@ import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { ButtonToolbar } from 'react-bootstrap';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -118,8 +129,8 @@ export default Page;
 export function Cycle(props) {
 	const {
 		id,
-		container_id,
-		microclimate_id,
+		container,
+		microclimate,
 		startDate,
 		estimatedDate,
 		finishDate,
@@ -130,8 +141,17 @@ export function Cycle(props) {
 		closeModal,
 		open
 	} = props;
-	console.log("ahhh heinz ql: "+props.data)
 	const classes = useStyles();
+	const handleFullDatetime = datetime => {
+        datetime = datetime.split(/[- :]/)
+        datetime = datetime[2] + "/" + datetime[1] + "/" + datetime[0] +"  " +  datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
+        return datetime
+    }
+	const handleDatetime = datetime => {
+        datetime = datetime.split(/[- :]/)
+        datetime = datetime[3] + ":" + datetime[4] + ":" + datetime[5].split(/[.]/)[0]
+        return datetime
+    }
 	return(
 		<div>
 		  <ExpansionPanel className="card-color-gradient">
@@ -140,74 +160,187 @@ export function Cycle(props) {
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			  <Typography className={classes.heading}>ID: {id}</Typography>
-			  <Typography className={classes.secondaryHeading}> 
-			  	ID Contenedor: {container_id}
-			  	ID Microclima: {microclimate_id}<p/>
-				Fecha inicio: {startDate}<p/>
-				Fecha estimada: {estimatedDate}<p/>
-				Fecha fin: {finishDate}<p/>
-			  </Typography>
+			<div style={{width:"80%"}}>
+		  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)} --> Fecha de terimno estimada: {handleFullDatetime( estimatedDate)}</Typography>
+	  		</div>
+		  	<div className="row" style={{width:"20%", foat:"right"}}>
+		  		<Grid container spacing={0}>
+			  		<Grid item xs={6}>
+			  			<Fab aria-label="delete" className={classes.fab, classes.add}>
+							<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteCycle(id)} />
+						</Fab>
+			  		</Grid>
+			  		<Grid item xs={6}>
+						<Fab aria-label="edit" className={classes.fab, classes.add} >
+							<EditIcon color="primary" onClick={openModal} />
+						</Fab>
+						<Popup  open={open}
+								closeOnDocumentClick
+								onClose={closeModal} >
+							<FormUpdateCycle
+									container_id={container.id}
+									microclimate_id={microclimate.id}
+									startDate={startDate}
+									estimatedDate={estimatedDate}
+									available={available}
+									finishDate={finishDate}
+									updateCycle={updateCycle} 
+									closeModal={closeModal}
+									/>
+						</Popup>
+					</Grid>
+				</Grid>
+		  	</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{display:'block'}}>
 				<div>
-					<div className="row">
-						<div className="col" >
-								<Fab aria-label="delete" className={classes.fab, classes.add}>
-									<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteCycle(id)} />
-								</Fab>
-								<Fab aria-label="edit" className={classes.fab, classes.add} >
-									<EditIcon color="primary" onClick={openModal} />
-								</Fab>
-								<Popup  open={open}
-										closeOnDocumentClick
-										onClose={closeModal} >
-									<FormUpdateCycle
-											container_id={container_id}
-											microclimate_id={microclimate_id}
-											startDate={startDate}
-											estimatedDate={estimatedDate}
-											available={available}
-											finishDate={finishDate}
-											updateCycle={updateCycle} 
-											closeModal={closeModal}
-											/>
-								</Popup>
-						</div>
-					</div>
-					{/*<div className="row">
-						<div className="col">
-							{ <Contenedores
-								containers={containers}
-							/> }
-						</div>
-							</div>*/}
+					<Grid container spacing={1}>
+						<Grid item xs={6}>
+							<Microclima 
+								name={microclimate.name} 
+                                intensity={microclimate.intensity}
+                                lightType={microclimate.lightType}
+                                waterPH={microclimate.waterPH}
+                                dailyHours={microclimate.dailyHours}
+                                lightStartTime={handleDatetime( microclimate.lightStartTime.date) }
+                                temperature={microclimate.temperature}
+                                humidity={microclimate.humidity}
+							/>
+						</Grid>
+						<Grid item xs={6}>
+							<div style={{margin:'0.4rem'}}>
+								<Container
+									id={container.id}
+									name={container.name}
+									volume={container.volume}
+								/>
+							</div>
+						</Grid>
+					</Grid>
 				</div>
 			</ExpansionPanelDetails>
 		  </ExpansionPanel>
 		 </div>
 	)
 }
-/*export function RielDesactivado(props) {
+export function Container(props) {
+	console.log("Container = ");
+	console.log(props);
 	const {
+		id,
 		name,
-		location,
+		volume,
 	} = props;
-		
-	const classes = useStyles();
-	return(
-		<ExpansionPanel disabled>
-			<ExpansionPanelSummary
-			expandIcon={<ExpandMoreIcon />}
-			aria-controls="panel3a-content"
-			id="panel3a-header"
-			>
-			<Typography className={classes.heading}> {name} </Typography>
-			<Typography className={classes.secondaryHeading}> {location} </Typography>
-			</ExpansionPanelSummary>
-		</ExpansionPanel>
-  	)
-}*/
+  	const classes = useStyles();
+  	return (
+		<Card className="card">
+		<CardContent>
+			<div className="row">
+				<div className="col">
+				<Typography float="center" color="textSecondary" variant="h5"> 
+					Contenedor: { name }
+				</Typography>
+				</div>
+			</div>
+			<div>
+				<Table className={classes.table} aria-label="spanning table">
+					<TableRow>
+						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID de contenedor</h6> { id } </TableCell>
+						<TableCell align="center" width="33%"><h6>ESTADO</h6>  <div className={"text-success"}>En ciclo</div> </TableCell>
+						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
+					</TableRow>
+				</Table>
+			</div>
+		</CardContent>
+		</Card>
+  	);
+}
+function LightType(props){
+    console.log(props.type);
+    if(props.type == "blanca"){
+        return (<img src={blanca}/>);
+    }else if(props.type == "violeta"){
+        return (<img src={roja}/>);
+    }else{
+        return (<img src={verde}/>);
+    }
+}
+function Microclima( props ) {
+	console.log("Microclima = ");
+	console.log(props);
+    
+    return(
+        <div style={ { margin: '0.4rem'}} >
+            <Card className={"card"}>
+                <CardMedia className={"other-card-color-gradient"}>
+                <CardContent>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography variant="h5">Microclima: {props.name}</Typography>
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Tipo de luz:
+                                <br/> 
+                                <LightType type={props.lightType}/>
+                                <br/> 
+                                {props.lightType}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4} alignItems="center">
+                            <Paper className={"paper"}>Intensidad de luz:
+                                <div className={"dato"}>
+                                    {props.intensity}
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid container xs={4} spacing={1} style={{padding:"8px"}}>
+                            <Grid item xs={12}>
+                                <Paper className={"paper"} style={{padding:'0'}}>PH del Agua:
+                                    <div className={"dato"}>
+                                        {props.waterPH}
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper className={"paper"}>Humedad:
+                                    <div className={"dato"}>
+                                        {props.humidity} [%]
+                                    </div>
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Hora comienzo de luz:
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.lightStartTime}
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={"paper"}>Horas de luz:
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.dailyHours} [Horas]
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4} style={{paddingRight:"8px !important"}}>
+                            <Paper className={"paper"}>Temperatura:
+                                <br/>
+                                <div className={"dato"}>
+                                    {props.temperature} [°C]
+                                </div>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+                </CardMedia>
+            </Card>
+        </div>
+    )
+}
 export function Ciclos(props){
 	const {
 		suggestions,
@@ -257,9 +390,8 @@ export function Ciclos(props){
 					suggestions.map( suggestion =>
 						<Cycle
 							id={suggestion.id}
-							containers={suggestion.containers}
-							container_id={suggestion.container.id}
-							microclimate_id={suggestion.microclimate.id}
+							container={suggestion.container}
+							microclimate={suggestion.microclimate}
 							startDate={suggestion.start_date.date}
 							estimatedDate={suggestion.estimated_date.date}
 							finishDate={suggestion.finish_date}

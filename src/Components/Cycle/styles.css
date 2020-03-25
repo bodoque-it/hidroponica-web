@@ -35,3 +35,16 @@
 .card-color-gradient{
     background:linear-gradient(-30deg,rgba(99, 168, 97, 0.979),transparent);
 }
+.dato{
+  text-align: center;
+  display:grid;
+  align-items: center;
+  height: 50%;
+}
+.paper{
+  text-align: center;
+  height: 100%;
+  padding:0.4em !important;
+  border: 0.05em #000000 solid !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}

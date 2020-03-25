@@ -34,7 +34,6 @@ class FormAddRail extends Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-
 		this.setState({
 			[name]: value
 		});
@@ -54,12 +53,15 @@ class FormAddRail extends Component {
 	validate(name,infrastructure_address){
 		const errors = {
 			name: '',
+			infrastructure_address: ''
 		};
 		const regName = /^[a-zA-Z]{1,10}?([a-zA-Z0-9 _-]{0,15})$/;
 		if (this.state.touched.name && !regName.test(name) ) {
 			errors.name = 'No has escrito un nombre valido';
 		}
-		
+		if(this.state.touched.infrastructure_address && infrastructure_address===''){
+			errors.infrastructure_address = "No se ha ingresado ubicación"
+		}
 		return errors;
 	}
 
@@ -104,8 +106,9 @@ class FormAddRail extends Component {
 					 			<Label htmlFor="infrastructure_address" md={2} > Ubicación </Label>
 					 			<Col md={10} >
 									<Input type="select" name="infrastructure_address" id="infrastructure_address" value={this.state.infrastructure_address} onBlur={this.handleBlur('infrastructure_address')} onChange={this.handleInputChange} >
+									<option></option>
 									{ isEmpty ?
-										<option>""</option>
+										<br/>
 										:
 											this.props.infrastructures.map( infrastructure =>
 													<option> { infrastructure.address } </option>
