@@ -167,6 +167,7 @@ export function Cycle(props) {
 											microclimate_id={microclimate_id}
 											startDate={startDate}
 											estimatedDate={estimatedDate}
+											available={available}
 											finishDate={finishDate}
 											updateCycle={updateCycle} 
 											closeModal={closeModal}
