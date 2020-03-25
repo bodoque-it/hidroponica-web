@@ -25,7 +25,7 @@ class Cycles extends Component {
     }
 
     deleteCycle(id_cycle){
-        this.props.axiosRailDelete(id_cycle);
+        this.props.axiosCycleDelete(id_cycle);
         window.location.reload();
     }
 
@@ -35,7 +35,7 @@ class Cycles extends Component {
     }
 
     updateCycle(id_cycle,begin_date, estimated_date, finish_date){
-        this.props.axiosRailUpdate(id_cycle,begin_date, estimated_date, finish_date);
+        this.props.axiosCycleUpdate(id_cycle,begin_date, estimated_date, finish_date);
         window.location.reload();
     }
 
@@ -76,6 +76,7 @@ class Cycles extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("ciclos: "+state.cycles)
     return {
         suggestions: state.cycles,
         available: state.suggestions,

@@ -82,6 +82,7 @@ export function rootReducer(state = defaultState, {type,payload}) {
         }
 
         case FIND_CYCLES_SUGGESTIONS:{
+            console.log(payload)
             return {
                 ...state,
                 cycles: payload
