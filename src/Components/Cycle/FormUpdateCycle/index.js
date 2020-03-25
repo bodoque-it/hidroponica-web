@@ -46,7 +46,7 @@ class FormUpdateCycle extends Component {
 		});
 	}
 
-	validate(container_id,microclimate_id,startDate,estimatedDate,finishDate){
+	validate(container_id,microclimate_id,estimatedDate){
 		const errors = {
             container_id: '',
             microclimate_id: '',
