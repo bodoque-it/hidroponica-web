@@ -141,7 +141,6 @@ export function Cycle(props) {
 		closeModal,
 		open
 	} = props;
-	console.log("ahhh heinz ql: "+props.data)
 	const classes = useStyles();
 	const handleFullDatetime = datetime => {
         datetime = datetime.split(/[- :]/)
@@ -155,19 +154,19 @@ export function Cycle(props) {
     }
 	return(
 		<div>
-		  <ExpansionPanel className="card-color-gradient">
+		  <ExpansionPanel className={finishDate===null? "card-color-gradient":"card-color-gradient-terminated"}>
 			<ExpansionPanelSummary
 			  expandIcon={<ExpandMoreIcon />}
 			  aria-controls="panel1a-content"
 			  id="panel1a-header"
 			>
-			<div style={{width:"40%"}}>
+			<div style={{width:"42.5%"}}>
 		  		<Typography className={classes.heading}>Fecha inicio: {handleFullDatetime( startDate)}</Typography>
 	  		</div>
-	  		<div style={{width:"40%"}}>
+	  		<div style={{width:"42.5%"}}>
 		  		<Typography className={classes.heading}>Fecha de termino estimada: {handleFullDatetime( estimatedDate)}</Typography>
 	  		</div>
-		  	<div className="row" style={{width:"20%", foat:"right"}}>
+		  	<div className="row" style={{width:"15%", foat:"right"}}>
 		  		<Grid container spacing={0}>
 			  		<Grid item xs={4}>
 			  			<Fab aria-label="edit" size="small" className={classes.fab} >
