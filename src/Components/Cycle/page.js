@@ -159,6 +159,9 @@ export function Cycle(props) {
 								<Fab aria-label="edit" className={classes.fab, classes.add} >
 									<EditIcon color="primary" onClick={openModal} />
 								</Fab>
+								<Fab aria-label="edit" className={classes.fab, classes.add} >
+									<EditIcon color="secondary" onClick={openModal} />
+								</Fab>
 								<Popup  open={open}
 										closeOnDocumentClick
 										onClose={closeModal} >
