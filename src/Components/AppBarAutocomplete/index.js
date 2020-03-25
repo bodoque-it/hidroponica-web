@@ -4,6 +4,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import './styles.css';
+import logOut from '../../redux/rootReducer/logOut';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class AppBarAutocomplete extends Component{
     constructor(props) {
@@ -11,8 +14,16 @@ class AppBarAutocomplete extends Component{
 
         this.state = {
             isOpen: false,
-        };
-    }
+		};
+		this.LogOut = this.LogOut.bind(this);
+
+	}
+	
+	LogOut(){
+		this.props.logOut("");
+		console.log("salte de aqui wn")
+		this.props.history.push("/");
+	}
 
     render() {
         const {
@@ -27,59 +38,68 @@ class AppBarAutocomplete extends Component{
         } = this.state;
         if(title=='Rieles' || title=='Ciclos' || title=='Microclimas'){
         	return (
-		        <div className="main-container" style={{
-		            position: 'absolute', 
-		            left: '50%', 
-		            top: '50%',
-		            transform: 'translate(-50%, -50%)'
-		        }} >
-		            <div className="container-icon">
-		                <SearchIcon />
-		            </div>
-		            <InputBase
-		                placeholder="Search…"
-		                value={text}
-		                style={{ width: '100%' }}
-		                onChange={(event) => {
-		                    const newText = event.target.value;
+				<div>
+					<div className="main-container" style={{
+						position: 'absolute', 
+						left: '50%', 
+						top: '50%',
+						
+						transform: 'translate(-50%, -50%)'
+					}} >
+						<div className="container-icon">
+							<SearchIcon />
+						</div>
+						<InputBase
+							placeholder="Search…"
+							value={text}
+							style={{ width: '100%' }}
+							onChange={(event) => {
+								const newText = event.target.value;
 
-		                    onChangeText(newText);
+								onChangeText(newText);
 
-		                    if (!isOpen && newText) {
-		                        this.setState({ isOpen: true });
-		                    } else if (isOpen && !newText) {
-		                        this.setState({ isOpen: false });
-		                    }
-		                }}
-		                onBlur={() => {
-		                    setTimeout(() => this.setState({ isOpen: false }), 100);
-		                }}
-		                onFocus={() => {
-		                    if (text) {
-		                        this.setState({ isOpen: true });
-		                    }
-		                }}
-		                onKeyPress={(event) => {
-		                    if (event.key === 'Enter' && text) {
-		                        onChangeSelection(text);
-		                    }
-		                }}
-		            />
-		            {isOpen &&
-		            <Paper className="container-results" square>
-		                {suggestions.map(suggestion =>
-		                <MenuItem
-		                    key={suggestion.locate}
-		                    component="div"
-		                    onClick={() => {
-		                        onChangeSelection(suggestion.name);
-		                        this.setState({ isOpen: false });
-		                    }}
-		                >
-		                    {suggestion.name}
-		                </MenuItem>)}
-		            </Paper>}
-		        </div>
+								if (!isOpen && newText) {
+									this.setState({ isOpen: true });
+								} else if (isOpen && !newText) {
+									this.setState({ isOpen: false });
+								}
+							}}
+							onBlur={() => {
+								setTimeout(() => this.setState({ isOpen: false }), 100);
+							}}
+							onFocus={() => {
+								if (text) {
+									this.setState({ isOpen: true });
+								}
+							}}
+							onKeyPress={(event) => {
+								if (event.key === 'Enter' && text) {
+									onChangeSelection(text);
+								}
+							}}
+						/>
+						{isOpen &&
+						<Paper className="container-results" square>
+							{suggestions.map(suggestion =>
+							<MenuItem
+								key={suggestion.locate}
+								component="div"
+								onClick={() => {
+									onChangeSelection(suggestion.name);
+									this.setState({ isOpen: false });
+								}}
+							>
+								{suggestion.name}
+							</MenuItem>)}
+						</Paper>}
+					
+					</div>
+					<div width="10%" style={{ float:'right' }} >
+						<button onClick={ this.LogOut } class="btn btn-info btn-lg">
+							<span class="glyphicon glyphicon-log-out"></span> Log out
+						</button>
+					</div>
+				</div>
 		    );
         } else{
         	return(null);
@@ -88,4 +108,14 @@ class AppBarAutocomplete extends Component{
     }
 }
 
-export default AppBarAutocomplete;
+const mapStateToProps = (state) => {
+    return {
+        
+    };
+};
+
+const mapDispatchToProps = {
+    logOut,
+};
+
+export default withRouter(connect( mapStateToProps, mapDispatchToProps)(AppBarAutocomplete));

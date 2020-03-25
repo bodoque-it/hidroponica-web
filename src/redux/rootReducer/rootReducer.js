@@ -23,7 +23,9 @@ import {
         CYCLE_UPDATE,
         CONTAINER_ADD_IN_RAIL,
         LOGIN_ERROR,
-        LOGIN_SUCCESS
+        LOGIN_SUCCESS,
+        LOGOUT_ERROR,
+        LOGOUT_SUCCESS
 } from '../actions/actions';
          
 const defaultState = {
@@ -53,6 +55,21 @@ export function rootReducer(state = defaultState, {type,payload}) {
                 ...state,
                 authError: null,
                 logged: true
+            }
+        }
+        case LOGOUT_ERROR:{
+            console.log("Logout error")
+            return{
+                ...state,
+                authError: 'Logout failed'
+            }
+        }
+        case LOGOUT_SUCCESS:{
+            localStorage.setItem( "token",payload )
+            return{
+                ...state,
+                authError: null,
+                logged: false
             }
         }
         case FIND_CONTAINER_COUNT_SUGGESTIONS:{
