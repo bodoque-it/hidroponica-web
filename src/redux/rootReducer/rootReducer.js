@@ -36,7 +36,7 @@ const defaultState = {
     container: {},
     rails: [],
     authError: null,
-    token: null,
+    token: 'null',
     logged: false
 }
 
@@ -50,7 +50,7 @@ export function rootReducer(state = defaultState, {type,payload}) {
             }
         }
         case LOGIN_SUCCESS:{
-            localStorage.setItem( "token",payload.data )
+            localStorage.setItem( "token",payload )
             return{
                 ...state,
                 authError: null,

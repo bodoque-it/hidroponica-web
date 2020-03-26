@@ -19,7 +19,12 @@ function signIn( username_input, passwod_input ) {
             }
             try {
                 const res = await axios.post('/login', user , JSON.stringify(config));
-                dispatch(loginSuccess(res.data));
+                if ( res.data.data === 'sale mono sapo' || res.data.data == 'undefined'){
+                    dispatch(loginSuccess( null ));
+                }
+                else {
+                    dispatch(loginSuccess(res.data.data));
+                }
             } catch (error) {
                 dispatch(loginError(error));
             }

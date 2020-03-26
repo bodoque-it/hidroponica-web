@@ -3,14 +3,14 @@ import { Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ component,logged,titulo, ...rest }) => {
+const PrivateRoute = ({ component,titulo, ...rest }) => {
     let ComponentToRender = component;
 
   return (
     <Route
       {...rest}
       render={props =>
-        localStorage.getItem("token")
+        localStorage.getItem("token") != 'null' && localStorage.getItem("token")
           ? console.log("Trying to render component") || (
               <ComponentToRender title={titulo} />
             )
@@ -24,13 +24,9 @@ const PrivateRoute = ({ component,logged,titulo, ...rest }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ logged: state.logged });
+const mapStateToProps = (state) => ({
+  
+});
 export default withRouter(connect(mapStateToProps)(PrivateRoute));
-
-    
-        // <Route {...rest} render={props =>
-        //     !this.props.logged ? <Redirect to='/' /> : <Component {...props} />
-        //   }
-        // />
 
 

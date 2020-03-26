@@ -44,8 +44,6 @@ class App extends Component {
                     <PrivateRoute exact path='/rails' component={Plantilla} titulo="Rieles" />
                     <PrivateRoute exact path='/containers' component={Plantilla} titulo="Contenedores" />
                     <Redirect from="/" to="/login" />
-                    
-                    
                 </Switch>
             </BrowserRouter>
           </Provider>

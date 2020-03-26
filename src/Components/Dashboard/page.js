@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => {
 
 export default function Page(props) {
     const data = props.suggestions;
-    console.log("activos_container = ", data.active_container);
     return (
         <div className={"root"} align="center">
             <h3>Contadores y gráficos</h3>

@@ -38,7 +38,7 @@ class AppBar extends Component{
     }
 
     LogOut(){
-		this.props.logOut("");
+		this.props.logOut( null );
 		console.log("salte de aqui wn")
 		this.props.history.push("/");
 	}

@@ -37,12 +37,14 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+
         this.props.signIn( this.state.username, this.state.password )
-        console.log(localStorage.getItem("token"))
-        setTimeout(function() { //Start the timer
-             //After 1 second, set render to true
-             this.props.history.push("/dashboard");
-        }.bind(this), 500)
+        setTimeout(function() { 
+            console.log("token:" + localStorage.getItem("token"))
+            if ( localStorage.getItem('token') && localStorage.getItem('token') != 'null' && localStorage.getItem('token') != 'undefined' ){
+                    this.props.history.push("/dashboard");
+            } 
+        }.bind(this), 100)
         
     }
 
