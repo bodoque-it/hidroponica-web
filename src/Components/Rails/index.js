@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axiosRailDelete from '../../redux/rootReducer/axiosRailDelete';
 import axiosRailUpdate from '../../redux/rootReducer/axiosRailUpdate';
 import fetchRailCreate from '../../redux/rootReducer/fetchRailCreate';
+import fetchRailsSuggestions from '../../redux/rootReducer/fetchRailsSuggestions';
 
 
 class Rails extends Component {
@@ -31,17 +32,25 @@ class Rails extends Component {
 
     deleteRail(id_rail){
         this.props.axiosRailDelete(id_rail);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchRailsSuggestions('');
+        }.bind(this), 25)
     }
 
     addRiel(name,infrastructure_address){
         this.props.fetchRailCreate(name,infrastructure_address);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchRailsSuggestions('');
+            this.setState({ addModalShow : false })
+        }.bind(this), 25)
     }
 
     updateRiel(id_rail,name,infrastructure_address){
         this.props.axiosRailUpdate(id_rail,name,infrastructure_address);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchRailsSuggestions('');
+            this.setState({ open: false });
+        }.bind(this), 25)
     }
 
     addModalClose(){
@@ -96,6 +105,7 @@ const mapDispatchToProps = {
     axiosRailDelete,
     axiosRailUpdate,
     fetchRailCreate,
+    fetchRailsSuggestions
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Rails) ) ;

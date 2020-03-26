@@ -6,6 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axiosAddContainerInRail from '../../../redux/rootReducer/axiosAddContainerInRail';
+import fetchRailsSuggestions from '../../../redux/rootReducer/fetchRailsSuggestions';
 
 
 class FormAddContainer extends Component{
@@ -32,7 +33,10 @@ class FormAddContainer extends Component{
 
     addContainer( id_rail, name, volume ){
         this.props.axiosAddContainerInRail( id_rail, name, volume );
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchRailsSuggestions('');
+            this.closeModal()
+        }.bind(this), 25)
     }
 
 
@@ -150,6 +154,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     axiosAddContainerInRail,
+    fetchRailsSuggestions
 };
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps)(FormAddContainer));

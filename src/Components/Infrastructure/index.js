@@ -42,14 +42,17 @@ class Infrastructure extends Component{
     }
 
     addUbicacion( infrastructure_address ){
-        console.log("ubicacion: "+infrastructure_address);
         this.props.axiosInfrastructureCreate( infrastructure_address );
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.axiosInfrastructuresSuggestions("");
+        }.bind(this), 25)
     }
 
     deleteUbicacion( address ){
         this.props.axiosInfrastructureDelete( address );
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.axiosInfrastructuresSuggestions("");
+        }.bind(this), 25)
     }
 
     handleInputChange(event){

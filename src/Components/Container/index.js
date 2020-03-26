@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import axiosContainerDelete from '../../redux/rootReducer/axiosContainerDelete';
 import axiosContainerUpdate from '../../redux/rootReducer/axiosContainerUpdate';
 import fetchContainerCreate from '../../redux/rootReducer/fetchContainerCreate';
+import fetchContainersSuggestions from '../../redux/rootReducer/fetchContainersSuggestions';
 
 
 class Containers extends Component {
     constructor(props){
         super(props);
         this.state = {
-            addModalShow : false,
             open: false,
             containerSelect : {
                 idContainer: null,
@@ -21,35 +21,28 @@ class Containers extends Component {
         };
 
         this.deleteContainer = this.deleteContainer.bind(this);
-        this.addContainer = this.addContainer.bind(this);
         this.updateContainer = this.updateContainer.bind(this);
-        this.addModalClose = this.addModalClose.bind(this);
-        this.addModalOpen = this.addModalOpen.bind(this);
+        
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
     deleteContainer(id_container){
         this.props.axiosContainerDelete(id_container);
-        window.location.reload();
-    }
-
-    addContainer(name,volume){
-        this.props.fetchContainerCreate(name,volume);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchContainersSuggestions("");
+        }.bind(this), 25)
     }
 
     updateContainer(id_container,name,volume){
         this.props.axiosContainerUpdate(id_container,name,volume);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchContainersSuggestions("");
+            this.setState({ open: false });
+        }.bind(this), 25)
     }
 
-    addModalClose(){
-        this.setState({ addModalShow : false })
-    }
-    addModalOpen(){
-        this.setState({ addModalShow : true })
-    }
+    
 
     openModal( id_container, name, volume ) {
         this.setState({ open: true });
@@ -71,11 +64,8 @@ class Containers extends Component {
         	    <Page
                     suggestions={this.props.suggestions}
                     deleteContainer={this.deleteContainer}
-                    addContainer={this.addContainer}
                     updateContainer={this.updateContainer}
                     addModalShow={this.state.addModalShow}
-                    addModalClose={this.addModalClose}
-                    addModalOpen={this.addModalOpen}
                     openModal={this.openModal}
                     closeModal={this.closeModal}
                     open={this.state.open}
@@ -96,6 +86,7 @@ const mapDispatchToProps = {
     axiosContainerDelete,
     axiosContainerUpdate,
     fetchContainerCreate,
+    fetchContainersSuggestions
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Containers) ) ;

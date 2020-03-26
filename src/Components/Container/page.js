@@ -78,7 +78,6 @@ function Page(props) {
 	const {
 		suggestions,
 		deleteContainer,
-		addContainer,
 		updateContainer,
 		addModalShow,
 		addModalClose,
@@ -94,7 +93,6 @@ function Page(props) {
         	<Containers
 				suggestions={suggestions}
 				deleteContainer={deleteContainer}
-				addContainer={addContainer}
 				updateContainer={updateContainer}
 				addModalShow={addModalShow}
 				addModalClose={addModalClose}
@@ -181,8 +179,10 @@ export function ContainerTable(props) {
 		<TableRow>
 			<TableCell>{name}</TableCell>
 			<TableCell>{volume}</TableCell>
-			<TableCell>{active?<div className={"text-success"}>En ciclo</div>:<div className={"text-danger"}>Inactivo</div>
-			}</TableCell>
+			<TableCell>{	active 
+							? <div className={"text-success"}>En ciclo</div> 
+							: <div className={"text-danger"}>Inactivo</div> 
+						}</TableCell>
 			<TableCell>
 				<Grid container spacing={2}>
 					<Grid item xs={2}>
@@ -239,11 +239,7 @@ export function Containers(props){
 	const {
 		suggestions,
 		deleteContainer,
-		addContainer,
 		updateContainer,
-		addModalShow,
-		addModalClose,
-		addModalOpen,
 		openModal,
 		closeModal,
 		open,
@@ -276,7 +272,7 @@ export function Containers(props){
 								name={suggestion.name}
 								volume={suggestion.volume}
 								id={suggestion.id}
-								active={suggestions.active}
+								active={suggestion.active}
 								deleteContainer={deleteContainer}
 								updateContainer={updateContainer}
 								openModal={openModal}

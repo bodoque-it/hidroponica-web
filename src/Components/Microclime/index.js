@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import axiosMicroclimateCreate from '../../redux/rootReducer/axiosMicroclimateCreate';
 import axiosMicroclimateUpdate from '../../redux/rootReducer/axiosMicroclimateUpdate';
 import axiosMicroclimateDelete from '../../redux/rootReducer/axiosMicroclimateDelete';
+import fetchMicroclimatesSuggestions from '../../redux/rootReducer/fetchMicroclimatesSuggestions';
 
 class Microclimate extends React.PureComponent {
     constructor(props){
@@ -53,17 +54,25 @@ class Microclimate extends React.PureComponent {
 
     addMicroclimate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
         this.props.axiosMicroclimateCreate( name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity );
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchMicroclimatesSuggestions('')
+            this.setState({ addModalShow : false })
+        }.bind(this), 15)
     }
 
     deleteMicroclimate(id_microclimate){
         this.props.axiosMicroclimateDelete(id_microclimate);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchMicroclimatesSuggestions('')
+        }.bind(this), 15)
     }
 
     updateMicroclimate(id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity ){
         this.props.axiosMicroclimateUpdate( id_microclimate,name, intensity, lightType, waterPH, dailyHours, lightStartTime, temperature, humidity );
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchMicroclimatesSuggestions('')
+            this.setState({ open: false });
+        }.bind(this), 15)
     }
 
     addModalClose(){
@@ -112,6 +121,7 @@ const mapDispatchToProps = {
     axiosMicroclimateCreate,
     axiosMicroclimateUpdate,
     axiosMicroclimateDelete,
+    fetchMicroclimatesSuggestions
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Microclimate) ) ;

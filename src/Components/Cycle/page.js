@@ -105,7 +105,8 @@ function Page(props) {
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		cycleSelect
 	} = props;
 	const classes = useStyles();
     return (
@@ -122,6 +123,7 @@ function Page(props) {
 				openModal={openModal}
 				closeModal={closeModal}
 				open={open}
+				cycleSelect={cycleSelect}
 			/>
         </div>
     );
@@ -141,7 +143,8 @@ export function Cycle(props) {
 		updateCycle,
 		openModal,
 		closeModal,
-		open
+		open,
+		cycleSelect
 	} = props;
 	const classes = useStyles();
 	const handleFullDatetime = datetime => {
@@ -180,19 +183,24 @@ export function Cycle(props) {
 				  		</Grid>
 					  	<Grid item xs={4}>
 							<Fab aria-label="editar" size="small" className={classes.fab} >
-								<EditIcon color="primary" onClick={openModal} />
+								<EditIcon color="primary" onClick={() => 	openModal(  id,
+																						container.id,
+																						microclimate.id,
+																						estimatedDate,
+																						finishDate
+																			) } />
 							</Fab>
 							<Popup  open={open}
 									closeOnDocumentClick
 									onClose={closeModal} >
 								<FormUpdateCycle
-										id_cycle={id}
-										container_id={container.id}
-										microclimate_id={microclimate.id}
+										id_cycle={cycleSelect.idCycle}
+										container_id={cycleSelect.container_idCycle}
+										microclimate_id={cycleSelect.microclimate_idCycle}
 										startDate={startDate}
-										estimatedDate={estimatedDate}
+										estimatedDate={cycleSelect.estimatedDateCycle}
 										available={available}
-										finishDate={finishDate}
+										finishDate={cycleSelect.finishDateCycle}
 										updateCycle={updateCycle} 
 										closeModal={closeModal}
 										/>
@@ -425,7 +433,8 @@ export function Ciclos(props){
 		addModalOpen,
 		openModal,
 		closeModal,
-		open
+		open,
+		cycleSelect
 	} = props;
 	
 	const isEmpty = suggestions.length === 0;
@@ -481,6 +490,7 @@ export function Ciclos(props){
 							openModal={openModal}
 							closeModal={closeModal}
 							open={open}
+							cycleSelect={cycleSelect}
 						/>
 					)}
 				</div>

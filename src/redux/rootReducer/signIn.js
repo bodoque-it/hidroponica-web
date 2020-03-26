@@ -20,7 +20,7 @@ function signIn( username_input, passwod_input ) {
             try {
                 const res = await axios.post('/login', user , JSON.stringify(config));
                 if ( res.data.data === 'sale mono sapo' || res.data.data == 'undefined'){
-                    dispatch(loginSuccess( null ));
+                    dispatch(loginError("error"));
                 }
                 else {
                     dispatch(loginSuccess(res.data.data));

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axiosCycleDelete from '../../redux/rootReducer/axiosCycleDelete';
 import axiosCycleUpdate from '../../redux/rootReducer/axiosCycleUpdate';
 import fetchCycleCreate from '../../redux/rootReducer/fetchCycleCreate';
+import fetchCyclesSuggestions from '../../redux/rootReducer/fetchCyclesSuggestions';
 
 
 class Cycles extends Component {
@@ -12,7 +13,14 @@ class Cycles extends Component {
         super(props);
         this.state = {
             addModalShow : false,
-            open: false
+            open: false,
+            cycleSelect : {
+                idCycle: null,
+                container_idCycle: null,
+                microclimate_idCycle: null,
+                estimatedDateCycle: null,
+                finishDateCycle: null
+            }
         };
 
         this.deleteCycle = this.deleteCycle.bind(this);
@@ -26,18 +34,26 @@ class Cycles extends Component {
 
     deleteCycle(id_cycle){
         this.props.axiosCycleDelete(id_cycle);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchCyclesSuggestions('')
+        }.bind(this), 15)
     }
 
     addCycle(begin_date, estimated_date, finish_date){
         this.props.fetchCycleCreate(begin_date, estimated_date, finish_date);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchCyclesSuggestions('')
+            this.setState({ addModalShow : false })
+        }.bind(this), 5)
     }
 
     updateCycle(id_cycle,fk_container,fk_microclimate, estimated_date, isFinish){
         console.log( "id_ciclo: "+id_cycle+ "container: "+fk_container+ "microclima: "+fk_microclimate+"estimated_date: "+estimated_date+"isFinisH: "+isFinish )
         this.props.axiosCycleUpdate(id_cycle,fk_container,fk_microclimate, estimated_date, isFinish);
-        window.location.reload();
+        setTimeout(function() { 
+            this.props.fetchCyclesSuggestions('')
+            this.setState({ open: false });
+        }.bind(this), 15)
     }
 
     addModalClose(){
@@ -47,8 +63,16 @@ class Cycles extends Component {
         this.setState({ addModalShow : true })
     }
 
-    openModal() {
+    openModal(id_cycle, container_id, microclimate_id, estimated_date, finish_date ) {
         this.setState({ open: true });
+        this.setState({ cycleSelect : {
+                            idCycle: id_cycle,
+                            container_idCycle: container_id,
+                            microclimate_idCycle: microclimate_id,
+                            estimatedDateCycle: estimated_date,
+                            finishDateCycle: finish_date
+                        } 
+        })
     }
 
     closeModal() {
@@ -70,6 +94,7 @@ class Cycles extends Component {
                     openModal={this.openModal}
                     closeModal={this.closeModal}
                     open={this.state.open}
+                    cycleSelect={this.state.cycleSelect}
                 />
             </div>
         )
@@ -88,6 +113,7 @@ const mapDispatchToProps = {
     axiosCycleDelete,
     axiosCycleUpdate,
     fetchCycleCreate,
+    fetchCyclesSuggestions
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cycles) ) ;
