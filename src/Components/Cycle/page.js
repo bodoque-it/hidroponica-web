@@ -176,12 +176,12 @@ export function Cycle(props) {
 		  		</div>
 			  	<div className="row" style={{width:"15%", foat:"right"}}>
 			  		<Grid container spacing={0}>
-			  			<Grid item xs={4}>
+			  			<Grid item xs={6}>
 				  			<Fab aria-label="Terminar" color="secondary" size="small" className={classes.fab} >
 								<CancelIcon  onClick={() => updateCycle(id, container.id, microclimate.id, estimatedDate, true)} />
 							</Fab>
 				  		</Grid>
-					  	<Grid item xs={4}>
+					  	<Grid item xs={6}>
 							<Fab aria-label="editar" size="small" className={classes.fab} >
 								<EditIcon color="primary" onClick={() => 	openModal(  id,
 																						container.id,
@@ -206,11 +206,6 @@ export function Cycle(props) {
 										/>
 							</Popup>
 						</Grid>
-						<Grid item xs={4}>
-				  			<Fab aria-label="delete" size="small" color="secondary" className={classes.fab}>
-								<DeleteIcon style={{float:"right",color:'#fff'}} onClick={ () => deleteCycle(id)} />
-							</Fab>
-				  		</Grid>
 					</Grid>
 			  	</div>
 				</ExpansionPanelSummary>
@@ -459,12 +454,39 @@ export function Ciclos(props){
 					
 					</label>
 					<div className="row">
-						<div className="col" align="right">
-							<LensIcon className="color-active" fontSize="large"/> Ciclos Activos
+						<div style={{width:'40%'}}>
+							<div class="row">
+								<div className="col" align="right">
+								<LensIcon className="color-active" fontSize="large"/> Ciclos Activos
+								</div>
+								<div className="col" align="left">
+									<LensIcon className="color-terminated" fontSize="large"/> Ciclos Terminados
+								</div>
+							</div>
 						</div>
-						<div className="col" align="left">
-							<LensIcon className="color-terminated" fontSize="large"/> Ciclos Terminados
+						<div style={{width:'60%'}}>
+							<div class="row">
+								<div class="col">
+									<Fab aria-label="Terminar" disableRipple="true" size="small">
+										<CancelIcon/>
+									</Fab>
+									&nbsp;Terminar Ciclo
+								</div>
+								<div class="col">
+									<Fab aria-label="Terminar" disableRipple="true" size="small">
+										<EditIcon color="primary" />
+									</Fab>
+									&nbsp;Modificar Ciclo
+								</div>
+								<div class="col">
+									<Fab aria-label="Terminar" disableRipple="true" color="secondary" size="small">
+										<DeleteIcon/>
+									</Fab>
+									&nbsp; Eliminar ciclo
+								</div>
+							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>

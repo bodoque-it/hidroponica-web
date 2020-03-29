@@ -3,7 +3,9 @@
     height: 30vw;
     margin: 100px auto;
 }
-
+.border-row{
+    border: #5cb85c solid;
+}
 
 .root {
     width:'100%';

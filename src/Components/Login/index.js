@@ -14,14 +14,19 @@ class Login extends Component {
             password: '',
         };
 
-        this.validateForm = this.validateForm.bind(this);
+        this.validateSession = this.validateSession.bind(this);
         this.iniciaSesion = this.iniciaSesion.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    validateForm() {
-        
+    validateSession() {
+        setTimeout(function() { 
+            console.log("token:" + localStorage.getItem("token"))
+            if ( localStorage.getItem('token') && localStorage.getItem('token') != 'null' && localStorage.getItem('token') != 'undefined' ){
+                    this.props.history.push("/dashboard");
+            } 
+        }.bind(this), 100);
     }
 
     handleChange = (e) => {
@@ -47,7 +52,9 @@ class Login extends Component {
         }.bind(this), 100)
         
     }
-
+    componentWillMount(){
+        this.validateSession();
+    }
     render(){
         return(
             <div>

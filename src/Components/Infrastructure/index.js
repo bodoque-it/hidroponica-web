@@ -113,12 +113,12 @@ class Infrastructure extends Component{
                     <Modal className="custom-modal-style" isOpen={this.state.open}  size="xl"  >
                         <ModalHeader > Ubicaciones </ModalHeader  >
                             <ModalBody className="panel" style={{borderBottom:"1% solid"}} align="center">
-                                <Table style={{background:"#5cb85c", width:"90%"}}>
+                                <Table style={{width:"90%",borderRadius:"5%"}}>
                                     <TableBody>
                                         { isEmpty ?
                                             <Typography > No hay Ubicaciones Disponibles </Typography>
                                             : this.props.infrastructures.map( infrastructure =>
-                                                <TableRow>
+                                                <TableRow class={"border-row"}>
                                                     <TableCell>{infrastructure.address}</TableCell>
                                                     <TableCell>
                                                         <Fab aria-label="delete" color="secondary" size="small" className="fab">

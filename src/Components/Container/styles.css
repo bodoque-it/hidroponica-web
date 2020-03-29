@@ -5,3 +5,6 @@ root{
 cellHeader{
 	font-size: 30px !important;
 }
+.border-row-container{
+	border-color: #28a745;
+}

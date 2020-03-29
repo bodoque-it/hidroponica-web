@@ -36,7 +36,7 @@ class AppBarAutocomplete extends Component{
         const {
             isOpen,
         } = this.state;
-        if(title=='Rieles' || title=='Ciclos' || title=='Microclimas'){
+        if(title=='Rieles' || title=='Contenedores' || title=='Microclimas'){
         	return (
 				<div>
 					<div className="main-container" style={{

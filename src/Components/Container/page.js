@@ -107,60 +107,6 @@ function Page(props) {
 }
 export default Page;
 
-export function Container(props) {
-	const {
-		name,
-		volume,
-		id,
-		active,
-		deleteContainer,
-		updateContainer,
-		openModal,
-		closeModal,
-		open
-	} = props;
-	const classes = useStyles();
-	return(
-		<div>
-		  <ExpansionPanel className="card-color-gradient">
-			<ExpansionPanelSummary
-			  expandIcon={<ExpandMoreIcon />}
-			  aria-controls="panel1a-content"
-			  id="panel1a-header"
-			>
-			  <Typography className={classes.heading}>NAME: {name}</Typography>
-			  <Typography className={classes.secondaryHeading}> VOLUME: {volume} <p/> IS ACTIVE: {active}</Typography>
-			</ExpansionPanelSummary>
-			<ExpansionPanelDetails style={{display:'block'}}>
-				<div>
-					<div className="row">
-						<div className="col" >
-							<Fab aria-label="delete" className={classes.fab, classes.add}>
-								<DeleteIcon style={{float:"right",background:'#e53935',color:'#fff'}} onClick={ () => deleteContainer(id)} />
-							</Fab>
-							<Fab aria-label="edit" className={classes.fab, classes.add} >
-								<EditIcon color="primary" onClick={openModal} />
-							</Fab>
-							<Popup  open={open}
-									closeOnDocumentClick
-									onClose={closeModal}>
-								<FormUpdateContainer
-										id={id}
-										name={name}
-										volume={volume}
-										active={active}
-										updateContainer={updateContainer} 
-										closeModal={closeModal}
-										/>
-							</Popup>
-						</div>
-					</div>
-				</div>
-			</ExpansionPanelDetails>
-		  </ExpansionPanel>
-		 </div>
-	)
-}
 export function ContainerTable(props) {
 	const {
 		name,
@@ -176,7 +122,7 @@ export function ContainerTable(props) {
 	} = props;
 	const classes = useStyles();
 	return(
-		<TableRow>
+		<TableRow class="border-row-container">
 			<TableCell>{name}</TableCell>
 			<TableCell>{volume}</TableCell>
 			<TableCell>{	active 
