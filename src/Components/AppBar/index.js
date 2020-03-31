@@ -56,7 +56,7 @@ class AppBar extends Component{
             this.props.fetchMicroclimatesSuggestions(text);
         }
         else if( this.state.title === "Contenedores"  ){
-            this.props.fetchContainersSuggestions("");
+            this.props.fetchContainersSuggestions(text);
         }
     }
 
@@ -73,7 +73,7 @@ class AppBar extends Component{
             this.props.fetchMicroclimatesSuggestions(text);
         }
         else if( this.state.title === "Contenedores"  ){
-            this.props.fetchContainersSuggestions("");
+            this.props.fetchContainersSuggestions(text);
         }
     }
 

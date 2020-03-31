@@ -230,6 +230,7 @@ export function Cycle(props) {
 										id={container.id}
 										name={container.name}
 										volume={container.volume}
+										active={container.active}
 									/>
 								</div>
 							</Grid>
@@ -285,6 +286,7 @@ export function Cycle(props) {
 										id={container.id}
 										name={container.name}
 										volume={container.volume}
+										active={container.active}
 									/>
 								</div>
 							</Grid>
@@ -305,6 +307,7 @@ export function Container(props) {
 		id,
 		name,
 		volume,
+		active
 	} = props;
   	const classes = useStyles();
   	return (
@@ -321,7 +324,10 @@ export function Container(props) {
 				<Table className={classes.table} aria-label="spanning table">
 					<TableRow>
 						<TableCell rowSpan={2} align="center" width="33%"> <h6>ID de contenedor</h6> { id } </TableCell>
-						<TableCell align="center" width="33%"><h6>ESTADO</h6>  <div className={"text-success"}>En ciclo</div> </TableCell>
+						<TableCell align="center" width="33%"><h6>ESTADO</h6>  {	active 
+																				? <div className={"text-success"}>En ciclo</div> 
+																				: <div className={"text-danger"}>Inactivo</div> } 
+						</TableCell>
 						<TableCell align="center" width="33%"><h6>VOLUMEN</h6> { volume } [m3] </TableCell>
 					</TableRow>
 				</Table>
